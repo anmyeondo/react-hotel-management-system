@@ -5,11 +5,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD:front-end/src/App.js
-        <SignIn />;
-=======
-        <Login/>;
->>>>>>> 8788ed7880d660d0e16d06d833f3d5c1bbfd7d04:src/App.js
+        <Login />;
       </div>
     );
   }

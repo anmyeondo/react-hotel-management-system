@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import './Login.css'
+import './Login.css';
 
 function Copyright() {
   return (
@@ -71,8 +71,12 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" id="getcenter">
-            <strong><p>디비디바비디부</p></strong>
-            <strong>호텔 <u>관리자</u> 페이지</strong>
+            <strong>
+              <p>디비디바비디부</p>
+            </strong>
+            <strong>
+              호텔 <u>관리자</u> 페이지
+            </strong>
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
