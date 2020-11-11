@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "test": "nodemon ./bin/www -e ejs,js,css,html,jpg,png,scss",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "front-end-update": "cd ../front-end && yarn",
+    "update": "yarn && yarn front-end-update"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
