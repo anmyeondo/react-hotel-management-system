@@ -10,16 +10,14 @@ router.get('/', function (req, res, next) {
 // 로그인 API
 router.get('/login', (req, res, next) => {
   console.log('login start...');
-  // const data = req.data; // {id: id, password: password}
-  const data = { id: 'KSH', password: '1234' };
-  const q = `select * from customer where name = "${data.id}"`;
-  var numID = 0;
+  const tq = req.query; // {id: id, password: password}
+  console.log(tq);
+  const q = `select * from customer where name = "${tq.id}"`;
+  console.log(q);
   connection.query(q, (err, rows, fields) => {
     console.log(rows);
-    console.log(Object.keys(rows).length);
-    numID = numID + Object.keys(rows).length;
+    res.send(rows);
   });
-  console.log(numID);
 });
 
 module.exports = router;
