@@ -16,8 +16,7 @@ import { Redirect } from "react-router-dom"
 import './Login.css';
 import signIn  from '../auth.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './HeroSection'
-import HeroSection from './HeroSection';
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -70,16 +69,8 @@ export default function LogIn() {
   const [id, setId] = useState("")
   const [password, setPassword] = useState("")
   const login = ( {id, password} ) => setUser(signIn( {id, password} ));
-  const [islogin] = useState(false)
+
   const handleClick = () => {
-    // if(login(id, password)) {
-    //   alert("Welcome " + id)
-    // }
-    // else {
-    //   alert("Failed to Login the account " + id + " " + password)
-    //   setId("")
-    //   setPassword("")
-    // }
     try {
       login({id, password})
       alert("Welcome " + id)
@@ -91,7 +82,6 @@ export default function LogIn() {
   }
   
   return (
-  
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
