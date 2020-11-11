@@ -12,8 +12,12 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Redirect } from "react-router-dom"
 import './Login.css';
-import { signIn } from '../auth.js';
+import signIn  from '../auth.js';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './HeroSection'
+import HeroSection from './HeroSection';
 
 function Copyright() {
   return (
@@ -59,22 +63,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function LogIn() {
   const classes = useStyles();  
   const [user, setUser] = useState(null);
   const [id, setId] = useState("")
   const [password, setPassword] = useState("")
-  const login = ({ id, password }) => setUser(signIn({ id, password }));
+  const login = ( {id, password} ) => setUser(signIn( {id, password} ));
+  const [islogin] = useState(false)
   const handleClick = () => {
+    // if(login(id, password)) {
+    //   alert("Welcome " + id)
+    // }
+    // else {
+    //   alert("Failed to Login the account " + id + " " + password)
+    //   setId("")
+    //   setPassword("")
+    // }
     try {
       login({id, password})
-      alert("Success")
+      alert("Welcome " + id)
     } catch (e) {
       alert("Failed to Login the account " + id + " " + password)
       setId("")
       setPassword("")
     }
   }
+  
   return (
   
     <Grid container component="main" className={classes.root}>
