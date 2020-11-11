@@ -8,7 +8,6 @@ var logger = require('morgan');
 // 라우터
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testRouter = require('./routes/test');
 
 // Express 서버 실행
 var app = express();
