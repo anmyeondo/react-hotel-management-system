@@ -69,7 +69,7 @@ export default function LogIn() {
   const [id, setId] = useState("")
   const [password, setPassword] = useState("")
   const login = ( {id, password} ) => setUser(signIn( {id, password} ));
-
+  const [islogin] = useState(false)
   const handleClick = () => {
     try {
       login({id, password})
