@@ -21,10 +21,20 @@ const connection = mysql.createConnection({
 });
 connection.connect(); // connect db
 
-// app.get('/api/hello', (req, res) => {
-//   connection.query('SELECT * FROM CUSTOMER', (err, rows, fileds) => {
-//     res.send(rows);
-//   });
-// });
+// 라우터
+const router = express.Router();
+
+router.route('./login').post(function (req, res) {
+  console.log(req.)
+});
+
+app.get('/api/adminpage/login', (req, res) => {
+  const q = 'SELECT * FROM customer WHERE name = ' + '"KSH"';
+  console.log(q);
+  connection.query(q, (err, rows, fileds) => {
+    res.send(rows);
+    console.log(rows);
+  });
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
