@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import './Login.css';
+import { signIn } from '../auth.js';
 
 function Copyright() {
   return (
@@ -58,10 +59,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
-  const classes = useStyles();
-
+export default function LogIn() {
+  const classes = useStyles();  
+  const [user, setUser] = useState(null);
+  const [id, setId] = useState("")
+  const [password, setPassword] = useState("")
+  const login = ({ id, password }) => setUser(signIn({ id, password }));
+  const handleClick = () => {
+    try {
+      login({id, password})
+      alert("Success")
+    } catch (e) {
+      alert("Failed to Login the account " + id + " " + password)
+      setId("")
+      setPassword("")
+    }
+  }
   return (
+  
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -70,13 +85,8 @@ export default function Login() {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" id="getcenter">
-            <strong>
-              <p>디비디바비디부</p>
-            </strong>
-            <strong>
-              호텔 관리자 페이지
-            </strong>
+          <Typography component="h1" variant="h5">
+            Sign in
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -84,11 +94,14 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="email" // have to modify
+              id="id"
               label="Employee ID"
-              name="email" // have to modify
-              autoComplete="email" // have to modify
+              name="id"
+              autoComplete="id"
               autoFocus
+              onChange={({ target: { value } }) => setId(value)}
+              //onChange ={onChangeHandler.bind(this)}
+              
             />
             <TextField
               variant="outlined"
@@ -100,12 +113,9 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={({ target: { value } }) => setPassword(value)}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            <Button
+            <Button onClick = {handleClick}
               type="submit"
               fullWidth
               variant="contained"
@@ -114,18 +124,13 @@ export default function Login() {
             >
               Sign In
             </Button>
-            {/* <Grid container>
+            <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
+            </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>
