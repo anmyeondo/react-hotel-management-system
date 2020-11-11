@@ -75,7 +75,7 @@ export default function Login() {
               <p>디비디바비디부</p>
             </strong>
             <strong>
-              호텔 <u>관리자</u> 페이지
+              호텔 관리자 페이지
             </strong>
           </Typography>
           <form className={classes.form} noValidate>
