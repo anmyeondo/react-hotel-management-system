@@ -24,10 +24,6 @@ connection.connect(); // connect db
 // 라우터
 const router = express.Router();
 
-router.route('./login').post(function (req, res) {
-  console.log(req.)
-});
-
 app.get('/api/adminpage/login', (req, res) => {
   const q = 'SELECT * FROM customer WHERE name = ' + '"KSH"';
   console.log(q);
