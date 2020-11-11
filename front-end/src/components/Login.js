@@ -17,7 +17,6 @@ import './Login.css';
 import signIn  from '../auth.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from "axios";
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -30,7 +29,6 @@ function Copyright() {
     </Typography>
   );
 }
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -70,17 +68,23 @@ export default function LogIn() {
   const [password, setPassword] = useState("")
   const login = ( {id, password} ) => setUser(signIn( {id, password} ));
   const [islogin] = useState(false)
-  const handleClick = () => {
+  const handleClick = async () => {
     try {
-      login({id, password})
-      alert("Welcome " + id)
-    } catch (e) {
-      alert("Failed to Login the account " + id + " " + password)
-      setId("")
-      setPassword("")
+      let ret = await signIn({id, password});
+      console.log(ret); 
+      if(ret === 1) {
+        alert("Success to login");
+      }
+      else {
+        alert("Failed to login");
+      }
+    
+  } 
+    catch (e) {
+      alert("Failed to Login the account " + id + " " + password);
     }
   }
-  
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -105,8 +109,7 @@ export default function LogIn() {
               autoComplete="id"
               autoFocus
               onChange={({ target: { value } }) => setId(value)}
-              //onChange ={onChangeHandler.bind(this)}
-              
+              //onChange ={onChangeHandler.bind(this)} 
             />
             <TextField
               variant="outlined"
@@ -121,7 +124,6 @@ export default function LogIn() {
               onChange={({ target: { value } }) => setPassword(value)}
             />
             <Button onClick = {handleClick}
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
@@ -144,4 +146,4 @@ export default function LogIn() {
       </Grid>
     </Grid>
   );
-}
+  }

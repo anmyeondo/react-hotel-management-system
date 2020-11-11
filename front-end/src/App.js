@@ -12,16 +12,11 @@ function App() {
   const [user, setUser] = useState(null);
   const authenticated = user != null;
 
-  const login = ({ id, password }) => setUser(signIn({ id, password }));
+  const login = ({ email, password }) => setUser(signIn({ email, password }));
   const logout = () => setUser(null);
+  
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Login />;
-      </Switch>
-    </Router>
-  )
+    <Login/>
+  );
 }
-
 export default App;
