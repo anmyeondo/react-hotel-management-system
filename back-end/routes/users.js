@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 // 로그인 API
 router.get('/login', (req, res, next) => {
   var startTime = new Date();
-  console.log('Login API Start' + startTime);
+  console.log('Login API Start at : ' + startTime);
   const params = req.query; // {id: id, password: password}
   const q = `SELECT * FROM Customer WHERE ID = ${params.id}`;
   console.log(q);
