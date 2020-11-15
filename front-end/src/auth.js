@@ -14,7 +14,7 @@ export default async function signIn({ id, password }) {
   console.log("응답 성공");
 
   var data = res.data;
-  var ans = Object.keys(data).length;
+  var ans = data.length;
 
   if (ans == 0) {
     console.log("no ID");

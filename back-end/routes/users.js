@@ -11,13 +11,14 @@ router.get('/', function (req, res, next) {
 router.get('/login', (req, res, next) => {
   var startTime = new Date();
   console.log('Login API Start at : ' + startTime);
+
   const params = req.query; // {id: id, password: password}
   const q = `SELECT * FROM Customer WHERE ID = ${params.id}`;
-  console.log(q);
+
   connection.query(q, (err, rows, fields) => {
-    res.send(rows);
-    // console.log(rows);
+    res.send(JSON.stringify(rows));
   });
+
   console.log('Login API End');
 });
 
