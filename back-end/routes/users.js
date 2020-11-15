@@ -9,15 +9,15 @@ router.get('/', function (req, res, next) {
 
 // 로그인 API
 router.get('/login', (req, res, next) => {
-  console.log('login start...');
-  const tq = req.query; // {id: id, password: password}
-  console.log(tq);
-  const q = `select * from customer where name = "${tq.id}"`;
+  var startTime = new Date();
+  console.log('Login API Start' + startTime);
+  const params = req.query; // {id: id, password: password}
+  const q = `SELECT * FROM Customer WHERE ID = ${params.id}`;
   console.log(q);
   connection.query(q, (err, rows, fields) => {
-    console.log(rows);
     res.send(rows);
   });
+  console.log('Login API End');
 });
 
 module.exports = router;
