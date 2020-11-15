@@ -19,7 +19,7 @@ connection.connect(function (err) {
     console.error(err.stack);
     return;
   }
-  console.log('DB');
+  console.log('데이터베이스에 성공적으로 연결되었습니다.');
 });
 
 module.exports = connection;

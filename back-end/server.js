@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var customersRouter = require('./routes/customers');
 var staffsRouter = require('./routes/staffs');
+var testRouter = require('./routes/test');
 
 // Express 서버 실행
 var app = express();
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/customers', customersRouter);
 app.use('/staffs', staffsRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -42,6 +44,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`${port}번 포트에 연결되어 있습니다.`));
 
 module.exports = app;
