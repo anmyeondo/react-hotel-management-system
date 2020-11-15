@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "nodemon ./bin/www -e ejs,js,css,html,jpg,png,scss",
-    "start": "node ./bin/www",
+    "server": "nodemon server.js",
+    "client": "cd ../front-end && yarn start",
     "front-end-update": "cd ../front-end && yarn",
-    "update": "yarn && yarn front-end-update"
+    "update": "yarn && yarn front-end-update",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
