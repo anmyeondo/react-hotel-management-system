@@ -7,4 +7,10 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    createProxyMiddleware("/customers", {
+      target: "http://localhost:5000/",
+      changeOrigin: true,
+    })
+  );
 };
