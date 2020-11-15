@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# 암호화
+jwt.js
+
 # database
 /database/database.json
 
