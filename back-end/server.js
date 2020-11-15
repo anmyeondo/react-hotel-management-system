@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var port = process.env.PORT || 5000;
 
 // 라우터
 var indexRouter = require('./routes/index');
@@ -40,5 +41,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 module.exports = app;

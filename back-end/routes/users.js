@@ -16,6 +16,7 @@ router.get('/login', (req, res, next) => {
   console.log(q);
   connection.query(q, (err, rows, fields) => {
     res.send(rows);
+    // console.log(rows);
   });
   console.log('Login API End');
 });
