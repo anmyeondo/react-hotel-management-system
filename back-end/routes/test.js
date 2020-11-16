@@ -35,8 +35,6 @@ router.get('/t1', (req, res, next) => {
     });
   }
 
-  next(`/comp?PP=${myPlainPassword}&SP=${mySaltedPassword}`);
-
   console.log('TEST END');
 });
 
