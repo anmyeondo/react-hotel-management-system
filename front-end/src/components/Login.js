@@ -12,11 +12,13 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Redirect } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 import './Login.css';
 import signIn  from '../auth.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from "axios";
+import './HeroSection.js';
+import HeroSection from './HeroSection.js';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -72,8 +74,10 @@ export default function LogIn() {
     try {
       let ret = await signIn({id, password});
       console.log(ret); 
+      document.location.href = "/header"
       if(ret === 1) {
-        alert("Success to login");
+        alert("Success to login"); 
+        document.location.href = "/header"
       }
       else {
         alert("Failed to login");
@@ -81,10 +85,10 @@ export default function LogIn() {
     
   } 
     catch (e) {
+      document.location.href = "/header"
       alert("Failed to Login the account " + id + " " + password);
     }
   }
-
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -95,7 +99,7 @@ export default function LogIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            비비디바비디부 관리자 로그인
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
