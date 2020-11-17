@@ -21,6 +21,11 @@ export default async function signIn({ id, password }) {
     // 계정이 존재하지 않는 경우 처리
   } else if (errorCode == 2) {
     // 계정이 존재하는 경우 처리
+    if (compResult) {
+      // 비밀번호 일치하는 경우 처리
+    } else {
+      // 비밀번호 불일치일 경우 처리
+    }
   } else {
     // 계정이 중복되는 경우 처리
   }
