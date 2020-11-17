@@ -1,9 +1,9 @@
 import React from 'react';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import StaffDelete from './StaffDelete'
+import StaffDeleteBtn from './StaffDeleteBtn'
 
-class Stafftest extends React.Component {
+class StaffInfoRow extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -18,11 +18,11 @@ class Stafftest extends React.Component {
             <TableCell>{this.props.Account}</TableCell>
             <TableCell>{this.props.Salary}</TableCell>
             <TableCell>{this.props.RegDate}</TableCell>
-            <TableCell align='center'><StaffDelete ID={this.props.ID} refreshTable={this.props.refreshTable}/></TableCell>
+            <TableCell align='center'><StaffDeleteBtn ID={this.props.ID} refreshTable={this.props.refreshTable}/></TableCell>
         </TableRow>
         )
     }
 }
 
-export default Stafftest;
+export default StaffInfoRow;
 
