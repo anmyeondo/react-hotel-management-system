@@ -1,53 +1,59 @@
-import React, {useState, useEffect} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import signIn  from '../../modules/auth';
+import React, { useState, useEffect } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import signIn from "../../modules/auth";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Reference © '}
-      <Link color="inherit" href="https://github.com/anmyeondo/react-hotel-management-system">
+      {"Reference © "}
+      <Link
+        color="inherit"
+        href="https://github.com/anmyeondo/react-hotel-management-system"
+      >
         Our Github Page
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
-    backgroundImage: 'url(https://cf.bstatic.com/images/hotel/max1024x768/218/218319706.jpg)',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage:
+      "url(https://cf.bstatic.com/images/hotel/max1024x768/218/218319706.jpg)",
+    backgroundRepeat: "no-repeat",
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     // backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -55,31 +61,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function LogIn() {
-  const classes = useStyles();  
+  const classes = useStyles();
   const [user, setUser] = useState(null);
-  const [id, setId] = useState("")
-  const [password, setPassword] = useState("")
-  const login = ( {id, password} ) => setUser(signIn( {id, password} ));
-  const [islogin] = useState(false)
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const login = ({ id, password }) => setUser(signIn({ id, password }));
+  const [islogin] = useState(false);
   const handleClick = async () => {
     try {
-      let ret = await signIn({id, password});
-      console.log(ret); 
-      if(ret === 1) {
-        alert("Success to login"); 
-        document.location.href = "/header"
+      let resData = await signIn({ id, password });
+      const errorCode = resData.e;
+      const compResult = resData.cr;
+
+      console.log(errorCode);
+      console.log(compResult);
+
+      if (errorCode === 1) {
+        alert("계정이 존재하지 않습니다. 아이디를 확인해주세요.");
+      } else if (errorCode === 2) {
+        if (compResult) {
+          setTimeout(() => {
+            alert("로그인에 성공하였습니다.");
+            // 여기부분 /header 대신 /main이나 그런 페이지 만들어서 이동해야 할듯
+            document.location.href = "/header";
+          }, 1000);
+        } else {
+          alert("로그인에 실패하였습니다. 비밀번호를 확인해주세요.");
+        }
+      } else {
+        alert("계정이 중복되었습니다. 관리자에게 문의하세요.");
       }
-      else {
-        alert("Failed to login");
-      }
-    
-  } 
-    catch (e) {
-      alert("Failed to Login the account " + id + " " + password);
+    } catch (e) {
+      alert("로그인에 실패하였습니다 : " + e);
     }
-  }
+  };
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -117,7 +133,8 @@ export default function LogIn() {
               autoComplete="current-password"
               onChange={({ target: { value } }) => setPassword(value)}
             />
-            <Button onClick = {handleClick}
+            <Button
+              onClick={handleClick}
               fullWidth
               variant="contained"
               color="primary"
@@ -140,4 +157,4 @@ export default function LogIn() {
       </Grid>
     </Grid>
   );
-  }
+}

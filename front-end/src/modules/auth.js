@@ -29,4 +29,6 @@ export default async function signIn({ id, password }) {
   } else {
     // 계정이 중복되는 경우 처리
   }
+
+  return { e: errorCode, cr: compResult };
 }
