@@ -36,7 +36,7 @@ router.post('/addStaff', async (req, res, next) => {
 
   let body = req.body;
   const q =
-    'INSERT INTO Staff(Hotel_ID, Inform_ID, CODE, Rank, Bank, ACCOUNT, Staff_Password, RegDate, Salay, Is_Available) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+    'INSERT INTO Staff(Hotel_ID, Inform_ID, CODE, Rank, Bank, ACCOUNT, Staff_Password, RegDate, Salary, Is_Available) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
 
   let pwEncrpt = async () => {
     console.log('비밀번호 암호화를 시작합니다');
