@@ -54,11 +54,10 @@ function Header({classes, onDrawerToggle, idx}) {
     document.location.href = "/header"
   }
 
-  const printclick = () => {
-    console.log("click!!");
+  const gethelp = () => {
+    alert("디비디바비디부 관리자 홈페이지입니다.")
+    alert("고객 관리, 손님 관리, 객실 관리, 예약 관리 등을 하실 수 있습니다.")
   }
-
-
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -114,7 +113,7 @@ function Header({classes, onDrawerToggle, idx}) {
 
             <Grid item>
               <Tooltip title="Help">
-                <IconButton color="inherit" href = "http://localhost:3000/">
+                <IconButton color="inherit" onClick={gethelp}>
                   <HelpIcon />
                 </IconButton>
               </Tooltip>
