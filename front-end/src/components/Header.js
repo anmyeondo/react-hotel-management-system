@@ -1,3 +1,4 @@
+import HeaderTest from "./HeaderTest";
 import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,6 +15,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
 const lightColor = "rgba(255, 255, 255, 0.7)";
+
+// for test
 
 const styles = (theme) => ({
   secondaryBar: {
@@ -55,16 +58,7 @@ function Header({ classes, onDrawerToggle, idx }) {
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
-          <Tabs value={idx} ptextColor="inherit">
-            <Tab onClick={handleClick0} textColor="inherit" label="staffs" />
-            <Tab onClick={handleClick1} textColor="inherit" label="Customers" />
-            <Tab
-              onClick={handleClick2}
-              textColor="inherit"
-              label="Reservation"
-            />
-            <Tab onClick={handleClick3} textColor="inherit" label="Room" />
-          </Tabs>
+          <HeaderTest />
           <Grid container spacing={1} alignItems="center">
             <Grid item xs />
             <Grid item>
@@ -91,7 +85,6 @@ function Header({ classes, onDrawerToggle, idx }) {
           </Grid>
         </Toolbar>
       </AppBar>
-
     </React.Fragment>
   );
 }
