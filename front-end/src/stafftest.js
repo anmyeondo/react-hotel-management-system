@@ -6,15 +6,18 @@ class stafftest extends React.Component {
     constructor(props) {
         super(props);
     }
+    // <TableCell><img src={this.props.Code} alt="profile"/></TableCell>
     render() {
         return (
         <TableRow>
-            <TableCell>{this.props.id}</TableCell>
-            <TableCell><img src={this.props.image} alt="profile"/></TableCell>
-            <TableCell>{this.props.name}</TableCell>
-            <TableCell>{this.props.birthday}</TableCell>
-            <TableCell>{this.props.gender}</TableCell>
-            <TableCell>{this.props.job}</TableCell>
+            <TableCell>{this.props.Hotel_ID}</TableCell>
+            <TableCell>{this.props.Code}</TableCell>
+            <TableCell>{this.props.Inform_ID}</TableCell>
+            <TableCell>{this.props.Rank}</TableCell>
+            <TableCell>{this.props.Bank}</TableCell>
+            <TableCell>{this.props.Account}</TableCell>
+            <TableCell>{this.props.Salary}</TableCell>
+            <TableCell>{this.props.RegDate}</TableCell>
         </TableRow>
         )
     }

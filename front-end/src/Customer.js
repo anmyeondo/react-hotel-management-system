@@ -71,6 +71,11 @@ class Customer extends React.Component {
     return (
       <div>
         <Header idx={1}/>
+        <Tabs value={0} textColor="inherit">
+          <Tab textColor="inherit" label="조회"/>
+          <Tab textColor="inherit" label="배정" />
+          <Tab  textColor="inherit" label="추가" />
+        </Tabs>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
@@ -85,7 +90,7 @@ class Customer extends React.Component {
               </TableHead>
               <TableBody>
               {customers.map(c => {
-              return <Stafftest key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />
+              return <Stafftest key={c.id } id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />
               })}
             </TableBody>
           </Table>
