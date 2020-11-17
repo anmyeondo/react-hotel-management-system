@@ -2,18 +2,10 @@ import React from 'react'
 
 import { post } from 'axios';
 
-
-
 class Test extends React.Component {
-
-
-
 constructor(props) {
-
 super(props);
-
 this.state = {
-
 file: null,
 
 userName: '',
@@ -134,7 +126,6 @@ return (
 <button type="submit">추가하기</button>
 
 </form>
-
 )
 
 }
