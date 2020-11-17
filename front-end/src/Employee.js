@@ -17,9 +17,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
+import Test from './Test';
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
-class Customer extends React.Component {
+class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,9 +29,12 @@ class Customer extends React.Component {
   }
   render() {
     return (
-      <Header idx={1}/>
+      <div>
+        <Header idx={0}/>
+        <Test/>;
+      </div>
     );
   }
 }
 
-export default Customer;
+export default Employee;

@@ -17,8 +17,6 @@ import './Login.css';
 import signIn  from '../auth.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from "axios";
-import './HeroSection.js';
-import HeroSection from './HeroSection.js';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

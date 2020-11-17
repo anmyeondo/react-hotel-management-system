@@ -16,7 +16,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import testing from './Test'
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 const styles = (theme) => ({
@@ -41,23 +40,17 @@ const styles = (theme) => ({
   },
 });
 
-function Header(props) {
-  const { classes, onDrawerToggle } = props;
-  const [idx, setidx] = useState(0);
+function Header({classes, onDrawerToggle, idx}) {
   const handleClick0 = () => {
-    setidx(0);
-    document.location.href = "/header"
+    document.location.href = "/employee"
   }
   const handleClick1 = () => {
-    setidx(1);
     document.location.href = "/customer"
   }
   const handleClick2 = () => {
-    setidx(2);
     document.location.href = "/header"
   }
   const handleClick3 = () => {
-    setidx(3);
     document.location.href = "/header"
   }
 
@@ -137,15 +130,12 @@ function Header(props) {
         elevation={0}
       >
         <Tabs value={idx} textColor="inherit">
-          <Tab textColor="inherit" label="Employee"/>
           <Tab onClick={handleClick0} textColor="inherit" label="Employee"/>
           <Tab onClick={handleClick1} textColor="inherit" label="Customers" />
           <Tab onClick={handleClick2} textColor="inherit" label="Reservation" />
           <Tab onClick={handleClick3} textColor="inherit" label="Room" />
         </Tabs>
       </AppBar>
-      Management for Employee
-      <testing/>
     </React.Fragment>
   );
 }
