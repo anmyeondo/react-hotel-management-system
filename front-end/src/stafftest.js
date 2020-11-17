@@ -1,12 +1,12 @@
 import React from 'react';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import StaffDelete from './StaffDelete'
 
 class stafftest extends React.Component {
     constructor(props) {
         super(props);
     }
-    // <TableCell><img src={this.props.Code} alt="profile"/></TableCell>
     render() {
         return (
         <TableRow>
@@ -18,6 +18,7 @@ class stafftest extends React.Component {
             <TableCell>{this.props.Account}</TableCell>
             <TableCell>{this.props.Salary}</TableCell>
             <TableCell>{this.props.RegDate}</TableCell>
+            <TableCell align='center'><StaffDelete ID={this.props.ID} refreshTable={this.props.refreshTable}/></TableCell>
         </TableRow>
         )
     }
