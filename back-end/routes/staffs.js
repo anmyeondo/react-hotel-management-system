@@ -17,32 +17,87 @@ router.use(bodyParser.urlencoded({ extended: true }));
 /* GET staffs information */
 router.get('/informs', (req, res, next) => {
   var startTime = new Date();
-  console.log('Staff information API Start at ' + startTime);
+  console.log('Staff 테이블 조회를 시작합니다 : ' + startTime);
 
-  const params = req.query;
   const q = `SELECT * FROM Staff`;
 
   connection.query(q, (err, rows, fields) => {
     res.send(JSON.stringify(rows));
   });
+});
 
-  console.log('Staff information API End');
+/* Login admin page */
+router.get('/login', async (req, res, next) => {
+  const startTime = new Date();
+  console.log('로그인을 시작합니다 : ' + startTime);
+
+  const params = req.query; // {id: id, password: password}
+  const q = `SELECT ID, Staff_Password FROM Staff WHERE ID = ${params.id}`;
+  let compResult = false;
+  let errorcode = 0;
+
+  // DB에서 해당 ID의 (ID, PW)를 불러오는 메소드
+  loginApi = async () => {
+    console.log('  DB에서 계정 정보를 요청합니다');
+    connection.query(q, async (err, rows, fields) => {
+      if (err) {
+        console.log('    DB에서 계정 정보를 불러오는 도중 에러가 발생하였습니다');
+        console.log('  에러 : ' + err);
+      } else {
+        let queryRes = JSON.stringify(rows);
+        queryRes = JSON.parse(queryRes);
+
+        console.log(`    DB에서 ${queryRes.length}개의 계정을 조회했습니다`);
+        if (queryRes.length == 0) {
+          // 계정 정보 없음
+          console.log('    에러 : 계정 정보가 없습니다');
+          errorcode = 1;
+        } else if (queryRes.length == 1) {
+          // 계정 정보 있음
+          console.log('    비밀번호 비교를 시작합니다');
+
+          const staffPlainPassword = params.password;
+          const staffSaltedPassword = queryRes[0].Staff_Password;
+
+          console.log('    암호화된 비밀번호와 비교합니다');
+          compResult = await bcrypt.compare(staffPlainPassword, staffSaltedPassword);
+          errorcode = 2;
+
+          if (compResult) {
+            console.log('      비밀번호가 일치합니다');
+          } else {
+            console.log('      비밀번호가 불일치합니다');
+          }
+        } else {
+          // 중복 계정 존재
+          console.log('    에러 : 중복 계정이 존재합니다');
+          errorcode = 3;
+        }
+
+        console.log('  로그인Api 처리 결과를 반환합니다');
+        res.json(JSON.stringify({ errorcode, compResult }));
+      }
+    });
+  };
+
+  await loginApi();
 });
 
 /* ADD new staff */
 router.post('/addStaff', async (req, res, next) => {
-  var startTime = new Date();
-  console.log('Add Staff API Start at ' + startTime);
+  const startTime = new Date();
+  console.log('직원 추가를 시작합니다 : ' + startTime);
 
   let body = req.body;
   const q =
     'INSERT INTO Staff(Hotel_ID, Inform_ID, CODE, Rank, Bank, ACCOUNT, Staff_Password, RegDate, Salary, Is_Available) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
 
+  // 비밀번호 암호화 -> 암호화 비밀번호로 동기화 -> DB에 추가
   let pwEncrpt = async () => {
-    console.log('비밀번호 암호화를 시작합니다');
+    console.log(' 비밀번호 암호화를 시작합니다');
     await bcrypt.genSalt(saltRounds, async (err, salt) => {
       await bcrypt.hash(body.staff_pw, salt, async (err, hash) => {
-        console.log('비밀번호가 암호화 되었습니다');
+        console.log('  비밀번호가 암호화 되었습니다');
         let value = await makeValue(body, hash);
         let pushDB = await dbInsert(q, value);
         return pushDB;
@@ -50,8 +105,9 @@ router.post('/addStaff', async (req, res, next) => {
     });
   };
 
+  // DB에 추가하는 메소드
   let dbInsert = async (q, value) => {
-    console.log('데이터베이스에 쿼리를 입력합니다');
+    console.log('  데이터베이스에 쿼리를 입력합니다');
     connection.query(q, value, (err, rows, fields) => {
       if (err) {
         return true;
@@ -61,8 +117,9 @@ router.post('/addStaff', async (req, res, next) => {
     });
   };
 
+  // 암호화 비밀번호 동기화 메소드
   let makeValue = async (body, sp) => {
-    console.log('암호화된 비밀번호로 갱신중입니다');
+    console.log('  암호화된 비밀번호로 갱신중입니다');
     body.staff_pw = sp;
     return Object.values(body);
   };
