@@ -1,14 +1,13 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
-import Test from './Test';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import Stafftest from './stafftest'
+import Stafftest from './components/Stafftest'
 import axios from 'axios'
 
 
@@ -60,7 +59,7 @@ class Employee extends React.Component {
     return (
       <div>
         <Header idx={0}/>
-        <Test/>;
+        {/* <Test/>; */}
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>

@@ -3,7 +3,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import StaffDelete from './StaffDelete'
 
-class stafftest extends React.Component {
+class Stafftest extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -24,5 +24,5 @@ class stafftest extends React.Component {
     }
 }
 
-export default stafftest;
+export default Stafftest;
 
