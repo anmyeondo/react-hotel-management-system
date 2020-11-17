@@ -27,6 +27,7 @@ import TableCell from '@material-ui/core/TableCell';
 import Stafftest from './stafftest'
 import axios from 'axios'
 
+
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 const styles = theme => ({
   root: {
@@ -46,11 +47,22 @@ class Employee extends React.Component {
     this.state = {
       customers: [],
     }
+    this.stateRefresh = this.stateRefresh.bind(this);
+  }
+
+  stateRefresh() {
+    this.setState({
+      customers: '',
+    });
+      this.callApi()
+      .then(res => this.setState({customers: res}))
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
     this.callApi();
   }
+
   
   callApi = async () => {
     let response = await axios({
@@ -79,12 +91,13 @@ class Employee extends React.Component {
                 <TableCell>계좌</TableCell>
                 <TableCell>월급</TableCell>
                 <TableCell>등록일자</TableCell>
+                <TableCell align='center'>설정</TableCell>
               </TableRow>
               </TableHead>
               <TableBody>
 
               {this.state.customers.map(c => {
-                return <Stafftest key={c.ID} Hotel_ID={c.Hotel_ID} Code={c.Code} Inform_ID={c.Inform_ID} Rank={c.Rank} Bank={c.Bank} Account={c.Account} Salary={c.Salary} RegDate={c.RegDate}  />
+                return <Stafftest stateRefresh={this.stateRefresh} key={c.ID} Hotel_ID={c.Hotel_ID} Code={c.Code} Inform_ID={c.Inform_ID} Rank={c.Rank} Bank={c.Bank} Account={c.Account} Salary={c.Salary} RegDate={c.RegDate}  />
               })}
             </TableBody>
           </Table>
