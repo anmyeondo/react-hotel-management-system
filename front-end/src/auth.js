@@ -19,7 +19,7 @@ export default async function signIn({ id, password }) {
   if (ans == 0) {
     console.log("no ID");
     return 0;
-  } else if (data[0].Login_PW == password) {
+  } else if (data[0].Staff_Password == password) {
     console.log("correct");
     return 1;
   } else {

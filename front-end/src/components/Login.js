@@ -72,7 +72,6 @@ export default function LogIn() {
     try {
       let ret = await signIn({id, password});
       console.log(ret); 
-      document.location.href = "/header"
       if(ret === 1) {
         alert("Success to login"); 
         document.location.href = "/header"
@@ -83,7 +82,6 @@ export default function LogIn() {
     
   } 
     catch (e) {
-      document.location.href = "/header"
       alert("Failed to Login the account " + id + " " + password);
     }
   }

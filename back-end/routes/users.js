@@ -13,7 +13,7 @@ router.get('/login', (req, res, next) => {
   console.log('Login API Start at : ' + startTime);
 
   const params = req.query; // {id: id, password: password}
-  const q = `SELECT * FROM Customer WHERE ID = ${params.id}`;
+  const q = `SELECT * FROM Staff WHERE ID = ${params.id}`;
 
   connection.query(q, (err, rows, fields) => {
     res.send(JSON.stringify(rows));
