@@ -1,4 +1,4 @@
-import HeaderTest from "./HeaderTest";
+import LeftSidebar from "./LeftSidebar";
 import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
@@ -58,7 +58,7 @@ function Header({ classes, onDrawerToggle, idx }) {
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
-          <HeaderTest />
+          <LeftSidebar />
           <Grid container spacing={1} alignItems="center">
             <Grid item xs />
             <Grid item>
