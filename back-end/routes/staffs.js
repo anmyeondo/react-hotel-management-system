@@ -30,25 +30,45 @@ router.get('/informs', (req, res, next) => {
 });
 
 /* ADD new staff */
-router.post('/addStaff', (req, res, next) => {
+router.post('/addStaff', async (req, res, next) => {
   var startTime = new Date();
   console.log('Add Staff API Start at ' + startTime);
 
   let body = req.body;
-  const q = 'INSERT INTO Staff VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  const q =
+    'INSERT INTO Staff(Hotel_ID, Inform_ID, CODE, Rank, Bank, ACCOUNT, Staff_Password, RegDate, Salay, Is_Available) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
 
-  bcrypt.genSalt(saltRounds, (err, salt) => {
-    bcrypt.hash(body.PW, salt, (err, hash) => {
-      body.PW = hash;
-      console.log('패스워드가 암호화되었습니다.');
+  let pwEncrpt = async () => {
+    console.log('비밀번호 암호화를 시작합니다');
+    await bcrypt.genSalt(saltRounds, async (err, salt) => {
+      await bcrypt.hash(body.staff_pw, salt, async (err, hash) => {
+        console.log('비밀번호가 암호화 되었습니다');
+        let value = await makeValue(body, hash);
+        let pushDB = await dbInsert(q, value);
+        return pushDB;
+      });
     });
-  });
+  };
 
-  connection.query(q, body, (err, rows, fields) => {
-    res.send(JSON.stringify(rows));
-  });
+  let dbInsert = async (q, value) => {
+    console.log('데이터베이스에 쿼리를 입력합니다');
+    connection.query(q, value, (err, rows, fields) => {
+      if (err) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  };
 
-  console.log('Add Staff API END');
+  let makeValue = async (body, sp) => {
+    console.log('암호화된 비밀번호로 갱신중입니다');
+    body.staff_pw = sp;
+    return Object.values(body);
+  };
+
+  let ret = await pwEncrpt();
+  res.send(ret);
 });
 
 module.exports = router;
