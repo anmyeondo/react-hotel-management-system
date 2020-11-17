@@ -62,6 +62,12 @@ function Header({classes, onDrawerToggle, idx}) {
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
+          <Tabs value={idx} textColor="inherit">
+              <Tab onClick={handleClick0} textColor="inherit" label="Employee"/>
+              <Tab onClick={handleClick1} textColor="inherit" label="Customers" />
+              <Tab onClick={handleClick2} textColor="inherit" label="Reservation" />
+              <Tab onClick={handleClick3} textColor="inherit" label="Room" />
+            </Tabs>
           <Grid container spacing={1} alignItems="center">
             <Hidden smUp>
               <Grid item>
@@ -103,23 +109,6 @@ function Header({classes, onDrawerToggle, idx}) {
         position="static"
         elevation={0}
       >
-        <Toolbar>
-          <Grid container alignItems="center" spacing={1}>
-            <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
-                Del luna Busan ADMIN
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <Tooltip title="Help">
-                <IconButton color="inherit" onClick={gethelp}>
-                  <HelpIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        </Toolbar>
       </AppBar>
       <AppBar
         component="div"
@@ -128,12 +117,6 @@ function Header({classes, onDrawerToggle, idx}) {
         position="static"
         elevation={0}
       >
-        <Tabs value={idx} textColor="inherit">
-          <Tab onClick={handleClick0} textColor="inherit" label="Employee"/>
-          <Tab onClick={handleClick1} textColor="inherit" label="Customers" />
-          <Tab onClick={handleClick2} textColor="inherit" label="Reservation" />
-          <Tab onClick={handleClick3} textColor="inherit" label="Room" />
-        </Tabs>
       </AppBar>
     </React.Fragment>
   );
