@@ -1,0 +1,7 @@
+CREATE TABLE Department_Code
+(
+    Code INT AUTO_INCREMENT,
+    Dept_Name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (Code)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8
