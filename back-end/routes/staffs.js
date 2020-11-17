@@ -54,9 +54,9 @@ router.post('/addStaff', async (req, res, next) => {
     console.log('데이터베이스에 쿼리를 입력합니다');
     connection.query(q, value, (err, rows, fields) => {
       if (err) {
-        return true;
+        console.log(err);
       } else {
-        return false;
+        console.log("등록완료");
       }
     });
   };
@@ -70,5 +70,26 @@ router.post('/addStaff', async (req, res, next) => {
   let ret = await pwEncrpt();
   res.send(ret);
 });
+
+/* Delete new staff */
+router.get('/del', async (req, res) => {
+  var startTime = new Date();
+  console.log('Delete Staff API Start at ' + startTime);
+  let id = req.query.id;
+  const q = `DELETE FROM Staff WHERE id=?;`;
+  
+  let dbInsert = async (q, value) => {
+    console.log('데이터베이스에 쿼리를 입력합니다');
+    connection.query(q, value, (err, rows, fields) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("삭제완료");
+      }
+    });
+  };
+  dbInsert(q, [id])
+  res.send("하이염");
+})
 
 module.exports = router;

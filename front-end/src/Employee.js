@@ -1,20 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import HelpIcon from '@material-ui/icons/Help';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
 import Test from './Test';
@@ -47,21 +31,20 @@ class Employee extends React.Component {
     this.state = {
       customers: [],
     }
-    this.stateRefresh = this.stateRefresh.bind(this);
-  }
-
-  stateRefresh() {
-    this.setState({
-      customers: '',
-    });
-      this.callApi()
-      .then(res => this.setState({customers: res}))
-      .catch(err => console.log(err));
+    
   }
 
   componentDidMount() {
     this.callApi();
   }
+
+  refreshTable = () => {
+    this.setState({
+      customers: [],
+    });
+    this.callApi();
+  }
+
 
   
   callApi = async () => {
@@ -69,7 +52,6 @@ class Employee extends React.Component {
       method: "get",
       url: "/staffs/informs",
     });
-    console.log(response.data);
     this.setState({customers: response.data});
   }
   
@@ -97,7 +79,7 @@ class Employee extends React.Component {
               <TableBody>
 
               {this.state.customers.map(c => {
-                return <Stafftest stateRefresh={this.stateRefresh} key={c.ID} Hotel_ID={c.Hotel_ID} Code={c.Code} Inform_ID={c.Inform_ID} Rank={c.Rank} Bank={c.Bank} Account={c.Account} Salary={c.Salary} RegDate={c.RegDate}  />
+                return <Stafftest key={c.ID} ID={c.ID} Hotel_ID={c.Hotel_ID} Code={c.Code} Inform_ID={c.Inform_ID} Rank={c.Rank} Bank={c.Bank} Account={c.Account} Salary={c.Salary} RegDate={c.RegDate}  refreshTable={this.refreshTable}/>
               })}
             </TableBody>
           </Table>
