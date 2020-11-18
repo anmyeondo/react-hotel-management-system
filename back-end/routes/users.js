@@ -45,15 +45,18 @@ router.post('/test', (req, res, next) => {
   // 쿼리문 만드는 부분
   let q = 'SELECT * FROM Staff';
   let addq = ' WHERE';
-  const key = Object.keys(body);
-  console.log(key);
-  const value = Object.values(body);
-  console.log(value);
 
-  for (let i in key) {
-    console.log(body.i);
-    if (body[i] != '' || body[i] != undefined) {
-      addq = addq + ' ' + i + ' = ' + body[i];
+  for (let key in body) {
+    console.log(body[key]);
+    if (body[key] != '' && body[key] != undefined) {
+      if (addq !== ' WHERE') {
+        addq = addq + ' and';
+      }
+      let x = body[key];
+      if (key == 'Rank') {
+        x = '"' + x + '"';
+      }
+      addq = addq + ' ' + key + ' = ' + x;
     } else {
       continue;
     }
@@ -65,7 +68,8 @@ router.post('/test', (req, res, next) => {
     q = q + addq;
     console.log(q);
     connection.query(q, (err, rows, fields) => {
-      res.send(rows);
+      console.log(JSON.stringify(rows));
+      res.send(JSON.stringify(rows));
     });
   }
 });

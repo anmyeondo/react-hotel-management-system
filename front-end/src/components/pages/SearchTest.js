@@ -79,10 +79,10 @@ class SearchTest extends React.Component {
 
     this.searchCustomer().then((response) => {
       console.log(response.data);
+      this.props.test(response.data);
     });
-
     this.handleClose();
-    this.props.refreshTable();
+    // this.props.refreshTable();
   }
 
   handleFileChange(e) {
@@ -103,10 +103,10 @@ class SearchTest extends React.Component {
       method: "post",
       url: "/users/test",
       data: {
-        h_id: this.state.h_id,
-        i_id: this.state.i_id,
-        code: this.state.code,
-        rank: this.state.rank,
+        Hotel_ID: this.state.h_id,
+        Inform_ID: this.state.i_id,
+        Code: this.state.code,
+        Rank: this.state.rank,
         // bank: this.state.bank,
         // account: this.state.account,
         // staff_pw: this.state.staff_pw,
@@ -163,7 +163,6 @@ class SearchTest extends React.Component {
               onChange={this.handleValueChange}
             />
             <br />
-
           </DialogContent>
           <DialogActions>
             <Button
