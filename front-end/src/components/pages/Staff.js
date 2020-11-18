@@ -12,6 +12,8 @@ import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
 import AddStaff from "./StaffAdd";
 import SearchTest from "./SearchTest";
+import Button from '@material-ui/core/Button';
+import {Update} from "@material-ui/icons";
 const styles = (theme) => ({
   root: {
     width: "100%",
@@ -78,6 +80,15 @@ class Staff extends React.Component {
         <h3>호텔 직원 관리 페이지입니다.</h3>
         {<AddStaff refreshTable={this.refreshTable} />}
         {<SearchTest test={this.test} />}
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          startIcon={<Update />}
+          onClick={this.refreshTable}
+        >
+          모든직원 조회
+        </Button>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
