@@ -10,7 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import StaffInfoRow from '../StaffInfoRow'
 import axios from 'axios'
 import TablePagination from '@material-ui/core/TablePagination';
-
+import AddStaff from './StaffAdd'
 
 const styles = theme => ({
   root: {
@@ -69,7 +69,8 @@ class Staff extends React.Component {
     return (
       <div>
         <Header idx={0}/>
-        {/* <Test/>; */}
+        <h3>호텔 직원 관리 페이지입니다.</h3>
+        { <AddStaff refreshTable={this.refreshTable}/> }
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
