@@ -59,6 +59,7 @@ function Header({ classes, onDrawerToggle, idx }) {
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
           <LeftSidebar />
+          <h2> ADMIN </h2>
           <Grid container spacing={1} alignItems="center">
             <Grid item xs />
             <Grid item>

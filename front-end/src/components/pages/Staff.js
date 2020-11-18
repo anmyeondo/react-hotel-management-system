@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import StaffInfoRow from '../StaffInfoRow'
 import axios from 'axios'
+import TablePagination from '@material-ui/core/TablePagination';
+
 
 const styles = theme => ({
   root: {
@@ -27,6 +29,8 @@ class Staff extends React.Component {
     this.callApi = this.callApi.bind(this);
     this.state = {
       customers: [],
+      page: 0,
+      rowsPerPage: 10,
     }
     
   }
@@ -51,7 +55,15 @@ class Staff extends React.Component {
     });
     this.setState({customers: response.data});
   }
-  
+
+  handleChangePage = (event, newPage) => {
+    this.setState({page: newPage});
+  };
+
+  handleChangeRowsPerPage = (event) => {
+    this.setState({RowsPerPage: +event.target.value});
+    this.setState({page: 0});
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -75,11 +87,20 @@ class Staff extends React.Component {
               </TableHead>
               <TableBody>
 
-              {this.state.customers.map(c => {
+              {this.state.customers.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map(c => {
                 return <StaffInfoRow key={c.ID} ID={c.ID} Hotel_ID={c.Hotel_ID} Code={c.Code} Inform_ID={c.Inform_ID} Rank={c.Rank} Bank={c.Bank} Account={c.Account} Salary={c.Salary} RegDate={c.RegDate}  refreshTable={this.refreshTable}/>
               })}
             </TableBody>
           </Table>
+          <TablePagination
+            rowsPerPageOptions={[10]}
+            component="div"
+            count={this.state.customers.length}
+            rowsPerPage={this.state.rowsPerPage}
+            page={this.state.page}
+            onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+          />
         </Paper>
       </div>
     );
