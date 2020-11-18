@@ -41,6 +41,7 @@ function Header({ classes }) {
         <Toolbar>
           <LeftSidebar />
           <Grid container spacing={1} alignItems="center">
+            <h2> ADMIN </h2>
             <Grid item xs />
             <Grid item>
               <Link

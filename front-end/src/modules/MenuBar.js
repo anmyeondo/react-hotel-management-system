@@ -13,6 +13,7 @@ import {
 import menuItems from "./sideBarItems";
 import useStyles from "./menuBarStyles";
 import { NavLink as RouterLink } from "react-router-dom";
+import Addtest from "./Addtest";
 
 // idx에 따라 아이콘 지정하는 함수
 const ParentIcon = (idx) => {
@@ -61,6 +62,7 @@ const MenuBar = (props) => {
                 })}
                 component={CustomRouterLink}
                 to={url}
+                // onClick={name=="Add Staff" ? (() => <Addtest/>) : (() => console.log("bb"))}
               >
                 {name}
               </Button>

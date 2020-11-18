@@ -11,6 +11,7 @@ import StaffInfoRow from '../StaffInfoRow'
 import axios from 'axios'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddStaff from './StaffAdd'
+import SearchTest from './SearchTest'
 
 const styles = theme => ({
   root: {
@@ -46,8 +47,6 @@ class Staff extends React.Component {
     this.callApi();
   }
 
-
-  
   callApi = async () => {
     let response = await axios({
       method: "get",
@@ -70,7 +69,10 @@ class Staff extends React.Component {
       <div>
         <Header idx={0}/>
         <h3>호텔 직원 관리 페이지입니다.</h3>
+        <div styleSheet="width:200px; height:150px; border:1px solid red; float:left;">
         { <AddStaff refreshTable={this.refreshTable}/> }
+        { <SearchTest refreshTable={this.refreshTable}/> }
+        </div>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
