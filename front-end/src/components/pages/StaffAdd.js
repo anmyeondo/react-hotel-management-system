@@ -27,16 +27,16 @@ class StaffAdd extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      h_id: 0,
-      i_id: 0,
-      code: 0,
-      rank: "",
-      bank: "",
-      account: "",
-      staff_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 0,
+      h_id: 1,
+      i_id: 1,
+      code: 1000,
+      rank: "a",
+      bank: "b",
+      account: "c",
+      staff_pw: "d",
+      r_date: "2020-11-11",
+      salary: "10000",
+      is_able: 1,
       open: false,
     };
 
@@ -60,29 +60,30 @@ class StaffAdd extends React.Component {
 
   handleClose() {
     this.setState({
-      h_id: 0,
-      i_id: 0,
-      code: 0,
-      rank: "",
-      bank: "",
-      account: "",
-      staff_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 0,
+      h_id: 1,
+      i_id: 1,
+      code: 1000,
+      rank: "a",
+      bank: "b",
+      account: "c",
+      staff_pw: "d",
+      r_date: "2020-11-11",
+      salary: "10000",
+      is_able: 1,
       open: false,
     });
   }
 
-  handleFormSubmit(e) {
+  async handleFormSubmit(e) {
     e.preventDefault();
 
-    this.addCustomer().then((response) => {
-      console.log(response.data);
+    await this.addCustomer()
+    .then(() => {
+      this.handleClose();
+    }).then(() => {
+      this.props.refreshTable();
     });
 
-    this.handleClose();
-    this.props.refreshTable();
   }
 
   handleFileChange(e) {
@@ -98,8 +99,8 @@ class StaffAdd extends React.Component {
     this.setState(nextState);
   }
 
-  addCustomer() {
-    return axios({
+async addCustomer() {
+    await axios({
       method: "post",
       url: "/staffs/addStaff",
       data: {
@@ -118,7 +119,6 @@ class StaffAdd extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Button

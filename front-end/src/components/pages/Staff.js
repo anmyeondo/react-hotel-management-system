@@ -42,18 +42,19 @@ class Staff extends React.Component {
   refreshTable = () => {
     this.setState({
       customers: [],
-    });
+    })
     this.callApi();
   }
-
-
   
-  callApi = async () => {
-    let response = await axios({
+  callApi = () => {
+    axios({
       method: "get",
       url: "/staffs/informs",
+    }).then((res) => {
+      this.setState({
+        customers: res.data,
+      });
     });
-    this.setState({customers: response.data});
   }
 
   handleChangePage = (event, newPage) => {
