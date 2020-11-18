@@ -40,22 +40,30 @@ router.post('/test', (req, res, next) => {
   console.log('테스트를 시작합니다 : ' + startTime);
 
   const body = req.body; // {h_id, i_id, code, rank} 입력, 없으면 ""
+  console.log(body);
 
   // 쿼리문 만드는 부분
   let q = 'SELECT * FROM Staff';
   let addq = ' WHERE';
   const key = Object.keys(body);
-  const value = Object.keys(body);
+  console.log(key);
+  const value = Object.values(body);
+  console.log(value);
 
   for (let i in key) {
-    if (body[i] != '') {
+    console.log(body.i);
+    if (body[i] != '' || body[i] != undefined) {
       addq = addq + ' ' + i + ' = ' + body[i];
     } else {
       continue;
     }
   }
 
+  console.log('큐 : ' + addq);
+
   if (addq != ' WHERE') {
+    q = q + addq;
+    console.log(q);
     connection.query(q, (err, rows, fields) => {
       res.send(rows);
     });
