@@ -100,7 +100,7 @@ router.post('/addStaff', async (req, res, next) => {
         console.log('  비밀번호가 암호화 되었습니다');
         let value = await makeValue(body, hash);
         let pushDB = await dbInsert(q, value);
-        return pushDB;
+        // return pushDB;
       });
     });
   };
@@ -113,6 +113,7 @@ router.post('/addStaff', async (req, res, next) => {
         console.log(err);
       } else {
         console.log('등록완료');
+        res.send(rows);
       }
     });
   };
@@ -125,7 +126,6 @@ router.post('/addStaff', async (req, res, next) => {
   };
 
   let ret = await pwEncrpt();
-  res.send(ret);
 });
 
 /* Delete new staff */
