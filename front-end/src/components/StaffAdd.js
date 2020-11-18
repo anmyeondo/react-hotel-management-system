@@ -78,12 +78,12 @@ class StaffAdd extends React.Component {
     e.preventDefault();
 
     await this.addCustomer()
-    .then(() => {
-      this.handleClose();
-    }).then(() => {
-      this.props.refreshTable();
-    });
-
+      .then(() => {
+        this.handleClose();
+      })
+      .then(() => {
+        this.props.refreshTable();
+      });
   }
 
   handleFileChange(e) {
@@ -99,7 +99,7 @@ class StaffAdd extends React.Component {
     this.setState(nextState);
   }
 
-async addCustomer() {
+  async addCustomer() {
     await axios({
       method: "post",
       url: "/staffs/addStaff",

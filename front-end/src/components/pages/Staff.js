@@ -10,10 +10,10 @@ import TableCell from "@material-ui/core/TableCell";
 import StaffInfoRow from "../StaffInfoRow";
 import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
-import AddStaff from "./StaffAdd";
-import SearchTest from "./SearchTest";
-import Button from '@material-ui/core/Button';
-import {Update} from "@material-ui/icons";
+import AddStaff from "../StaffAdd";
+import SearchTest from "../SearchTest";
+import Button from "@material-ui/core/Button";
+import { Update } from "@material-ui/icons";
 const styles = (theme) => ({
   root: {
     width: "100%",
@@ -78,17 +78,19 @@ class Staff extends React.Component {
       <div>
         <Header idx={0} />
         <h3>호텔 직원 관리 페이지입니다.</h3>
-        {<AddStaff refreshTable={this.refreshTable} />}
-        {<SearchTest test={this.test} />}
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          startIcon={<Update />}
-          onClick={this.refreshTable}
-        >
-          모든직원 조회
-        </Button>
+        <div>
+          <AddStaff refreshTable={this.refreshTable} />
+          <SearchTest test={this.test} />
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            startIcon={<Update />}
+            onClick={this.refreshTable}
+          >
+            모든직원 조회
+          </Button>
+        </div>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
