@@ -23,21 +23,20 @@ const styles = (theme) => ({
   },
 });
 
-class SearchTest extends React.Component {
+class StaffAdd extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
-      // bank: "",
-      // account: "",
-      // staff_pw: "",
-      // r_date: "",
-      // salary: "",
-      // is_able: "",
-      open: false,
+      h_id: 1,
+      i_id: 1,
+      code: 1000,
+      rank: "a",
+      bank: "b",
+      account: "c",
+      staff_pw: "d",
+      r_date: "2020-11-11",
+      salary: "10000",
+      is_able: 1,
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -45,7 +44,7 @@ class SearchTest extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.searchCustomer = this.searchCustomer.bind(this);
+    this.addCustomer = this.addCustomer.bind(this);
   }
 
   handleClickOpen() {
@@ -60,22 +59,30 @@ class SearchTest extends React.Component {
 
   handleClose() {
     this.setState({
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
+      h_id: 1,
+      i_id: 1,
+      code: 1000,
+      rank: "a",
+      bank: "b",
+      account: "c",
+      staff_pw: "d",
+      r_date: "2020-11-11",
+      salary: "10000",
+      is_able: 1,
     });
     this.props.closeDialog();
   }
 
-  handleFormSubmit(e) {
+  async handleFormSubmit(e) {
     e.preventDefault();
 
-    this.searchCustomer().then((response) => {
-      console.log(response.data);
-      this.props.test(response.data);
-    });
-    this.handleClose();
+    await this.addCustomer()
+      .then(() => {
+        this.handleClose();
+      })
+      .then(() => {
+        this.props.refreshTable();
+      });
   }
 
   handleFileChange(e) {
@@ -91,30 +98,29 @@ class SearchTest extends React.Component {
     this.setState(nextState);
   }
 
-  searchCustomer() {
-    return axios({
+  async addCustomer() {
+    await axios({
       method: "post",
-      url: "/users/test",
+      url: "/staffs/addStaff",
       data: {
-        Hotel_ID: this.state.h_id,
-        Inform_ID: this.state.i_id,
-        Code: this.state.code,
-        Rank: this.state.rank,
-        // bank: this.state.bank,
-        // account: this.state.account,
-        // staff_pw: this.state.staff_pw,
-        // r_date: this.state.r_date,
-        // salary: this.state.salary,
-        // is_able: this.state.is_able,
+        h_id: this.state.h_id,
+        i_id: this.state.i_id,
+        code: this.state.code,
+        rank: this.state.rank,
+        bank: this.state.bank,
+        account: this.state.account,
+        staff_pw: this.state.staff_pw,
+        r_date: this.state.r_date,
+        salary: this.state.salary,
+        is_able: this.state.is_able,
       },
     });
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> 직원 검색</DialogTitle>
+        <DialogTitle> 고객 추가</DialogTitle>
         <DialogContent>
           <TextField
             label="호텔번호"
@@ -133,7 +139,7 @@ class SearchTest extends React.Component {
           />
           <br />
           <TextField
-            label="부서코드"
+            label="코드"
             type="text"
             name="code"
             value={this.state.code}
@@ -148,6 +154,54 @@ class SearchTest extends React.Component {
             onChange={this.handleValueChange}
           />
           <br />
+          <TextField
+            label="은행"
+            type="text"
+            name="bank"
+            value={this.state.bank}
+            onChange={this.handleValueChange}
+          />
+          <br />
+          <TextField
+            label="계좌"
+            type="text"
+            name="account"
+            value={this.state.account}
+            onChange={this.handleValueChange}
+          />
+          <br />
+          <TextField
+            label="비번"
+            type="text"
+            name="staff_pw"
+            value={this.state.staff_pw}
+            onChange={this.handleValueChange}
+          />
+          <br />
+          <TextField
+            label="등록일"
+            type="text"
+            name="r_date"
+            value={this.state.r_date}
+            onChange={this.handleValueChange}
+          />
+          <br />
+          <TextField
+            label="연봉"
+            type="text"
+            name="salary"
+            value={this.state.salary}
+            onChange={this.handleValueChange}
+          />
+          <br />
+          <TextField
+            label="가능여부"
+            type="text"
+            name="is_able"
+            value={this.state.is_able}
+            onChange={this.handleValueChange}
+          />
+          <br />
         </DialogContent>
         <DialogActions>
           <Button
@@ -155,7 +209,7 @@ class SearchTest extends React.Component {
             color="primary"
             onClick={this.handleFormSubmit}
           >
-            검색
+            추가
           </Button>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>
             닫기
@@ -166,4 +220,4 @@ class SearchTest extends React.Component {
   }
 }
 
-export default withStyles(styles)(SearchTest);
+export default withStyles(styles)(StaffAdd);

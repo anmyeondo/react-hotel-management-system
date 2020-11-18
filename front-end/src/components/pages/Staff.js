@@ -14,6 +14,8 @@ import AddStaff from "../StaffAdd";
 import SearchTest from "../SearchTest";
 import Button from "@material-ui/core/Button";
 import { Update } from "@material-ui/icons";
+import StaffAddTest from "../StaffAddTest";
+
 const styles = (theme) => ({
   root: {
     width: "100%",
@@ -28,12 +30,17 @@ const styles = (theme) => ({
 class Staff extends React.Component {
   constructor(props) {
     super(props);
-    this.callApi = this.callApi.bind(this);
     this.state = {
       customers: [],
       page: 0,
       rowsPerPage: 10,
+      addStaffDialog: false,
+      searchStaffDialog: false,
     };
+    this.callApi = this.callApi.bind(this);
+    this.addStaffBtnOnclick = this.addStaffBtnOnclick.bind(this);
+    this.closeAddDialog = this.closeAddDialog.bind(this);
+    this.test = this.test.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +79,28 @@ class Staff extends React.Component {
     this.setState({ RowsPerPage: +event.target.value });
     this.setState({ page: 0 });
   };
+
+  // 버튼으로 Dialog를 조작하는 메소드
+  addStaffBtnOnclick = () => {
+    console.log("Staff.js 버튼 눌림");
+    this.setState({ addStaffDialog: true });
+    console.log(this.state);
+  };
+
+  closeAddDialog = () => {
+    console.log("값이 변경됨");
+    this.setState({ addStaffDialog: false });
+    console.log(this.state);
+  };
+
+  searchStaffBtnOnclick = () => {
+    this.setState({ searchStaffDialog: true });
+  };
+
+  closeSearchDialog = () => {
+    this.setState({ searchStaffDialog: false });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -79,7 +108,36 @@ class Staff extends React.Component {
         <Header idx={0} />
         <h3>호텔 직원 관리 페이지입니다.</h3>
         <div>
-          <AddStaff refreshTable={this.refreshTable} />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={this.addStaffBtnOnclick}
+          >
+            직원 추가
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={this.searchStaffBtnOnclick}
+          >
+            직원 검색
+          </Button>
+        </div>
+        {/* Dialog 표현 */}
+        <StaffAddTest
+          open={this.state.addStaffDialog}
+          closeDialog={this.closeAddDialog}
+          refreshTable={this.refreshTable}
+        />
+        <SearchTest
+          open={this.state.searchStaffDialog}
+          closeDialog={this.closeSearchDialog}
+          test={this.test}
+        />
+
+        {/* <div>
           <SearchTest test={this.test} />
           <Button
             variant="contained"
@@ -90,7 +148,7 @@ class Staff extends React.Component {
           >
             모든직원 조회
           </Button>
-        </div>
+        </div> */}
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
