@@ -26,9 +26,7 @@ class Test extends React.Component {
   handleFormSubmit(e) {
     e.preventDefault();
 
-    this.sendData().then((response) => {
-      console.log(response);
-    });
+    this.sendData();
   }
 
   handleFileChange(e) {
@@ -58,10 +56,13 @@ class Test extends React.Component {
       gender: this.state.gender,
     };
     console.log(d);
-    return axios({
+    axios({
       method: "post",
       url: "/users/addInform",
       data: d,
+    }).then((res) => {
+      // 여기 보면 있음
+      console.log(res.data.insertId);
     });
   }
 

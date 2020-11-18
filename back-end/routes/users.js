@@ -35,6 +35,31 @@ router.post('/addInform', (req, res, next) => {
   });
 });
 
-router.post('/test', (req, res, next) => {});
+router.post('/test', (req, res, next) => {
+  const startTime = new Date();
+  console.log('테스트를 시작합니다 : ' + startTime);
+
+  const body = req.body; // {h_id, i_id, code, rank} 입력, 없으면 ""
+
+  // 쿼리문 만드는 부분
+  let q = 'SELECT * FROM Staff';
+  let addq = ' WHERE';
+  const key = Object.keys(body);
+  const value = Object.keys(body);
+
+  for (let i in key) {
+    if (body[i] != '') {
+      addq = addq + ' ' + i + ' = ' + body[i];
+    } else {
+      continue;
+    }
+  }
+
+  if (addq != ' WHERE') {
+    connection.query(q, (err, rows, fields) => {
+      res.send(rows);
+    });
+  }
+});
 
 module.exports = router;
