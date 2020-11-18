@@ -5,15 +5,11 @@ export default {
       children: [
         {
           name: "Staff Status",
-          url: "/staff",
+          url: "/staff/status",
         },
         {
           name: "Add Staff",
           url: "/staff/add",
-        },
-        {
-          name: "Modify Staff",
-          url: "/staff/modify",
         },
       ],
       icon: 1,
@@ -23,15 +19,11 @@ export default {
       children: [
         {
           name: "Customer Status",
-          url: "/customer",
+          url: "/customer/status",
         },
         {
           name: "Add Customer",
           url: "/customer/add",
-        },
-        {
-          name: "Modify Customer",
-          url: "/customer/modify",
         },
       ],
       icon: 2,
@@ -47,15 +39,11 @@ export default {
           name: "Add Reservation",
           url: "/reserve/add",
         },
-        {
-          name: "Modify Reservation",
-          url: "/reserve/modify",
-        },
       ],
       icon: 3,
     },
     {
-      name: "Hotel Management",
+      name: "Hotel Management 수정필요",
       children: [
         {
           name: "Hotel status",
@@ -89,7 +77,7 @@ export default {
       children: [
         {
           name: "Current Order",
-          url: "/order",
+          url: "/order/current",
         },
         {
           name: "Order History",

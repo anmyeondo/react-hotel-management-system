@@ -1,4 +1,4 @@
-import LeftSidebar from "./LeftSidebar";
+import LeftSidebar from "../modules/LeftSidebar";
 import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";

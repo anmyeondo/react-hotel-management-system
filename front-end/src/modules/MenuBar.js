@@ -11,8 +11,8 @@ import {
   RoomService,
 } from "@material-ui/icons";
 import menuItems from "./sideBarItems";
-import { NavLink as RouterLink } from "react-router-dom";
 import useStyles from "./menuBarStyles";
+import { NavLink as RouterLink } from "react-router-dom";
 
 // idx에 따라 아이콘 지정하는 함수
 const ParentIcon = (idx) => {
