@@ -35,4 +35,6 @@ router.post('/addInform', (req, res, next) => {
   });
 });
 
+router.post('/test', (req, res, next) => {});
+
 module.exports = router;
