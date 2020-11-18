@@ -4,13 +4,19 @@ import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
+import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
 const lightColor = "rgba(255, 255, 255, 0.7)";
+
+// for test
 
 const styles = (theme) => ({
   secondaryBar: {
@@ -34,12 +40,26 @@ const styles = (theme) => ({
   },
 });
 
-function Header({ classes }) {
+function Header({ classes, onDrawerToggle, idx }) {
+  const handleClick0 = () => {
+    document.location.href = "/staff";
+  };
+  const handleClick1 = () => {
+    document.location.href = "/customer";
+  };
+  const handleClick2 = () => {
+    document.location.href = "/header";
+  };
+  const handleClick3 = () => {
+    document.location.href = "/header";
+  };
+
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
           <LeftSidebar />
+          <h2> ADMIN </h2>
           <Grid container spacing={1} alignItems="center">
             <Grid item xs />
             <Grid item>

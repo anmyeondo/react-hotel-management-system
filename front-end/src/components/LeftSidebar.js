@@ -3,19 +3,8 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import AddBox from "@material-ui/icons/AddBox";
-import AssignmentInd from "@material-ui/icons/AssignmentInd";
-import Person from "@material-ui/icons/Person";
-import MeetingRoom from "@material-ui/icons/MeetingRoom";
-import RoomService from "@material-ui/icons/RoomService";
-import EventAvailable from "@material-ui/icons/EventAvailable";
+import Menubar from "./MenuBar";
 
 const useStyles = makeStyles({
   list: {
@@ -53,90 +42,10 @@ export default function LeftSidebar() {
         [classes.fullList]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {/* 직원 관리 버튼 */}
-        <ListItem
-          button
-          key="staffManagement"
-          onClick={() => {
-            document.location.href = "/staff";
-          }}
-        >
-          <ListItemIcon>
-            <AssignmentInd />
-          </ListItemIcon>
-          <ListItemText primary={"Staff Management"} />
-        </ListItem>
-        {/* 고객 관리 버튼 */}
-        <ListItem
-          button
-          key="customerManagement"
-          onClick={() => {
-            // 눌렀을 때 이동할 주소 수정하려면 아래 라우트 수정
-            document.location.href = "/staff";
-          }}
-        >
-          <ListItemIcon>
-            {/* 아이콘 변경할거면 아래 수정 */}
-            <Person />
-          </ListItemIcon>
-          {/* 박스 안 내용물 수정할거면 여기 수정 */}
-          <ListItemText primary={"Customer Management"} />
-        </ListItem>
-        {/* 예약 관리 버튼 */}
-        <ListItem
-          button
-          key="reservationManagement"
-          onClick={() => {
-            document.location.href = "/staff";
-          }}
-        >
-          <ListItemIcon>
-            <EventAvailable />
-          </ListItemIcon>
-          <ListItemText primary={"Reservation Management"} />
-        </ListItem>
-        {/* 방 관리 버튼 */}
-        <ListItem
-          button
-          key="roomManagement"
-          onClick={() => {
-            document.location.href = "/staff";
-          }}
-        >
-          <ListItemIcon>
-            <MeetingRoom />
-          </ListItemIcon>
-          <ListItemText primary={"Room Management"} />
-        </ListItem>
-        {/* 주문 관리 버튼 */}
-        <ListItem
-          button
-          key="orderManagement"
-          onClick={() => {
-            document.location.href = "/staff";
-          }}
-        >
-          <ListItemIcon>
-            <RoomService />
-          </ListItemIcon>
-          <ListItemText primary={"Order Management"} />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <Menubar />
     </div>
   );
 
