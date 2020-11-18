@@ -5,29 +5,29 @@ class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      h_id: 0,
-      i_id: 0,
-      code: 0,
-      rank: "",
-      bank: "",
-      account: "",
-      staff_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 0,
+      zip: "",
+      aNum: "",
+      fName: "",
+      lName: "",
+      eMail: "",
+      fax: "",
+      birthday: "",
+      nationality: "",
+      phoneNumber: "",
+      gender: "",
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.addCustomer = this.addCustomer.bind(this);
+    this.sendData = this.sendData.bind(this);
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
 
-    this.addCustomer().then((response) => {
-      console.log(response.data);
+    this.sendData().then((response) => {
+      console.log(response);
     });
   }
 
@@ -44,22 +44,24 @@ class Test extends React.Component {
     this.setState(nextState);
   }
 
-  addCustomer() {
+  sendData() {
+    const d = {
+      zip: this.state.zip,
+      aNum: this.state.aNum,
+      fName: this.state.fName,
+      lName: this.state.lName,
+      eMail: this.state.eMail,
+      fax: this.state.fax,
+      birthday: this.state.birthday,
+      nationality: this.state.nationality,
+      phoneNumber: this.state.phoneNumber,
+      gender: this.state.gender,
+    };
+    console.log(d);
     return axios({
       method: "post",
-      url: "/staffs/addStaff",
-      data: {
-        h_id: this.state.h_id,
-        i_id: this.state.i_id,
-        code: this.state.code,
-        rank: this.state.rank,
-        bank: this.state.bank,
-        account: this.state.account,
-        staff_pw: this.state.staff_pw,
-        r_date: this.state.r_date,
-        salary: this.state.salary,
-        is_able: this.state.is_able,
-      },
+      url: "/users/addInform",
+      data: d,
     });
   }
 
@@ -68,83 +70,83 @@ class Test extends React.Component {
       <form onSubmit={this.handleFormSubmit}>
         <h1>고객 추가</h1>
         <br />
-        호텔아이디:{" "}
+        zip:{" "}
         <input
           type="text"
-          name="h_id"
-          value={this.state.h_id}
+          name="zip"
+          value={this.state.zip}
           onChange={this.handleValueChange}
         />
         <br />
-        정보아이디:{" "}
+        aNum:{" "}
         <input
           type="text"
-          name="i_id"
-          value={this.state.i_id}
+          name="aNum"
+          value={this.state.aNum}
           onChange={this.handleValueChange}
         />
         <br />
-        코드:{" "}
+        fName:{" "}
         <input
           type="text"
-          name="code"
-          value={this.state.code}
+          name="fName"
+          value={this.state.fName}
           onChange={this.handleValueChange}
         />
         <br />
-        등급:{" "}
+        lName:{" "}
         <input
           type="text"
-          name="rank"
-          value={this.state.rank}
+          name="lName"
+          value={this.state.lName}
           onChange={this.handleValueChange}
         />
         <br />
-        은행:{" "}
+        eMail:{" "}
         <input
           type="text"
-          name="bank"
-          value={this.state.bank}
+          name="eMail"
+          value={this.state.eMail}
           onChange={this.handleValueChange}
         />
         <br />
-        계좌:{" "}
+        fax:{" "}
         <input
           type="text"
-          name="account"
-          value={this.state.account}
+          name="fax"
+          value={this.state.fax}
           onChange={this.handleValueChange}
         />
         <br />
-        비번:{" "}
+        birthday:{" "}
         <input
           type="text"
-          name="staff_pw"
-          value={this.state.staff_pw}
+          name="birthday"
+          value={this.state.birthday}
           onChange={this.handleValueChange}
         />
         <br />
-        등록일:{" "}
+        nationality:{" "}
         <input
           type="text"
-          name="r_date"
-          value={this.state.r_date}
+          name="nationality"
+          value={this.state.nationality}
           onChange={this.handleValueChange}
         />
         <br />
-        연봉:{" "}
+        phoneNumber:{" "}
         <input
           type="text"
-          name="salary"
-          value={this.state.salary}
+          name="phoneNumber"
+          value={this.state.phoneNumber}
           onChange={this.handleValueChange}
         />
         <br />
-        가능여부:{" "}
+        성별:{" "}
         <input
           type="text"
-          name="is_able"
-          value={this.state.is_able}
+          name="gender"
+          value={this.state.gender}
           onChange={this.handleValueChange}
         />
         <br />

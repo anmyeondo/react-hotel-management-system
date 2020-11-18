@@ -12,7 +12,6 @@ import axios from 'axios'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddStaff from './StaffAdd'
 import SearchTest from './SearchTest'
-
 const styles = theme => ({
   root: {
   width: "100%",
@@ -43,16 +42,19 @@ class Staff extends React.Component {
   refreshTable = () => {
     this.setState({
       customers: [],
-    });
+    })
     this.callApi();
   }
-
-  callApi = async () => {
-    let response = await axios({
+  
+  callApi = () => {
+    axios({
       method: "get",
       url: "/staffs/informs",
+    }).then((res) => {
+      this.setState({
+        customers: res.data,
+      });
     });
-    this.setState({customers: response.data});
   }
 
   handleChangePage = (event, newPage) => {
@@ -69,10 +71,8 @@ class Staff extends React.Component {
       <div>
         <Header idx={0}/>
         <h3>호텔 직원 관리 페이지입니다.</h3>
-        <div styleSheet="width:200px; height:150px; border:1px solid red; float:left;">
         { <AddStaff refreshTable={this.refreshTable}/> }
         { <SearchTest refreshTable={this.refreshTable}/> }
-        </div>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
