@@ -37,6 +37,7 @@ class Staff extends React.Component {
       rowsPerPage: 10,
       addStaffIsOpen: false,
       searchStaffIsOpen: false,
+      StaffMoreInfoIsOpen: false,
     };
     this.callApi = this.callApi.bind(this);
     this.addStaffBtnOnclick = this.addStaffBtnOnclick.bind(this);
@@ -45,7 +46,6 @@ class Staff extends React.Component {
   }
 
   componentDidMount() {
-    this.props.checkPermission();
     this.callApi();
   }
 
@@ -89,6 +89,13 @@ class Staff extends React.Component {
     console.log(this.state);
   };
 
+
+  StaffMoreInfoOnClick = () => {
+    this.setState({ StaffMoreInfoIsOpen: true });
+    console.log(this.state);
+  };
+
+
   closeAddDialog = () => {
     console.log("값이 변경됨");
     this.setState({ addStaffIsOpen: false });
@@ -108,7 +115,7 @@ class Staff extends React.Component {
     return (
       <div>
         <Header idx={0} />
-        <h1 align="center"><strong>호텔 직원 관리 페이지입니다.</strong></h1>
+        <h1 align="center"><strong>호텔 직원 관리 페이지입니다.(테스트)</strong></h1>
         <hr/>
         <div align="right">
           <Button  
@@ -161,6 +168,7 @@ class Staff extends React.Component {
                 <TableCell>월급</TableCell>
                 <TableCell>등록일자</TableCell>
                 <TableCell align="center"></TableCell>
+                <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -173,8 +181,18 @@ class Staff extends React.Component {
                 .map((c) => {
                   return (
                     <StaffInfoRow
-                      data={c}
+                      key={c.ID}
+                      ID={c.ID}
+                      Hotel_ID={c.Hotel_ID}
+                      Code={c.Code}
+                      Inform_ID={c.Inform_ID}
+                      Rank={c.Rank}
+                      Bank={c.Bank}
+                      Account={c.Account}
+                      Salary={c.Salary}
+                      RegDate={c.RegDate}
                       refreshTable={this.refreshTable}
+                      StaffMoreInfoOnClick={this.StaffMoreInfoOnClick}
                     />
                   );
                 })}

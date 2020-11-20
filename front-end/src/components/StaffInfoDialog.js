@@ -21,6 +21,8 @@ const styles = makeStyles((theme) => ({
       marginRight: theme.spacing(1),
       width: 400,
     },
+
+
 }));
 
 class StaffInfoDialog extends Component {

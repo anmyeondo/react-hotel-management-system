@@ -6,12 +6,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from '@material-ui/core/styles';
 import StaffInfoDialog from './StaffInfoDialog';
-import { ImageSearch } from "@material-ui/icons";
-import ImageUpload from "./ImageUpload";
 
 const styles = makeStyles((theme) => ({
   hidden: {
@@ -28,12 +25,10 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-class StaffAddDialog extends React.Component {
+class StaffMoreInfoDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null,
-      fileName: '',
       h_id: "",
       i_id: "",
       code: "",
@@ -143,7 +138,6 @@ class StaffAddDialog extends React.Component {
     this.setState(nextState);
   }
 
-  
   async callApi() {
     await axios({
       method: "post",
@@ -169,11 +163,7 @@ class StaffAddDialog extends React.Component {
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle> 고객 추가</DialogTitle>
         <DialogContent>
-          <ImageUpload/>
           <form className={classes.container} noValidate>
-           {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
-           <br />
-           <br />
             <TextField
               id="r_date"
               name="r_date"
@@ -250,20 +240,6 @@ class StaffAddDialog extends React.Component {
           <br />
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.handleInfoOpen}
-          >
-            개인정보
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.handleFormSubmit}
-          >
-            추가
-          </Button>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>
             닫기
           </Button>
@@ -275,4 +251,4 @@ class StaffAddDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(StaffAddDialog);
+export default withStyles(styles)(StaffMoreInfoDialog);
