@@ -5,7 +5,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var port = process.env.PORT || 5000;
 
 // 라우터
 var indexRouter = require('./routes/index');
@@ -13,6 +12,9 @@ var usersRouter = require('./routes/users');
 var customersRouter = require('./routes/customers');
 var staffsRouter = require('./routes/staffs');
 var testRouter = require('./routes/test');
+
+// 포트 정보 설정
+var port = process.env.PORT || 5000;
 
 // Express 서버 실행
 var app = express();
@@ -22,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/image', express.static('./upload'));
 app.use(
   session({
     key: 'userid',
@@ -34,6 +37,7 @@ app.use(
   }),
 );
 
+// 라우터 정보 등록
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/customers', customersRouter);
