@@ -7,20 +7,22 @@ class StaffDeleteBtn extends React.Component {
         super(props);
     }
 
-deleteStaff = async (id) =>{
+deleteStaff = async (staffID, infoID) =>{
     await axios ({
         method: "get",
         url: "/staffs/del",
         params: {
-            id: id,
+            staffID: staffID,
+            infoID: infoID,
         }
+    }).then(() => {
+        this.props.refreshTable();
     });
-    this.props.refreshTable();
 }
 
 render() {
     return (
-        <Button onClick={(e) => {this.deleteStaff(this.props.ID)}} color="secondary" variant="contained" >삭제</Button>
+        <Button onClick={(e) => {this.deleteStaff(this.props.staffID, this.props.infoID)}} color="secondary" variant="contained" >삭제</Button>
     )
     }
 }

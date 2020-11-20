@@ -38,7 +38,7 @@ class StaffInfoRow extends React.Component {
             <TableCell>{this.props.Salary}</TableCell>
             <TableCell>{this.props.RegDate}</TableCell>
             <TableCell align='center'><Button onClick={this.InfoStaffBtnOnclick} color="primary" variant="contained" >상세정보</Button></TableCell>
-            <TableCell align='center'><StaffDeleteBtn ID={this.props.ID} refreshTable={this.props.refreshTable}/></TableCell> 
+            <TableCell align='center'><StaffDeleteBtn staffID={this.props.data.ID} infoID={this.props.data.Inform_ID} refreshTable={this.props.refreshTable}/></TableCell> 
             <StaffMoreInfoDialog
                 data = {this.props.data}
                 open={this.state.StaffMoreInfoisOpen}

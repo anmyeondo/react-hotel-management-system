@@ -78,8 +78,10 @@ router.post('/addStaff', async (req, res, next) => {
 router.get('/del', async (req, res) => {
   var startTime = new Date();
   console.log('Delete Staff API Start at ' + startTime);
-  let id = req.query.id;
-  const q = `DELETE FROM Staff WHERE id=?;`;
+  let infoID = req.query.infoID;
+  let staffID = req.query.staffID;
+  const q_info = `DELETE FROM Information WHERE Inform_ID=?;`;
+  const q_staff = `DELETE FROM Staff WHERE Staff_ID=?;`;
 
   let dbInsert = async (q, value) => {
     console.log('데이터베이스에 쿼리를 입력합니다');
@@ -91,8 +93,9 @@ router.get('/del', async (req, res) => {
       }
     });
   };
-  dbInsert(q, [id]);
-  res.send('하이염');
+  await dbInsert(q_staff, [staffID]);
+  await dbInsert(q_info, [infoID]);
+  res.send();
 });
 
 /* 세션 로그인 정보 받기 */
