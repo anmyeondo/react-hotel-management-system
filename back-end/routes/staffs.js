@@ -180,4 +180,30 @@ router.post('/sessionLogin', async (req, res) => {
   await loginApi();
 });
 
+router.get('/sessionLogout', async (req, res) => {
+  let msg = '';
+  let logoutApi = () => {
+    if(req.session.user){
+      console.log("로그아웃을 시작합니다.");
+      req.session.destroy((err) => {
+        if(err){
+          console.log("에러 발생: ", err);
+          msg = "ERROR";
+        }
+        else{
+          console.log("세션 삭제 완료");
+          msg = "Deleted session!";
+        }
+      });
+    }
+    else{
+      console.log("로그인 되지 않았습니다.");
+      msg = "Not Logined";
+    }
+  }
+
+  await logoutApi();
+  res.send(msg);
+});
+
 module.exports = router;
