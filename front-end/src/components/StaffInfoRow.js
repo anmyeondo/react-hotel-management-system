@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const Styles = (theme) => ({
     tablecelling: {
-      border: '2px solid black',
+        
     },
   });
 
@@ -39,13 +39,13 @@ class StaffInfoRow extends React.Component {
         const {classes} = this.props;
         return (
         <TableRow>
-            <TableCell className={classes.tablecelling}><strong>{this.props.data.HOTEL_Name}</strong></TableCell>
-            <TableCell className={classes.tablecelling}>{this.props.data.Last_Name+this.props.data.First_Name}</TableCell>
-            <TableCell className={classes.tablecelling}>{this.props.data.Dept_Name}</TableCell>
-            <TableCell className={classes.tablecelling}>{this.props.data.Rank}</TableCell>
-            <TableCell className={classes.tablecelling}>{this.props.data.Bank}</TableCell>
-            <TableCell className={classes.tablecelling}>{this.props.data.Account}</TableCell>
-            <TableCell className={classes.tablecelling}>{this.props.data.Salary}</TableCell>
+            <TableCell className={classes.tablecelling}><strong style={{textJustify:"center"}}>{this.props.data.HOTEL_Name}</strong></TableCell>
+            <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Last_Name+this.props.data.First_Name}</span></TableCell>
+            <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Dept_Name}</span></TableCell>
+            <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Rank}</span></TableCell>
+            <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Bank}</span></TableCell>
+            <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Account}</span></TableCell>
+            <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Salary}</span></TableCell>
             <TableCell align='center'><Button onClick={this.InfoStaffBtnOnclick} color="primary" variant="contained" >상세정보</Button></TableCell>
             <TableCell align='center'><StaffDeleteBtn staffID={this.props.data.ID} infoID={this.props.data.Inform_ID} refreshTable={this.props.refreshTable}/></TableCell> 
             <StaffMoreInfoDialog

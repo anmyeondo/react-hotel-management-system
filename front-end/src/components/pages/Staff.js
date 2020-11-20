@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Header from "../Header";
 import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
@@ -26,7 +27,7 @@ const styles = (theme) => ({
     border: '3px solid black',
   },
   tablecelling: {
-    border: '2px solid black',
+    align: "center"
   },
 });
 
@@ -112,7 +113,7 @@ class Staff extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center"><strong>호텔 직원 관리 페이지입니다.</strong></h1>
+        <h1 align="center" style={{background:"mistyrose"}}><strong>호텔 직원 관리 페이지입니다.</strong></h1>
         <hr/>
         <div align="right">
           <Button  
@@ -163,7 +164,7 @@ class Staff extends React.Component {
                 <TableCell className={classes.tablecelling}>은행</TableCell>
                 <TableCell className={classes.tablecelling}>계좌</TableCell>
                 <TableCell className={classes.tablecelling}>월급</TableCell>
-                <TableCell align="center"><strong>상세정보 조회</strong></TableCell>
+                <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
                 <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
               </TableRow>
             </TableHead>

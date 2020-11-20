@@ -24,7 +24,10 @@ const styles = makeStyles((theme) => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 400,
+    width: 4000,
+  },
+  dialogcss: {
+    align: "center"
   },
 }));
 
@@ -193,8 +196,8 @@ class StaffAddDialog extends React.Component {
     const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> 고객 추가</DialogTitle>
-        <DialogContent>
+        <DialogTitle> <span>고객 추가</span> </DialogTitle>
+        <DialogContent className={classes.dialogcss}>
           <ImageUpload updateImage={this.handleImageAddClick}/>
           <form className={classes.container} noValidate>
            {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
