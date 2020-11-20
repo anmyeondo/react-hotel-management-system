@@ -21,10 +21,22 @@ class App extends React.Component {
       }
     }
     this.checkPermission = this.checkPermission.bind(this);
+    this.checkLogined = this.checkLogined.bind(this);
   }
-  
-  checkPermission() {
-    axios({
+
+  async checkLogined() {
+    await axios({
+      method: "get",
+      url: "/staffs/sessionLogin"
+    }).then((res) => {
+      if(res.data.permission){
+        document.location.href = "/header"
+      }
+    })
+  }
+
+  async checkPermission() {
+    await axios({
       method: "get",
       url: "/staffs/sessionLogin"
     }).then((res) => {
@@ -33,6 +45,7 @@ class App extends React.Component {
           permission: true,
           user: res.data.user,
         })
+  
       } else {
         this.setState({
           permission: false,
@@ -51,7 +64,7 @@ class App extends React.Component {
   render() {
     return(
       <Router>
-        <Route exact path="/" render={() => (<Login permission={this.state.permission} />)}/>
+        <Route exact path="/" render={() => (<Login checkLogined={this.checkLogined}/>)}/>
         <Route path="/header" render={() => (<Header checkPermission={this.checkPermission}/>)} />
         <Route path="/staff" render={() => (<Staff checkPermission={this.checkPermission}/>)} />
         <Route path="/customer" render={() => (<Customer checkPermission={this.checkPermission}/>)} />

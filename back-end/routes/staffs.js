@@ -29,7 +29,6 @@ router.get('/informs', (req, res, next) => {
   });
 });
 
-<<<<<<< HEAD
 /* Login admin page -> 사용X(아래 세션로그인 사용함) */
 router.get('/login', async (req, res, next) => {
   const startTime = new Date();
@@ -87,8 +86,6 @@ router.get('/login', async (req, res, next) => {
   await loginApi();
 });
 
-=======
->>>>>>> 91cbe15931faf619ad097401ae70017db7d3ac14
 /* ADD new staff */
 router.post('/addStaff', async (req, res, next) => {
   const startTime = new Date();

@@ -107,7 +107,7 @@ class Staff extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Header idx={0} />
+        <Header checkPermission={this.props.checkPermission} idx={0} />
         <h1 align="center"><strong>호텔 직원 관리 페이지입니다.</strong></h1>
         <hr/>
         <div align="right">
