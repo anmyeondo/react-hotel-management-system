@@ -7,8 +7,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = (theme) => ({
+const styles = makeStyles((theme) => ({
   hidden: {
     display: "none",
   },
@@ -17,11 +18,11 @@ const styles = (theme) => ({
     flexWrap: "wrap",
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 400,
   },
-});
+}));
 
 class StaffAddDialog extends React.Component {
   constructor(props) {
@@ -118,10 +119,22 @@ class StaffAddDialog extends React.Component {
   }
 
   render() {
+    const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle> 고객 추가</DialogTitle>
         <DialogContent>
+          <form className={classes.container} noValidate>
+            <TextField
+              id="r_date"
+              name="r_date"
+              label="등록일자"
+              type="date"
+              value={this.state.r_date}
+              className={classes.textField}
+              onChange={this.handleValueChange}
+            />
+          </form>
           <TextField
             label="호텔번호"
             type="text"
@@ -178,13 +191,13 @@ class StaffAddDialog extends React.Component {
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
+          {/* <TextField
             label="등록일"
             type="text"
             name="r_date"
             value={this.state.r_date}
             onChange={this.handleValueChange}
-          />
+          /> */}
           <br />
           <TextField
             label="연봉"

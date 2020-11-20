@@ -26,6 +26,8 @@ const styles = (theme) => ({
   },
 });
 
+
+
 class Staff extends React.Component {
   constructor(props) {
     super(props);
@@ -105,9 +107,10 @@ class Staff extends React.Component {
     return (
       <div>
         <Header idx={0} />
-        <h3>호텔 직원 관리 페이지입니다.</h3>
-        <div>
-          <Button
+        <h1 align="center"><strong>호텔 직원 관리 페이지입니다.</strong></h1>
+        <hr/>
+        <div align="right">
+          <Button  
             variant="contained"
             color="primary"
             className={classes.button}
@@ -115,13 +118,22 @@ class Staff extends React.Component {
           >
             직원 추가
           </Button>
-          <Button
+          <Button 
             variant="contained"
             color="primary"
             className={classes.button}
             onClick={this.searchStaffBtnOnclick}
           >
             직원 검색
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            startIcon={<Update />}
+            onClick={this.refreshTable}
+          >
+            모든 직원 조회
           </Button>
         </div>
         {/* Dialog 표현 */}
