@@ -112,6 +112,9 @@ const styles = theme => ({
 });
 
 class ImageUploadCard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     mainState: "initial", // initial, search, gallery, uploaded
     imageUploaded: 0,
@@ -119,18 +122,13 @@ class ImageUploadCard extends React.Component {
   };
 
   handleUploadClick = event => {
-    console.log();
+    console.log("Clicked!");
     var file = event.target.files[0];
+    this.props.updateImage(file);
+    console.log(file)
     const reader = new FileReader();
     var url = reader.readAsDataURL(file);
-
-    reader.onloadend = function(e) {
-      this.setState({
-        selectedFile: [reader.result]
-      });
-    }.bind(this);
-    console.log(url); // Would see a path?
-
+    console.log(url);
     this.setState({
       mainState: "uploaded",
       selectedFile: event.target.files[0],

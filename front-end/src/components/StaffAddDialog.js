@@ -46,7 +46,7 @@ class StaffAddDialog extends React.Component {
       is_able: 1,
       info: {},
       info_open: false,
-
+      staff_image: null,
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -58,6 +58,7 @@ class StaffAddDialog extends React.Component {
     this.handleInfoOpen = this.handleInfoOpen.bind(this);
     this.handleInfoClose = this.handleInfoClose.bind(this);
     this.setInfo = this.setInfo.bind(this);
+    this.handleImageAddClick = this.handleImageAddClick.bind(this);
   }
 
   // Info dialog 관련 메서드
@@ -115,6 +116,10 @@ class StaffAddDialog extends React.Component {
     this.props.closeDialog();
   }
 
+  handleImageAddClick = (images) => {
+    this.setState({ staff_image: images });
+  }
+
   async handleFormSubmit(e) {
     e.preventDefault();
     this.setState({
@@ -145,9 +150,30 @@ class StaffAddDialog extends React.Component {
 
   
   async callApi() {
+    const formData = new FormData();
+    formData.append('staff_image', this.state.staff_image)
+    formData.append('h_id', this.state.h_id)
+    formData.append('i_id', this.state.i_id)
+    formData.append('code', this.state.code)
+    formData.append('rank', this.state.rank)
+    formData.append('bank', this.state.bank)
+    formData.append('account', this.state.account)
+    formData.append('staff_pw',  this.state.staff_pw)
+    formData.append('r_date', this.state.r_date)
+    formData.append('salary', this.state.salary)
+    formData.append('is_able', this.state.is_able)
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
     await axios({
       method: "post",
       url: "/staffs/addStaff",
+
       data: {
         h_id: this.state.h_id,
         i_id: this.state.i_id,
@@ -169,7 +195,7 @@ class StaffAddDialog extends React.Component {
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle> 고객 추가</DialogTitle>
         <DialogContent>
-          <ImageUpload/>
+          <ImageUpload updateImage={this.handleImageAddClick}/>
           <form className={classes.container} noValidate>
            {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
            <br />
