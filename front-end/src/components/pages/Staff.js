@@ -152,14 +152,13 @@ class Staff extends React.Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>호텔</TableCell>
-                <TableCell>부서</TableCell>
-                <TableCell>정보</TableCell>
-                <TableCell>등급</TableCell>
+                <TableCell><strong>호텔</strong></TableCell>
+                <TableCell>이름</TableCell>
+                <TableCell>담당부서</TableCell>
+                <TableCell>직급</TableCell>
                 <TableCell>은행</TableCell>
                 <TableCell>계좌</TableCell>
                 <TableCell>월급</TableCell>
-                <TableCell>등록일자</TableCell>
                 <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>
