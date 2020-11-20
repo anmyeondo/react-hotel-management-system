@@ -4,11 +4,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
+import Button from "@material-ui/core/Button";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
+import axios from 'axios';
+
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 const styles = (theme) => ({
@@ -32,7 +34,13 @@ const styles = (theme) => ({
     borderColor: lightColor,
   },
 });
-
+const logout = async () => {
+  await axios({
+    method: 'get',
+    url: '/staffs/sessionLogout'
+  });
+  document.location.href = '/';
+}
 function Header(props) {
   
   useEffect(() => {
@@ -49,13 +57,12 @@ function Header(props) {
             <h2> ADMIN </h2>
             <Grid item xs />
             <Grid item>
-              <Link
+              <Button
                 className={props.classes.link}
-                href="http://localhost:3000/"
-                variant="body2"
+                onClick={logout}
               >
                 Logout
-              </Link>
+              </Button>
             </Grid>
             <Grid item>
               <Tooltip title="Alerts • No alerts">
