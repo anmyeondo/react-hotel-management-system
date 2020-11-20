@@ -47,6 +47,8 @@ class Staff extends React.Component {
     this.addStaffBtnOnclick = this.addStaffBtnOnclick.bind(this);
     this.closeAddDialog = this.closeAddDialog.bind(this);
     this.setTableOnSearch = this.setTableOnSearch.bind(this);
+    this.getCustomer = this.getCustomer.bind(this);
+    this.callApi();
   }
 
   componentDidMount() {
@@ -102,10 +104,15 @@ class Staff extends React.Component {
 
   searchStaffBtnOnclick = () => {
     this.setState({ searchStaffIsOpen: true });
+    this.getCustomer()
   };
 
   closeSearchDialog = () => {
     this.setState({ searchStaffIsOpen: false });
+  };
+
+  getCustomer = () => {
+    return this.state.customers;
   };
 
   render() {
@@ -149,6 +156,8 @@ class Staff extends React.Component {
           refreshTable={this.refreshTable}
         />
         <StaffSearchDialog 
+          data = {this.state.customers}
+          getCustomer= {this.getCustomer}
           open={this.state.searchStaffIsOpen}
           closeDialog={this.closeSearchDialog}
           setTableOnSearch={this.setTableOnSearch}

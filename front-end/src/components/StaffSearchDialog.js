@@ -27,20 +27,8 @@ class StaffSearchDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
-      // bank: "",
-      // account: "",
-      // staff_pw: "",
-      // r_date: "",
-      // salary: "",
-      // is_able: "",
       open: false,
     };
-    console.log("???")
-    console.log(this.props.data);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -61,10 +49,11 @@ class StaffSearchDialog extends React.Component {
 
   handleClose() {
     this.setState({
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
+      HOTEL_Name: "",
+      First_Name: "",
+      Last_Name: "",
+      Dept_Name: "",
+      Rank: "",
     });
     this.props.closeDialog();
   }
@@ -97,16 +86,11 @@ class StaffSearchDialog extends React.Component {
       method: "post",
       url: "/users/test",
       data: {
-        Hotel_ID: this.state.h_id,
-        Inform_ID: this.state.i_id,
-        Code: this.state.code,
-        Rank: this.state.rank,
-        // bank: this.state.bank,
-        // account: this.state.account,
-        // staff_pw: this.state.staff_pw,
-        // r_date: this.state.r_date,
-        // salary: this.state.salary,
-        // is_able: this.state.is_able,
+        HOTEL_Name: this.state.HOTEL_Name,
+        First_Name: this.state.First_Name,
+        Last_Name: this.state.Last_Name,
+        Dept_Name: this.state.Dept_Name,
+        Rank: this.state.Rank
       },
     });
   }
@@ -118,34 +102,42 @@ class StaffSearchDialog extends React.Component {
         <DialogTitle> 직원 검색</DialogTitle>
         <DialogContent>
           <TextField
-            label="호텔번호"
+            label="호텔이름"
             type="text"
-            name="h_id"
-            value={this.state.h_id}
+            name="HOTEL_Name"
+            value={this.state.HOTEL_Name}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="정보아이디"
+            label="이름"
             type="text"
-            name="i_id"
-            value={this.state.i_id}
+            name="First_Name"
+            value={this.state.First_Name}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="부서코드"
+            label="성"
             type="text"
-            name="code"
-            value={this.state.code}
+            name="Last_Name"
+            value={this.state.Last_Name}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="등급"
+            label="담당부서"
             type="text"
-            name="rank"
-            value={this.state.rank}
+            name="Dept_Name"
+            value={this.state.Dept_Name}
+            onChange={this.handleValueChange}
+          />
+          <br />
+          <TextField
+            label="직급"
+            type="text"
+            name="Rank"
+            value={this.state.Rank}
             onChange={this.handleValueChange}
           />
           <br />

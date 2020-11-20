@@ -54,7 +54,7 @@ router.post('/test', (req, res, next) => {
         addq = addq + ' and';
       }
       let x = body[key];
-      if (key == 'Rank') {
+      if (key != 'Other') {
         x = '"' + x + '"';
       }
       addq = addq + ' ' + key + ' = ' + x;
