@@ -23,7 +23,7 @@ const styles = (theme) => ({
   },
 });
 
-class SearchTest extends React.Component {
+class StaffSearchDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,7 +73,7 @@ class SearchTest extends React.Component {
 
     this.searchCustomer().then((response) => {
       console.log(response.data);
-      this.props.test(response.data);
+      this.props.setTableOnSearch(response.data);
     });
     this.handleClose();
   }
@@ -166,4 +166,4 @@ class SearchTest extends React.Component {
   }
 }
 
-export default withStyles(styles)(SearchTest);
+export default withStyles(styles)(StaffSearchDialog);

@@ -23,7 +23,7 @@ const styles = (theme) => ({
   },
 });
 
-class StaffAdd extends React.Component {
+class StaffAddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class StaffAdd extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.addCustomer = this.addCustomer.bind(this);
+    this.callApi = this.callApi.bind(this);
   }
 
   handleClickOpen() {
@@ -76,7 +76,7 @@ class StaffAdd extends React.Component {
   async handleFormSubmit(e) {
     e.preventDefault();
 
-    await this.addCustomer()
+    await this.callApi()
       .then(() => {
         this.handleClose();
       })
@@ -98,7 +98,7 @@ class StaffAdd extends React.Component {
     this.setState(nextState);
   }
 
-  async addCustomer() {
+  async callApi() {
     await axios({
       method: "post",
       url: "/staffs/addStaff",
@@ -220,4 +220,4 @@ class StaffAdd extends React.Component {
   }
 }
 
-export default withStyles(styles)(StaffAdd);
+export default withStyles(styles)(StaffAddDialog);

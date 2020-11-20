@@ -10,11 +10,10 @@ import TableCell from "@material-ui/core/TableCell";
 import StaffInfoRow from "../StaffInfoRow";
 import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
-import AddStaff from "../StaffAdd";
-import SearchTest from "../SearchTest";
+import StaffSearchDialog from "../StaffSearchDialog";
 import Button from "@material-ui/core/Button";
 import { Update } from "@material-ui/icons";
-import StaffAddTest from "../StaffAddTest";
+import StaffAddDialog from "../StaffAddDialog";
 
 const styles = (theme) => ({
   root: {
@@ -34,13 +33,13 @@ class Staff extends React.Component {
       customers: [],
       page: 0,
       rowsPerPage: 10,
-      addStaffDialog: false,
-      searchStaffDialog: false,
+      addStaffIsOpen: false,
+      searchStaffIsOpen: false,
     };
     this.callApi = this.callApi.bind(this);
     this.addStaffBtnOnclick = this.addStaffBtnOnclick.bind(this);
     this.closeAddDialog = this.closeAddDialog.bind(this);
-    this.test = this.test.bind(this);
+    this.setTableOnSearch = this.setTableOnSearch.bind(this);
   }
 
   componentDidMount() {
@@ -54,7 +53,7 @@ class Staff extends React.Component {
     this.callApi();
   };
 
-  test = (arr) => {
+  setTableOnSearch = (arr) => {
     this.setState({
       customers: arr,
     });
@@ -83,22 +82,22 @@ class Staff extends React.Component {
   // 버튼으로 Dialog를 조작하는 메소드
   addStaffBtnOnclick = () => {
     console.log("Staff.js 버튼 눌림");
-    this.setState({ addStaffDialog: true });
+    this.setState({ addStaffIsOpen: true });
     console.log(this.state);
   };
 
   closeAddDialog = () => {
     console.log("값이 변경됨");
-    this.setState({ addStaffDialog: false });
+    this.setState({ addStaffIsOpen: false });
     console.log(this.state);
   };
 
   searchStaffBtnOnclick = () => {
-    this.setState({ searchStaffDialog: true });
+    this.setState({ searchStaffIsOpen: true });
   };
 
   closeSearchDialog = () => {
-    this.setState({ searchStaffDialog: false });
+    this.setState({ searchStaffIsOpen: false });
   };
 
   render() {
@@ -126,29 +125,16 @@ class Staff extends React.Component {
           </Button>
         </div>
         {/* Dialog 표현 */}
-        <StaffAddTest
-          open={this.state.addStaffDialog}
+        <StaffAddDialog
+          open={this.state.addStaffIsOpen}
           closeDialog={this.closeAddDialog}
           refreshTable={this.refreshTable}
         />
-        <SearchTest
-          open={this.state.searchStaffDialog}
+        <StaffSearchDialog
+          open={this.state.searchStaffIsOpen}
           closeDialog={this.closeSearchDialog}
-          test={this.test}
+          setTableOnSearch={this.setTableOnSearch}
         />
-
-        {/* <div>
-          <SearchTest test={this.test} />
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            startIcon={<Update />}
-            onClick={this.refreshTable}
-          >
-            모든직원 조회
-          </Button>
-        </div> */}
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
