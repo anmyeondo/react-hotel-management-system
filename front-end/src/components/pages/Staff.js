@@ -45,6 +45,7 @@ class Staff extends React.Component {
   }
 
   componentDidMount() {
+    this.props.checkPermission();
     this.callApi();
   }
 

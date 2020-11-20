@@ -22,13 +22,14 @@ router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Staff 테이블 조회를 시작합니다 : ' + startTime);
 
-  const q = `SELECT * FROM Staff`;
+  const q = `SELECT * FROM Staff Natural Join Hotel Natural Join Information Natural Join Department_Code Natural Join Zip`;
 
   connection.query(q, (err, rows, fields) => {
     res.send(JSON.stringify(rows));
   });
 });
 
+<<<<<<< HEAD
 /* Login admin page -> 사용X(아래 세션로그인 사용함) */
 router.get('/login', async (req, res, next) => {
   const startTime = new Date();
@@ -86,6 +87,8 @@ router.get('/login', async (req, res, next) => {
   await loginApi();
 });
 
+=======
+>>>>>>> 91cbe15931faf619ad097401ae70017db7d3ac14
 /* ADD new staff */
 router.post('/addStaff', async (req, res, next) => {
   const startTime = new Date();
@@ -131,7 +134,7 @@ router.post('/addStaff', async (req, res, next) => {
   let ret = await pwEncrpt();
 });
 
-/* Delete new staff */
+/* Delete staff */
 router.get('/del', async (req, res) => {
   var startTime = new Date();
   console.log('Delete Staff API Start at ' + startTime);

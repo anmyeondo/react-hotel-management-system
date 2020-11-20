@@ -1,6 +1,5 @@
 import LeftSidebar from "../modules/LeftSidebar";
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -34,7 +33,11 @@ const styles = (theme) => ({
   },
 });
 
-function Header({ classes }) {
+function Header(props) {
+  useEffect(() => {
+    props.checkPermission()
+  }, []);
+
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -45,7 +48,7 @@ function Header({ classes }) {
             <Grid item xs />
             <Grid item>
               <Link
-                className={classes.link}
+                className={props.classes.link}
                 href="http://localhost:3000/"
                 variant="body2"
               >
@@ -60,7 +63,7 @@ function Header({ classes }) {
               </Tooltip>
             </Grid>
             <Grid item>
-              <IconButton color="inherit" className={classes.iconButtonAvatar}>
+              <IconButton color="inherit" className={props.classes.iconButtonAvatar}>
                 <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
               </IconButton>
             </Grid>
@@ -71,9 +74,5 @@ function Header({ classes }) {
   );
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
-};
 
 export default withStyles(styles)(Header);

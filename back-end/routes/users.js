@@ -43,7 +43,8 @@ router.post('/test', (req, res, next) => {
   console.log(body);
 
   // 쿼리문 만드는 부분
-  let q = 'SELECT * FROM Staff';
+  let q =
+    'SELECT * FROM Staff Natural Join Hotel Natural Join Information Natural Join Department_Code Natural Join Zip';
   let addq = ' WHERE';
 
   for (let key in body) {

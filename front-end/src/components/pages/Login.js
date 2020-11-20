@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-export default function LogIn() {
+export default function LogIn({permission}) {
   const classes = useStyles();
   const [user, setUser] = useState(null);
   const [id, setId] = useState("");
@@ -96,11 +96,19 @@ export default function LogIn() {
     }
   };
 
+  useEffect(() => {
+    console.log(permission)
+    if(permission){
+      document.location.href = '/header';
+    }
+  },[])
+
   const onKeyPress = (e) => {
     if(e.key == 'Enter') {
       handleClick();
     }
   }
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
