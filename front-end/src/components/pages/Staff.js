@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Header from "../Header";
 import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
@@ -23,6 +24,10 @@ const styles = (theme) => ({
   },
   table: {
     minWidth: 1080,
+    border: '3px solid black',
+  },
+  tablecelling: {
+    align: "center"
   },
 });
 
@@ -108,7 +113,7 @@ class Staff extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center"><strong>호텔 직원 관리 페이지입니다.</strong></h1>
+        <h1 align="center" style={{background:"mistyrose"}}><strong>호텔 직원 관리 페이지입니다.</strong></h1>
         <hr/>
         <div align="right">
           <Button  
@@ -150,17 +155,17 @@ class Staff extends React.Component {
         />
         <Paper className={classes.root}>
           <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell>호텔</TableCell>
-                <TableCell>부서</TableCell>
-                <TableCell>정보</TableCell>
-                <TableCell>등급</TableCell>
-                <TableCell>은행</TableCell>
-                <TableCell>계좌</TableCell>
-                <TableCell>월급</TableCell>
-                <TableCell>등록일자</TableCell>
-                <TableCell align="center"></TableCell>
+            <TableHead >  
+              <TableRow className={classes.table}>
+                <TableCell className={classes.tablecelling}><strong>호텔</strong></TableCell>
+                <TableCell className={classes.tablecelling}>이름</TableCell>
+                <TableCell className={classes.tablecelling}>담당부서</TableCell>
+                <TableCell className={classes.tablecelling}>직급</TableCell>
+                <TableCell className={classes.tablecelling}>은행</TableCell>
+                <TableCell className={classes.tablecelling}>계좌</TableCell>
+                <TableCell className={classes.tablecelling}>월급</TableCell>
+                <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
+                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

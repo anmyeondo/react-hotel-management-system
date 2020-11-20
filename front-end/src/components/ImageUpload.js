@@ -38,15 +38,6 @@ import ReplayIcon from "@material-ui/icons/Replay";
 //Tabs
 import { withStyles } from "@material-ui/core/styles";
 
-const imageGallery = [
-  "https://raw.githubusercontent.com/dxyang/StyleTransfer/master/style_imgs/mosaic.jpg",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
-  "https://raw.githubusercontent.com/ShafeenTejani/fast-style-transfer/master/examples/dora-maar-picasso.jpg",
-  "https://pbs.twimg.com/profile_images/925531519858257920/IyYLHp-u_400x400.jpg",
-  "https://raw.githubusercontent.com/ShafeenTejani/fast-style-transfer/master/examples/dog.jpg",
-  "http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
-];
-
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -112,6 +103,9 @@ const styles = theme => ({
 });
 
 class ImageUploadCard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     mainState: "initial", // initial, search, gallery, uploaded
     imageUploaded: 0,
@@ -119,18 +113,8 @@ class ImageUploadCard extends React.Component {
   };
 
   handleUploadClick = event => {
-    console.log();
     var file = event.target.files[0];
-    const reader = new FileReader();
-    var url = reader.readAsDataURL(file);
-
-    reader.onloadend = function(e) {
-      this.setState({
-        selectedFile: [reader.result]
-      });
-    }.bind(this);
-    console.log(url); // Would see a path?
-
+    this.props.updateImage(file);
     this.setState({
       mainState: "uploaded",
       selectedFile: event.target.files[0],
@@ -165,18 +149,6 @@ class ImageUploadCard extends React.Component {
     );
   }
 
-
-  handleAvatarClick(value) {
-    var filename = value.url.substring(value.url.lastIndexOf("/") + 1);
-    console.log(filename);
-    this.setState({
-      mainState: "uploaded",
-      imageUploaded: true,
-      selectedFile: value.url,
-      fileReader: undefined,
-      filename: filename
-    });
-  }
 
   renderUploadedState() {
     const { classes, theme } = this.props;
