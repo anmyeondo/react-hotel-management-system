@@ -39,7 +39,8 @@ class StaffSearchDialog extends React.Component {
       // is_able: "",
       open: false,
     };
-
+    console.log("???")
+    console.log(this.props.data);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);

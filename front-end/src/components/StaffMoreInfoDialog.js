@@ -9,8 +9,20 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from '@material-ui/core/styles';
 import StaffInfoDialog from './StaffInfoDialog';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
 
 const styles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 720,
+    backgroundColor: theme.palette.background.paper,
+  },
+
   hidden: {
     display: "none",
   },
@@ -161,83 +173,50 @@ class StaffMoreInfoDialog extends React.Component {
     const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> 고객 추가</DialogTitle>
+        <DialogTitle> <strong>직원 상세정보</strong></DialogTitle>
         <DialogContent>
-          <form className={classes.container} noValidate>
-            <TextField
-              id="r_date"
-              name="r_date"
-              label="등록일자"
-              type="date"
-              value={this.state.r_date}
-              className={classes.textField}
-              onChange={this.handleValueChange}
-            />
-          </form>
-          <TextField
-            label="호텔번호"
-            type="text"
-            name="h_id"
-            value={this.state.h_id}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="코드"
-            type="text"
-            name="code"
-            value={this.state.code}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="등급"
-            type="text"
-            name="rank"
-            value={this.state.rank}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="은행"
-            type="text"
-            name="bank"
-            value={this.state.bank}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="계좌"
-            type="text"
-            name="account"
-            value={this.state.account}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="비번"
-            type="text"
-            name="staff_pw"
-            value={this.state.staff_pw}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="연봉"
-            type="text"
-            name="salary"
-            value={this.state.salary}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="가능여부"
-            type="text"
-            name="is_able"
-            value={this.state.is_able}
-            onChange={this.handleValueChange}
-          />
-          <br />
+          <List className={classes.root}>
+          <ListItem>
+            <ListItemText primary="소속 호텔" secondary={this.props.data.HOTEL_Name} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+            <ListItemText primary="이름" secondary={this.props.data.Last_Name+this.props.data.First_Name}/>
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+          <ListItemText primary="담당 부서" secondary={this.props.data.Dept_Name} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+          <ListItemText primary="직급" secondary={this.props.data.Rank} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+          <ListItemText primary="계정" secondary={this.props.data.Account} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+          <ListItemText primary="Phone" secondary={this.props.data.Phone_Number} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+          <ListItemText primary="이메일" secondary={this.props.data.E_Mail} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <ListItem>
+          <ListItemText primary="우편번호" secondary={this.props.data.Zip} />
+          </ListItem>
+          <ListItem>
+          <ListItemText primary="생일" secondary={this.props.data.Birthday.slice(undefined, 10)} />
+          </ListItem>
+          <ListItem>
+          <ListItemText primary="등록 일자" secondary={this.props.data.RegDate.slice(undefined, 10)} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+          <Divider variant="inset" component="li" />
+          <Divider variant="inset" component="li" />
+        </List>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>

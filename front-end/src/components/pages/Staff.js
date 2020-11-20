@@ -148,7 +148,7 @@ class Staff extends React.Component {
           closeDialog={this.closeAddDialog}
           refreshTable={this.refreshTable}
         />
-        <StaffSearchDialog
+        <StaffSearchDialog 
           open={this.state.searchStaffIsOpen}
           closeDialog={this.closeSearchDialog}
           setTableOnSearch={this.setTableOnSearch}
@@ -173,7 +173,7 @@ class Staff extends React.Component {
                 .slice(
                   this.state.page * this.state.rowsPerPage,
                   this.state.page * this.state.rowsPerPage +
-                    this.state.rowsPerPage
+                  this.state.rowsPerPage
                 )
                 .map((c) => {
                   return (
