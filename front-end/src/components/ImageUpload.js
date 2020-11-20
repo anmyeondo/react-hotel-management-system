@@ -3,103 +3,80 @@ import React from "react";
 //Card
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import CardMedia from "@material-ui/core/CardMedia";
 
 import Fab from "@material-ui/core/Fab";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
 
 import red from "@material-ui/core/colors/red";
-import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
-
-import Icon from "@material-ui/core/Icon";
-import PageviewIcon from "@material-ui/icons/Pageview";
-import SearchIcon from "@material-ui/icons/Search";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
-import CollectionsIcon from "@material-ui/icons/Collections";
-
-import Typography from "@material-ui/core/Typography";
-import Popover from "@material-ui/core/Popover";
-
-// Search
-import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import CloseIcon from "@material-ui/icons/Close";
-import ReplayIcon from "@material-ui/icons/Replay";
 
 //Tabs
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: 500,
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   icon: {
-    margin: theme.spacing.unit * 2
+    margin: theme.spacing.unit * 2,
   },
   iconHover: {
     margin: theme.spacing.unit * 2,
     "&:hover": {
-      color: red[800]
-    }
+      color: red[800],
+    },
   },
   cardHeader: {
     textalign: "center",
     align: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   input: {
-    display: "none"
+    display: "none",
   },
   title: {
     color: blue[800],
     fontWeight: "bold",
     fontFamily: "Montserrat",
-    align: "center"
+    align: "center",
   },
   button: {
     color: blue[900],
-    margin: 10
+    margin: 10,
   },
   secondaryButton: {
     color: "gray",
-    margin: 10
+    margin: 10,
   },
   typography: {
     margin: theme.spacing.unit * 2,
-    backgroundColor: "default"
+    backgroundColor: "default",
   },
 
   searchRoot: {
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    width: 400
+    width: 400,
   },
   searchInput: {
     marginLeft: 8,
-    flex: 1
+    flex: 1,
   },
   searchIconButton: {
-    padding: 10
+    padding: 10,
   },
   searchDivider: {
     width: 1,
     height: 28,
-    margin: 4
-  }
+    margin: 4,
+  },
 });
 
 class ImageUploadCard extends React.Component {
@@ -109,16 +86,16 @@ class ImageUploadCard extends React.Component {
   state = {
     mainState: "initial", // initial, search, gallery, uploaded
     imageUploaded: 0,
-    selectedFile: null
+    selectedFile: null,
   };
 
-  handleUploadClick = event => {
+  handleUploadClick = (event) => {
     var file = event.target.files[0];
     this.props.updateImage(file);
     this.setState({
       mainState: "uploaded",
       selectedFile: event.target.files[0],
-      imageUploaded: 1
+      imageUploaded: 1,
     });
   };
 
@@ -149,14 +126,14 @@ class ImageUploadCard extends React.Component {
     );
   }
 
-
   renderUploadedState() {
     const { classes, theme } = this.props;
 
     return (
       <React.Fragment>
         <CardActionArea onClick={this.imageResetHandler}>
-          이미지 업로드 완료!<br/>   
+          이미지 업로드 완료!
+          <br />
           {/* <img
             justify="center"
             width="10%"
@@ -168,7 +145,6 @@ class ImageUploadCard extends React.Component {
       </React.Fragment>
     );
   }
-
 
   render() {
     const { classes, theme } = this.props;

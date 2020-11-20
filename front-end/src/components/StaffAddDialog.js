@@ -8,8 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
-import { makeStyles } from '@material-ui/core/styles';
-import StaffInfoDialog from './StaffInfoDialog';
+import { makeStyles } from "@material-ui/core/styles";
+import StaffInfoDialog from "./StaffInfoDialog";
 import { ImageSearch } from "@material-ui/icons";
 import ImageUpload from "./ImageUpload";
 
@@ -27,7 +27,7 @@ const styles = makeStyles((theme) => ({
     width: 4000,
   },
   dialogcss: {
-    align: "center"
+    align: "center",
   },
 }));
 
@@ -36,7 +36,7 @@ class StaffAddDialog extends React.Component {
     super(props);
     this.state = {
       file: null,
-      fileName: '',
+      fileName: "",
       h_id: "",
       i_id: "",
       code: "",
@@ -76,9 +76,9 @@ class StaffAddDialog extends React.Component {
       info_open: false,
     });
   }
-  setInfo(data){
+  setInfo(data) {
     this.setState({
-      info: data
+      info: data,
     });
   }
 
@@ -88,10 +88,10 @@ class StaffAddDialog extends React.Component {
       url: "/users/addInform",
       data: this.state.info,
     }).then((res) => {
-        return res.data.insertId;
+      return res.data.insertId;
     });
     return infoId;
-  }
+  };
 
   handleClickOpen() {
     this.setState({
@@ -115,13 +115,16 @@ class StaffAddDialog extends React.Component {
       r_date: "",
       salary: "",
       is_able: 1,
+      info: {},
+      info_open: false,
+      staff_image: null,
     });
     this.props.closeDialog();
   }
 
   handleImageAddClick = (images) => {
     this.setState({ staff_image: images });
-  }
+  };
 
   async handleFormSubmit(e) {
     e.preventDefault();
@@ -151,58 +154,45 @@ class StaffAddDialog extends React.Component {
     this.setState(nextState);
   }
 
-  
   async callApi() {
     const formData = new FormData();
-    formData.append('staff_image', this.state.staff_image)
-    formData.append('h_id', this.state.h_id)
-    formData.append('i_id', this.state.i_id)
-    formData.append('code', this.state.code)
-    formData.append('rank', this.state.rank)
-    formData.append('bank', this.state.bank)
-    formData.append('account', this.state.account)
-    formData.append('staff_pw',  this.state.staff_pw)
-    formData.append('r_date', this.state.r_date)
-    formData.append('salary', this.state.salary)
-    formData.append('is_able', this.state.is_able)
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-    
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-    await axios({
-      method: "post",
-      url: "/staffs/addStaff",
-
-      data: {
-        h_id: this.state.h_id,
-        i_id: this.state.i_id,
-        code: this.state.code,
-        rank: this.state.rank,
-        bank: this.state.bank,
-        account: this.state.account,
-        staff_pw: this.state.staff_pw,
-        r_date: this.state.r_date,
-        salary: this.state.salary,
-        is_able: this.state.is_able,
+    const url = "/staffs/addStaff";
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
       },
-    });
+    };
+
+    formData.append("staff_image", this.state.staff_image);
+    formData.append("h_id", this.state.h_id);
+    formData.append("i_id", this.state.i_id);
+    formData.append("code", this.state.code);
+    formData.append("rank", this.state.rank);
+    formData.append("bank", this.state.bank);
+    formData.append("account", this.state.account);
+    formData.append("staff_pw", this.state.staff_pw);
+    formData.append("r_date", this.state.r_date);
+    formData.append("salary", this.state.salary);
+    formData.append("is_able", this.state.is_able);
+
+    // FormData의 value 확인
+    await axios.post(url, formData, config);
   }
 
   render() {
     const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> <span>고객 추가</span> </DialogTitle>
+        <DialogTitle>
+          {" "}
+          <span>고객 추가</span>{" "}
+        </DialogTitle>
         <DialogContent className={classes.dialogcss}>
-          <ImageUpload updateImage={this.handleImageAddClick}/>
+          <ImageUpload updateImage={this.handleImageAddClick} />
           <form className={classes.container} noValidate>
-           {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
-           <br />
-           <br />
+            {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
+            <br />
+            <br />
             <TextField
               id="r_date"
               name="r_date"
@@ -297,9 +287,12 @@ class StaffAddDialog extends React.Component {
             닫기
           </Button>
         </DialogActions>
-        <StaffInfoDialog info={this.state.info_open} handleInfoClose={this.handleInfoClose} setInfo={this.setInfo}/>
+        <StaffInfoDialog
+          info={this.state.info_open}
+          handleInfoClose={this.handleInfoClose}
+          setInfo={this.setInfo}
+        />
       </Dialog>
-      
     );
   }
 }
