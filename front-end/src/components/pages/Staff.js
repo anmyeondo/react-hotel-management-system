@@ -166,6 +166,7 @@ class Staff extends React.Component {
           <Table className={classes.table}>
             <TableHead >  
               <TableRow className={classes.table}>
+              <TableCell className={classes.tablecelling}><strong>사진</strong></TableCell>
                 <TableCell className={classes.tablecelling}><strong>호텔</strong></TableCell>
                 <TableCell className={classes.tablecelling}>이름</TableCell>
                 <TableCell className={classes.tablecelling}>담당부서</TableCell>

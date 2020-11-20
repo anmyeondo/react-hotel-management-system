@@ -6,8 +6,8 @@ import StaffDeleteBtn from "./StaffDeleteBtn";
 import StaffMoreInfoDialog from "./StaffMoreInfoDialog";
 import { withStyles } from "@material-ui/core/styles";
 
-const Styles = (theme) => ({
-  tablecelling: {},
+const Styles = theme => ({
+
 });
 
 class StaffInfoRow extends React.Component {
@@ -35,6 +35,9 @@ class StaffInfoRow extends React.Component {
     const { classes } = this.props;
     return (
       <TableRow>
+        <TableCell className={classes.tablecelling}>
+            <img src = {this.props.data.Staff_Image} style={{width:"96px",height:"96px"}}/>
+        </TableCell>
         <TableCell className={classes.tablecelling}>
           <strong style={{ textJustify: "center" }}>
             {this.props.data.HOTEL_Name}

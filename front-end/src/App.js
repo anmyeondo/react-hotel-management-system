@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/pages/Login";
 import Header from "./components/Header";
 import Customer from "./components/pages/Customer";
+import Circletest from "./components/pages/Circletest";
 import Staff from "./components/pages/Staff";
 import Test from "./components/pages/Test";
 import axios from "axios"
