@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
 export default function LogIn() {
   const classes = useStyles();
   const [user, setUser] = useState(null);
@@ -96,6 +95,12 @@ export default function LogIn() {
       alert("로그인에 실패하였습니다 : " + e);
     }
   };
+
+  const onKeyPress = (e) => {
+    if(e.key == 'Enter') {
+      handleClick();
+    }
+  }
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -120,6 +125,7 @@ export default function LogIn() {
               autoComplete="id"
               autoFocus
               onChange={({ target: { value } }) => setId(value)}
+              onKeyPress={onKeyPress}
             />
             <TextField
               variant="outlined"
@@ -132,6 +138,7 @@ export default function LogIn() {
               id="password"
               autoComplete="current-password"
               onChange={({ target: { value } }) => setPassword(value)}
+              onKeyPress={onKeyPress}
             />
             <Button
               onClick={handleClick}
