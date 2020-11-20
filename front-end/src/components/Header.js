@@ -34,8 +34,10 @@ const styles = (theme) => ({
 });
 
 function Header(props) {
+  
   useEffect(() => {
-    props.checkPermission()
+    const x = props.checkPermission;
+    x();
   }, []);
 
   return (

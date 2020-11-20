@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-export default function LogIn({permission}) {
+export default function LogIn({checkLogined}) {
   const classes = useStyles();
   const [user, setUser] = useState(null);
   const [id, setId] = useState("");
@@ -97,10 +97,7 @@ export default function LogIn({permission}) {
   };
 
   useEffect(() => {
-    console.log(permission)
-    if(permission){
-      document.location.href = '/header';
-    }
+      checkLogined()
   },[])
 
   const onKeyPress = (e) => {
