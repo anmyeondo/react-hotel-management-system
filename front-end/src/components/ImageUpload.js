@@ -138,18 +138,6 @@ class ImageUploadCard extends React.Component {
     });
   };
 
-  handleSearchClick = event => {
-    this.setState({
-      mainState: "search"
-    });
-  };
-
-  handleGalleryClick = event => {
-    this.setState({
-      mainState: "gallery"
-    });
-  };
-
   renderInitialState() {
     const { classes, theme } = this.props;
     const { value } = this.state;
@@ -171,80 +159,12 @@ class ImageUploadCard extends React.Component {
                 <AddPhotoAlternateIcon />
               </Fab>
             </label>
-            <Fab className={classes.button} onClick={this.handleSearchClick}>
-              <SearchIcon />
-            </Fab>
-            <Fab className={classes.button} onClick={this.handleGalleryClick}>
-              <CollectionsIcon />
-            </Fab>
           </Grid>
         </CardContent>
       </React.Fragment>
     );
   }
 
-  handleSearchURL = event => {
-    console.log();
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    var url = reader.readAsDataURL(file);
-
-    reader.onloadend = function(e) {
-      this.setState({
-        selectedFile: [reader.result]
-      });
-    }.bind(this);
-    console.log(url); // Would see a path?
-
-    this.setState({
-      selectedFile: event.target.files[0],
-      imageUploaded: 1
-    });
-  };
-
-  handleImageSearch(url) {
-    var filename = url.substring(url.lastIndexOf("/") + 1);
-    console.log(filename);
-    this.setState({
-      mainState: "uploaded",
-      imageUploaded: true,
-      selectedFile: url,
-      fileReader: undefined,
-      filename: filename
-    });
-  }
-
-  handleSeachClose = event => {
-    this.setState({
-      mainState: "initial"
-    });
-  };
-
-  renderSearchState() {
-    const { classes } = this.props;
-
-    return (
-      <Paper className={classes.searchRoot} elevation={1}>
-        <InputBase className={classes.searchInput} placeholder="Image URL" />
-        <IconButton
-          className={classes.button}
-          aria-label="Search"
-          onClick={this.handleImageSearch}
-        >
-          <SearchIcon />
-        </IconButton>
-        <Divider className={classes.searchDivider} />
-        <IconButton
-          color="primary"
-          className={classes.secondaryButton}
-          aria-label="Close"
-          onClick={this.handleSeachClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      </Paper>
-    );
-  }
 
   handleAvatarClick(value) {
     var filename = value.url.substring(value.url.lastIndexOf("/") + 1);
@@ -258,73 +178,25 @@ class ImageUploadCard extends React.Component {
     });
   }
 
-  renderGalleryState() {
-    const { classes } = this.props;
-    const listItems = this.props.imageGallery.map(url => (
-      <div
-        onClick={value => this.handleAvatarClick({ url })}
-        style={{
-          padding: "5px 5px 5px 5px",
-          cursor: "pointer"
-        }}
-      >
-        <Avatar src={url} />
-      </div>
-    ));
-
-    /*const listItems = this.props.imageGallery.map(url => (
-      <div
-        onClick={value => this.handleAvatarClick({ url })}
-        style={{
-          padding: "5px 5px 5px 5px",
-          cursor: "pointer"
-        }}
-      >
-        <Avatar shape="square" size={100} src={url} />
-      </div>
-    ));*/
-
-    return (
-      <React.Fragment>
-        <Grid>
-          {listItems}
-          <IconButton
-            color="primary"
-            className={classes.secondaryButton}
-            aria-label="Close"
-            onClick={this.handleSeachClose}
-          >
-            <ReplayIcon />
-          </IconButton>
-        </Grid>
-      </React.Fragment>
-    );
-  }
-
   renderUploadedState() {
     const { classes, theme } = this.props;
 
     return (
       <React.Fragment>
         <CardActionArea onClick={this.imageResetHandler}>
-          <img
-            width="100%"
+          이미지 업로드 완료!<br/>   
+          {/* <img
+            justify="center"
+            width="10%"
+            height="5%"
             className={classes.media}
             src={this.state.selectedFile}
-          />
+          /> */}
         </CardActionArea>
       </React.Fragment>
     );
   }
 
-  imageResetHandler = event => {
-    console.log("Click!");
-    this.setState({
-      mainState: "initial",
-      selectedFile: null,
-      imageUploaded: 0
-    });
-  };
 
   render() {
     const { classes, theme } = this.props;
