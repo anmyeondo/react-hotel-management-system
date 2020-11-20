@@ -4,6 +4,15 @@ import Button from '@material-ui/core/Button';
 import TableCell from '@material-ui/core/TableCell';
 import StaffDeleteBtn from './StaffDeleteBtn'
 import StaffMoreInfoDialog from './StaffMoreInfoDialog'
+import { withStyles } from "@material-ui/core/styles";
+
+
+const Styles = (theme) => ({
+    tablecelling: {
+      border: '2px solid black',
+    },
+  });
+
 class StaffInfoRow extends React.Component {
     constructor(props) {
         super(props);
@@ -27,15 +36,16 @@ class StaffInfoRow extends React.Component {
     };
     
     render() {
+        const {classes} = this.props;
         return (
         <TableRow>
-            <TableCell><strong>{this.props.data.HOTEL_Name}</strong></TableCell>
-            <TableCell>{this.props.data.Last_Name+this.props.data.First_Name}</TableCell>
-            <TableCell>{this.props.data.Dept_Name}</TableCell>
-            <TableCell>{this.props.data.Rank}</TableCell>
-            <TableCell>{this.props.data.Bank}</TableCell>
-            <TableCell>{this.props.data.Account}</TableCell>
-            <TableCell>{this.props.data.Salary}</TableCell>
+            <TableCell className={classes.tablecelling}><strong>{this.props.data.HOTEL_Name}</strong></TableCell>
+            <TableCell className={classes.tablecelling}>{this.props.data.Last_Name+this.props.data.First_Name}</TableCell>
+            <TableCell className={classes.tablecelling}>{this.props.data.Dept_Name}</TableCell>
+            <TableCell className={classes.tablecelling}>{this.props.data.Rank}</TableCell>
+            <TableCell className={classes.tablecelling}>{this.props.data.Bank}</TableCell>
+            <TableCell className={classes.tablecelling}>{this.props.data.Account}</TableCell>
+            <TableCell className={classes.tablecelling}>{this.props.data.Salary}</TableCell>
             <TableCell align='center'><Button onClick={this.InfoStaffBtnOnclick} color="primary" variant="contained" >상세정보</Button></TableCell>
             <TableCell align='center'><StaffDeleteBtn staffID={this.props.data.ID} infoID={this.props.data.Inform_ID} refreshTable={this.props.refreshTable}/></TableCell> 
             <StaffMoreInfoDialog
@@ -48,5 +58,5 @@ class StaffInfoRow extends React.Component {
     }
 }
 
-export default StaffInfoRow;
+export default withStyles(Styles)(StaffInfoRow);
 

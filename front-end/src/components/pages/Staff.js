@@ -23,6 +23,10 @@ const styles = (theme) => ({
   },
   table: {
     minWidth: 1080,
+    border: '3px solid black',
+  },
+  tablecelling: {
+    border: '2px solid black',
   },
 });
 
@@ -150,16 +154,17 @@ class Staff extends React.Component {
         />
         <Paper className={classes.root}>
           <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell><strong>호텔</strong></TableCell>
-                <TableCell>이름</TableCell>
-                <TableCell>담당부서</TableCell>
-                <TableCell>직급</TableCell>
-                <TableCell>은행</TableCell>
-                <TableCell>계좌</TableCell>
-                <TableCell>월급</TableCell>
-                <TableCell align="center"></TableCell>
+            <TableHead >  
+              <TableRow className={classes.table}>
+                <TableCell className={classes.tablecelling}><strong>호텔</strong></TableCell>
+                <TableCell className={classes.tablecelling}>이름</TableCell>
+                <TableCell className={classes.tablecelling}>담당부서</TableCell>
+                <TableCell className={classes.tablecelling}>직급</TableCell>
+                <TableCell className={classes.tablecelling}>은행</TableCell>
+                <TableCell className={classes.tablecelling}>계좌</TableCell>
+                <TableCell className={classes.tablecelling}>월급</TableCell>
+                <TableCell align="center"><strong>상세정보 조회</strong></TableCell>
+                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
