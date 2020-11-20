@@ -4,10 +4,26 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
-import axios from 'axios';
 
-class Info extends Component {
+const styles = makeStyles((theme) => ({
+    hidden: {
+      display: "none",
+    },
+    container: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 400,
+    },
+}));
+
+class StaffInfoDialog extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -17,7 +33,7 @@ class Info extends Component {
             lName: "",
             eMail: "",
             fax: "",
-            birthday: "",
+            birthday: "1998-12-03",
             nationality: "",
             phoneNumber: "",
             gender: "",
@@ -36,6 +52,7 @@ class Info extends Component {
     }
     
     render() {
+        const classes = makeStyles();
         return (
             <Dialog open={this.props.info} style>
                 <DialogTitle>개인정보</DialogTitle>
@@ -88,13 +105,17 @@ class Info extends Component {
                         onChange={this.handleValueChange}
                     />
                     <br/>
+
                     <TextField
-                        label="생년월일"
-                        type="text"
-                        name="birthday"
-                        value={this.state.birthday}
-                        onChange={this.handleValueChange}
+                    label="생년월일"
+                    id="birthday"
+                    name="birthday"
+                    type="date"
+                    value={this.state.birthday}
+                    // className={classes.textField}
+                    onChange={this.handleValueChange}
                     />
+                    
                     <br/>
                     <TextField
                         label="국가"
@@ -134,4 +155,4 @@ class Info extends Component {
     }
 }
 
-export default Info;
+export default withStyles(styles)(StaffInfoDialog);
