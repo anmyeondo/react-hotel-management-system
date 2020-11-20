@@ -35,7 +35,7 @@ router.get('/login', async (req, res, next) => {
   console.log('로그인을 시작합니다 : ' + startTime);
 
   const params = req.query; // {id: id, password: password}
-  const q = `SELECT ID, Staff_Password FROM Staff WHERE ID = ${params.id}`;
+  const q = `SELECT Staff_ID, Staff_Password FROM Staff WHERE ID = ${params.id}`;
   let compResult = false;
   let errorcode = 0;
 
@@ -158,7 +158,7 @@ router.get('/sessionLogin', (req, res) => {
   if (req.session.user) {
     console.log('세션이 존재합니다');
     console.log(req.session.user);
-    res.send({ permission: true, userID: req.session.user });
+    res.send({ permission: true, user: req.session.user });
   } else {
     console.log('세션이 없습니다');
     res.send({ permission: false });
@@ -171,7 +171,7 @@ router.post('/sessionLogin', async (req, res) => {
   console.log('세션 로그인 테스트를 시작합니다 : ' + startTime);
 
   const params = req.body; // {id: id, password: password}
-  const q = `SELECT ID, Staff_Password FROM Staff WHERE ID = ${params.id}`;
+  const q = `SELECT Staff_ID, Staff_Password FROM Staff WHERE Staff_ID = ${params.id}`;
   let compResult = false;
   let errorcode = 0;
   let resData = {};
