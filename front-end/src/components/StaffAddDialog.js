@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from '@material-ui/core/styles';
+import StaffInfoDialog from './StaffInfoDialog';
 
 const styles = makeStyles((theme) => ({
   hidden: {
@@ -28,16 +29,19 @@ class StaffAddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      h_id: 1,
-      i_id: 1,
-      code: 1000,
-      rank: "a",
-      bank: "b",
-      account: "c",
-      staff_pw: "d",
-      r_date: "2020-11-11",
-      salary: "10000",
+      h_id: "",
+      i_id: "",
+      code: "",
+      rank: "",
+      bank: "",
+      account: "",
+      staff_pw: "",
+      r_date: "",
+      salary: "",
       is_able: 1,
+      info: {},
+      info_open: false,
+
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -46,6 +50,38 @@ class StaffAddDialog extends React.Component {
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
     this.callApi = this.callApi.bind(this);
+    this.handleInfoOpen = this.handleInfoOpen.bind(this);
+    this.handleInfoClose = this.handleInfoClose.bind(this);
+    this.setInfo = this.setInfo.bind(this);
+  }
+
+  // Info dialog 관련 메서드
+  handleInfoOpen() {
+    this.setState({
+      info_open: true,
+    });
+  }
+
+  handleInfoClose() {
+    this.setState({
+      info_open: false,
+    });
+  }
+  setInfo(data){
+    this.setState({
+      info: data
+    });
+  }
+
+  sendData = async () => {
+    const infoId = await axios({
+      method: "post",
+      url: "/users/addInform",
+      data: this.state.info,
+    }).then((res) => {
+        return res.data.insertId;
+    });
+    return infoId;
   }
 
   handleClickOpen() {
@@ -60,15 +96,15 @@ class StaffAddDialog extends React.Component {
 
   handleClose() {
     this.setState({
-      h_id: 1,
-      i_id: 1,
-      code: 1000,
-      rank: "a",
-      bank: "b",
-      account: "c",
-      staff_pw: "d",
-      r_date: "2020-11-11",
-      salary: "10000",
+      h_id: "",
+      i_id: "",
+      code: "",
+      rank: "",
+      bank: "",
+      account: "",
+      staff_pw: "",
+      r_date: "",
+      salary: "",
       is_able: 1,
     });
     this.props.closeDialog();
@@ -76,6 +112,9 @@ class StaffAddDialog extends React.Component {
 
   async handleFormSubmit(e) {
     e.preventDefault();
+    this.setState({
+      i_id: await this.sendData(),
+    });
 
     await this.callApi()
       .then(() => {
@@ -144,14 +183,6 @@ class StaffAddDialog extends React.Component {
           />
           <br />
           <TextField
-            label="정보아이디"
-            type="text"
-            name="i_id"
-            value={this.state.i_id}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
             label="코드"
             type="text"
             name="code"
@@ -191,14 +222,6 @@ class StaffAddDialog extends React.Component {
             onChange={this.handleValueChange}
           />
           <br />
-          {/* <TextField
-            label="등록일"
-            type="text"
-            name="r_date"
-            value={this.state.r_date}
-            onChange={this.handleValueChange}
-          /> */}
-          <br />
           <TextField
             label="연봉"
             type="text"
@@ -220,6 +243,13 @@ class StaffAddDialog extends React.Component {
           <Button
             variant="contained"
             color="primary"
+            onClick={this.handleInfoOpen}
+          >
+            개인정보
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
             onClick={this.handleFormSubmit}
           >
             추가
@@ -228,7 +258,9 @@ class StaffAddDialog extends React.Component {
             닫기
           </Button>
         </DialogActions>
+        <StaffInfoDialog info={this.state.info_open} handleInfoClose={this.handleInfoClose} setInfo={this.setInfo}/>
       </Dialog>
+      
     );
   }
 }
