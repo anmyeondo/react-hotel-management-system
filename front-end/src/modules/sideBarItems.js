@@ -7,10 +7,6 @@ export default {
           name: "Staff Status",
           url: "/staff/status",
         },
-        {
-          name: "Add Staff",
-          url: "/staff/add",
-        },
       ],
       icon: 1,
     },
@@ -20,10 +16,6 @@ export default {
         {
           name: "Customer Status",
           url: "/customer/status",
-        },
-        {
-          name: "Add Customer",
-          url: "/customer/add",
         },
       ],
       icon: 2,
@@ -41,6 +33,21 @@ export default {
         },
       ],
       icon: 3,
+    },
+    {
+      name: "Order Management",
+      children: [
+        {
+          name: "Current Order",
+          url: "/order/current",
+        },
+        {
+          name: "Order History",
+          url: "/order/history",
+        },
+      ],
+      icon: 5,
+      
     },
     {
       name: "Hotel Management 수정필요",
@@ -72,19 +79,6 @@ export default {
       ],
       icon: 4,
     },
-    {
-      name: "Order Management",
-      children: [
-        {
-          name: "Current Order",
-          url: "/order/current",
-        },
-        {
-          name: "Order History",
-          url: "/order/history",
-        },
-      ],
-      icon: 5,
-    },
   ],
+  
 };
