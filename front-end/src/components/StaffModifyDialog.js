@@ -50,6 +50,7 @@ class StaffModifyDialog extends React.Component {
       r_date: "",
       salary: "",
       is_able: 1,
+      table_name: "Staff",
       info: {},
       info_open: false,
     };
@@ -122,9 +123,6 @@ class StaffModifyDialog extends React.Component {
 
   async handleFormSubmit(e) {
     e.preventDefault();
-    this.setState({
-      i_id: await this.sendData(),
-    });
 
     await this.callApi()
       .then(() => {
@@ -145,26 +143,32 @@ class StaffModifyDialog extends React.Component {
   handleValueChange(e) {
     let nextState = {};
     nextState[e.target.name] = e.target.value;
+    console.log(e.target.value);
     this.setState(nextState);
   }
 
   async callApi() {
-    await axios({
-      method: "post",
-      url: "/staffs/addStaff",
-      data: {
-        h_id: this.state.h_id,
-        i_id: this.state.i_id,
-        code: this.state.code,
-        rank: this.state.rank,
-        bank: this.state.bank,
-        account: this.state.account,
-        staff_pw: this.state.staff_pw,
-        r_date: this.state.r_date,
-        salary: this.state.salary,
-        is_able: this.state.is_able,
+    const formData = new FormData();
+    const url = "/test/test";
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
       },
-    });
+    };
+    formData.append("table_name", this.state.table_name)
+    const data={
+      code: this.state.code,
+      rank: this.state.rank,
+      salary: this.state.salary
+    }
+    formData.append("data", data);
+    const primary_key ={
+      primary_key: "Staff_ID",
+      primary_value: this.props.data.Staff_ID,
+    }
+    formData.append("primary_key", primary_key);
+    // FormData의 value 확인
+    await axios.post(url, formData, config);
   }
 
   render() {
@@ -173,18 +177,38 @@ class StaffModifyDialog extends React.Component {
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
           {" "}
-          <strong>직원 상세정보</strong>
+          <strong>직원 수정</strong>
         </DialogTitle>
         <DialogContent>
           <TextField
-            label="성"
+            label="부서 코드"
             type="text"
-            name="last_name"
-            value={this.props.data.Last_Name}
+            name="code"
+            defaultValue ={this.props.data.Code}
             onChange={this.handleValueChange}
           />
+          <br/>
+          <TextField
+            label="직급"
+            type="text"
+            name="rank"
+            defaultValue ={this.props.data.Rank}
+            onChange={this.handleValueChange}
+          />
+          <br/>
+          <TextField
+            label="연봉"
+            type="text"
+            name="salary"
+            defaultValue ={this.props.data.Salary}
+            onChange={this.handleValueChange}
+          />
+
         </DialogContent>
         <DialogActions>
+          <Button variant="outlined" color="primary" onClick={this.handleFormSubmit}>
+            수정
+          </Button>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>
             닫기
           </Button>
