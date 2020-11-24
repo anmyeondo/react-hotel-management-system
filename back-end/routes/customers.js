@@ -46,4 +46,45 @@ router.get('/del', async (req, res) => {
 
   res.send();
 });
+
+//고객 조회
+router.post('/seach', (req, res) => {
+  const startTime = new Date();
+  console.log('검색 시작합니다 : ' + startTime);
+
+  const body = req.body; // {h_id, i_id, code, rank} 입력, 없으면 ""
+  console.log(body);
+
+  // 쿼리문 만드는 부분
+  let q =
+    'SELECT * FROM Customer Natural Join Membership_Rank Natural Join Information Natural Join Zip Natural Join Card Card_BIN Natural Join Membership_Validity';
+  let addq = ' WHERE';
+
+  for (let key in body) {
+    console.log(body[key]);
+    if (body[key] != '' && body[key] != undefined) {
+      if (addq !== ' WHERE') {
+        addq = addq + ' and';
+      }
+      let x = body[key];
+      if (key != 'Other') {
+        x = '"' + x + '"';
+      }
+      addq = addq + ' ' + key + ' = ' + x;
+    } else {
+      continue;
+    }
+  }
+
+  console.log('큐 : ' + addq);
+
+  if (addq != ' WHERE') {
+    q = q + addq;
+    console.log(q);
+    connection.query(q, (err, rows, fields) => {
+      console.log(JSON.stringify(rows));
+      res.send(JSON.stringify(rows));
+    });
+  }
+});
 module.exports = router;

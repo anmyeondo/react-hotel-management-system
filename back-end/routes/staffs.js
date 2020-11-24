@@ -248,4 +248,44 @@ router.post('/addStaff', upload.any(), async (req, res) => {
   let ret = await pwEncrpt();
 });
 
+router.post('/seach', (req, res) => {
+  const startTime = new Date();
+  console.log('검색 시작합니다 : ' + startTime);
+
+  const body = req.body; // {h_id, i_id, code, rank} 입력, 없으면 ""
+  console.log(body);
+
+  // 쿼리문 만드는 부분
+  let q =
+    'SELECT * FROM Staff Natural Join Hotel Natural Join Information Natural Join Department_Code Natural Join Zip';
+  let addq = ' WHERE';
+
+  for (let key in body) {
+    console.log(body[key]);
+    if (body[key] != '' && body[key] != undefined) {
+      if (addq !== ' WHERE') {
+        addq = addq + ' and';
+      }
+      let x = body[key];
+      if (key != 'Other') {
+        x = '"' + x + '"';
+      }
+      addq = addq + ' ' + key + ' = ' + x;
+    } else {
+      continue;
+    }
+  }
+
+  console.log('큐 : ' + addq);
+
+  if (addq != ' WHERE') {
+    q = q + addq;
+    console.log(q);
+    connection.query(q, (err, rows, fields) => {
+      console.log(JSON.stringify(rows));
+      res.send(JSON.stringify(rows));
+    });
+  }
+});
+
 module.exports = router;
