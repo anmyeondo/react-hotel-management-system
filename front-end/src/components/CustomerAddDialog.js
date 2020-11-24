@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import StaffInfoDialog from "./StaffInfoDialog";
+import CustomerInfoDialog from "./CustomerInfoDialog";
 import { ImageSearch } from "@material-ui/icons";
 import ImageUpload from "./ImageUpload";
 
@@ -31,25 +31,18 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-class StaffAddDialog extends React.Component {
+class CustomerAddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null,
-      fileName: "",
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
-      bank: "",
-      account: "",
-      staff_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 1,
-      info: {},
-      info_open: false,
-      staff_image: null,
+        i_id: "",
+        rank: "",
+        valid_month: "",
+        login_id: "",
+        login_pw: "",
+        mileage: "",
+        r_date: "2020-11-24",
+        m_due: "2020-11-24",
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -105,25 +98,20 @@ class StaffAddDialog extends React.Component {
 
   handleClose() {
     this.setState({
-      h_id: "",
       i_id: "",
-      code: "",
       rank: "",
-      bank: "",
-      account: "",
-      staff_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 1,
-      info: {},
-      info_open: false,
-      staff_image: null,
+      valid_month: "",
+      login_id: "",
+      login_pw: "",
+      mileage: "",
+      r_date: "2020-11-24",
+      m_due: "2020-11-24",
     });
     this.props.closeDialog();
   }
 
   handleImageAddClick = (images) => {
-    this.setState({ staff_image: images });
+    this.setState({ customer_image: images });
   };
 
   async handleFormSubmit(e) {
@@ -156,24 +144,21 @@ class StaffAddDialog extends React.Component {
 
   async callApi() {
     const formData = new FormData();
-    const url = "/staffs/addStaff";
+    const url = "/customers/addCustomer";
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
 
-    formData.append("staff_image", this.state.staff_image);
-    formData.append("h_id", this.state.h_id);
     formData.append("i_id", this.state.i_id);
-    formData.append("code", this.state.code);
     formData.append("rank", this.state.rank);
-    formData.append("bank", this.state.bank);
-    formData.append("account", this.state.account);
-    formData.append("staff_pw", this.state.staff_pw);
+    formData.append("valid_month", this.state.valid_month);
+    formData.append("login_id", this.state.login_id);
+    formData.append("login_pw", this.state.login_pw);
+    formData.append("mileage", this.state.mileage);
     formData.append("r_date", this.state.r_date);
-    formData.append("salary", this.state.salary);
-    formData.append("is_able", this.state.is_able);
+    formData.append("m_due", this.state.m_due);
 
     // FormData의 value 확인
     await axios.post(url, formData, config);
@@ -188,9 +173,7 @@ class StaffAddDialog extends React.Component {
           <span>고객 추가</span>{" "}
         </DialogTitle>
         <DialogContent className={classes.dialogcss}>
-          <ImageUpload updateImage={this.handleImageAddClick} />
           <form className={classes.container} noValidate>
-            {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
             <br />
             <br />
             <TextField
@@ -204,23 +187,7 @@ class StaffAddDialog extends React.Component {
             />
           </form>
           <TextField
-            label="호텔번호"
-            type="text"
-            name="h_id"
-            value={this.state.h_id}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="코드"
-            type="text"
-            name="code"
-            value={this.state.code}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="등급"
+            label="멤버쉽"
             type="text"
             name="rank"
             value={this.state.rank}
@@ -228,44 +195,50 @@ class StaffAddDialog extends React.Component {
           />
           <br />
           <TextField
-            label="은행"
+            label="멤버쉽 기간"
             type="text"
-            name="bank"
-            value={this.state.bank}
+            name="valid_month"
+            value={this.state.valid_month}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="계좌"
+            label="마일리지"
             type="text"
-            name="account"
-            value={this.state.account}
+            name="mileage"
+            value={this.state.mileage}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="비번"
+            label="계정"
             type="text"
-            name="staff_pw"
-            value={this.state.staff_pw}
+            name="login_id"
+            value={this.state.login_id}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="연봉"
+            label="비밀번호"
             type="text"
-            name="salary"
-            value={this.state.salary}
+            name="login_pw"
+            value={this.state.login_pw}
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
-            label="가능여부"
-            type="text"
-            name="is_able"
-            value={this.state.is_able}
-            onChange={this.handleValueChange}
-          />
+          <form className={classes.container} noValidate>
+            <br />
+            <TextField
+              id="m_due"
+              name="m_due"
+              label="멤버쉽 만료일자"
+              type="date"
+              defaultValue={this.state.m_due}
+              value={this.state.m_due}
+              className={classes.textField}
+              onChange={this.handleValueChange}
+            />
+          </form>
           <br />
         </DialogContent>
         <DialogActions>
@@ -287,7 +260,7 @@ class StaffAddDialog extends React.Component {
             닫기
           </Button>
         </DialogActions>
-        <StaffInfoDialog
+        <CustomerInfoDialog
           info={this.state.info_open}
           handleInfoClose={this.handleInfoClose}
           setInfo={this.setInfo}
@@ -297,4 +270,4 @@ class StaffAddDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(StaffAddDialog);
+export default withStyles(styles)(CustomerAddDialog);

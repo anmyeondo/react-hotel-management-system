@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Customer from "./components/pages/Customer";
 import Circletest from "./components/pages/Circletest";
 import Staff from "./components/pages/Staff";
-import Test from "./components/pages/Test";
+import Test from "./components/pages/Room";
 import axios from "axios"
 import "./App.css";
 import { CircularProgress } from "@material-ui/core";

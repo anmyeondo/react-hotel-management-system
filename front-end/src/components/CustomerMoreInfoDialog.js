@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from '@material-ui/core/styles';
-import StaffInfoDialog from './StaffInfoDialog';
+import CustomerInfoDialog from './CustomerInfoDialog';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -37,7 +37,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-class StaffMoreInfoDialog extends React.Component {
+class CustomerMoreInfoDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +47,7 @@ class StaffMoreInfoDialog extends React.Component {
       rank: "",
       bank: "",
       account: "",
-      staff_pw: "",
+      customer_pw: "",
       r_date: "",
       salary: "",
       is_able: 1,
@@ -114,7 +114,7 @@ class StaffMoreInfoDialog extends React.Component {
       rank: "",
       bank: "",
       account: "",
-      staff_pw: "",
+      customer_pw: "",
       r_date: "",
       salary: "",
       is_able: 1,
@@ -153,7 +153,7 @@ class StaffMoreInfoDialog extends React.Component {
   async callApi() {
     await axios({
       method: "post",
-      url: "/staffs/addStaff",
+      url: "/customers/addCustomer",
       data: {
         h_id: this.state.h_id,
         i_id: this.state.i_id,
@@ -161,7 +161,7 @@ class StaffMoreInfoDialog extends React.Component {
         rank: this.state.rank,
         bank: this.state.bank,
         account: this.state.account,
-        staff_pw: this.state.staff_pw,
+        customer_pw: this.state.customer_pw,
         r_date: this.state.r_date,
         salary: this.state.salary,
         is_able: this.state.is_able,
@@ -208,10 +208,10 @@ class StaffMoreInfoDialog extends React.Component {
           <ListItemText primary="우편번호" secondary={this.props.data.Zip} />
           </ListItem>
           <ListItem>
-          <ListItemText primary="생일" secondary={this.props.data.Birthday.slice(undefined, 10)} />
+          <ListItemText primary="생일" secondary={this.props.data.Birthday} />
           </ListItem>
           <ListItem>
-          <ListItemText primary="등록 일자" secondary={this.props.data.RegDate.slice(undefined, 10)} />
+          <ListItemText primary="등록 일자" secondary={this.props.data.RegDate} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <Divider variant="inset" component="li" />
@@ -223,11 +223,11 @@ class StaffMoreInfoDialog extends React.Component {
             닫기
           </Button>
         </DialogActions>
-        <StaffInfoDialog info={this.state.info_open} handleInfoClose={this.handleInfoClose} setInfo={this.setInfo}/>
+        <CustomerInfoDialog info={this.state.info_open} handleInfoClose={this.handleInfoClose} setInfo={this.setInfo}/>
       </Dialog>
       
     );
   }
 }
 
-export default withStyles(styles)(StaffMoreInfoDialog);
+export default withStyles(styles)(CustomerMoreInfoDialog);
