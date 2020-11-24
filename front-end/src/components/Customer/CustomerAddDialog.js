@@ -32,14 +32,14 @@ class CustomerAddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        i_id: "",
-        rank: "",
-        valid_month: "",
-        login_id: "",
-        login_pw: "",
-        mileage: "",
-        r_date: "2020-11-24",
-        m_due: "2020-11-24",
+      i_id: "",
+      rank: "",
+      valid_month: "",
+      login_id: "",
+      login_pw: "",
+      mileage: "",
+      r_date: "2020-11-24",
+      m_due: "2020-11-24",
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);

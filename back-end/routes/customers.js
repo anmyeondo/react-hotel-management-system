@@ -1,6 +1,15 @@
 var express = require('express');
 var connection = require('../database/database');
+var bodyParser = require('body-parser');
+
+// FormData parser
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+
 var router = express.Router();
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -86,6 +95,51 @@ router.post('/search', (req, res) => {
       res.send(JSON.stringify(rows));
     });
   }
+});
+
+//고객 수정
+router.post('/modifyCustomer', multipartMiddleware, async (req, res) => {
+  const startTime = new Date();
+  console.log('정보 수정을 시작합니다 : ' + startTime);
+
+  const body = req.body;
+  table_name = body.table_name;
+  primary = JSON.parse(body.primary_key);
+  data = JSON.parse(body.data);
+
+  console.log('초기화 완료');
+
+  console.log(primary);
+  console.log(data);
+
+  let queryHeader = `UPDATE Customer NATURAL JOIN Information SET `;
+  let queryChange = ``;
+  let queryCondition = ` WHERE ${primary.primary_key} = ${primary.primary_value};`;
+
+  console.log(queryHeader);
+  console.log(queryCondition);
+
+  for (let key in data) {
+    console.log(key + ' : ' + data[key]);
+    if (data[key] != '' && data[key] !== undefined) {
+      if (queryChange === ``) {
+        queryChange = `${key} = '${data[key]}'`;
+      } else {
+        queryChange = queryChange + `, ${key} = '${data[key]}'`;
+      }
+    }
+  }
+
+  console.log(queryChange);
+
+  const q = queryHeader + queryChange + queryCondition;
+  console.log(q);
+
+  connection.query(q, (err, rows, fields) => {
+    console.log('  데이터베이스에서 수정을 시작합니다.');
+    console.log(JSON.stringify(rows));
+    res.send(JSON.stringify(rows));
+  });
 });
 
 module.exports = router;
