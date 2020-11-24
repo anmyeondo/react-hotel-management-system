@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import Header from "../Header";
+import Header from "./Header";
 import StaffInfoRow from "../Staff/StaffInfoRow";
 import StaffAddDialog from "../Staff/StaffAddDialog";
 import StaffSearchDialog from "../Staff/StaffSearchDialog";

@@ -1,4 +1,4 @@
-import LeftSidebar from "../modules/LeftSidebar";
+import LeftSidebar from "../../modules/LeftSidebar";
 import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";

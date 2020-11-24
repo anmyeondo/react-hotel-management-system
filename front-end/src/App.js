@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import Login from "./components/pages/Login";
-import Header from "./components/Header";
+import Header from "./components/pages/Header";
 import Customer from "./components/pages/Customer";
 import Staff from "./components/pages/Staff";
 import Test from "./components/pages/Room";

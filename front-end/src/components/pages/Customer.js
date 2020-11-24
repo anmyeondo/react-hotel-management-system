@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Header from "../Header";
+import Header from "./Header";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -120,14 +120,6 @@ class Customer extends React.Component {
         <h1 align="center" style={{background:"aquamarine"}}><strong>호텔 손님 관리 페이지입니다.</strong></h1>
         <hr/>
         <div align="right">
-          {/* <Button  
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={this.addCustomerBtnOnclick}
-          >
-            손님 추가
-          </Button> */}
           <Button 
             variant="contained"
             color="primary"
