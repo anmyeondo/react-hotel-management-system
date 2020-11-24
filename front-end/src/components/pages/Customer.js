@@ -1,6 +1,5 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Header from "./Header";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -8,12 +7,13 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import CustomerInfoRow from "../CustomerInfoRow";
-import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
-import CustomerSearchDialog from "../CustomerSearchDialog";
 import Button from "@material-ui/core/Button";
 import { Update } from "@material-ui/icons";
 import CustomerAddDialog from "../CustomerAddDialog";
+import CustomerSearchDialog from "../CustomerSearchDialog";
+import Header from "./Header";
+import axios from "axios";
 
 const styles = (theme) => ({
   root: {
@@ -116,7 +116,7 @@ class Customer extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Header checkPermission={this.props.checkPermission} idx={0} />
+        <Header/>
         <h1 align="center" style={{background:"aquamarine"}}><strong>호텔 손님 관리 페이지입니다.</strong></h1>
         <hr/>
         <div align="right">

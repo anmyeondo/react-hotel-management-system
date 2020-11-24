@@ -9,6 +9,7 @@ import {
   MeetingRoom,
   EventAvailable,
   RoomService,
+  Business,
 } from "@material-ui/icons";
 import menuItems from "./sideBarItems";
 import useStyles from "./menuBarStyles";
@@ -26,6 +27,8 @@ const ParentIcon = (idx) => {
     return <MeetingRoom />;
   } else if (idx === 5) {
     return <RoomService />;
+  } else if (idx === 6) {
+    return <Business />;
   }
 };
 
