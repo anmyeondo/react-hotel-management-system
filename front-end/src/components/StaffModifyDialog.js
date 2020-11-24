@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import StaffInfoDialog from "./StaffInfoDialog";
-import axios from 'axios';
+import axios from "axios";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -16,7 +16,6 @@ const styles = makeStyles((theme) => ({
     maxWidth: 720,
     backgroundColor: theme.palette.background.paper,
   },
-
 }));
 
 class StaffModifyDialog extends React.Component {
@@ -132,7 +131,7 @@ class StaffModifyDialog extends React.Component {
 
   async callApi() {
     const formData = new FormData();
-    const url = "/test/test";
+    const url = "/staffs/modifyStaff";
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -141,9 +140,9 @@ class StaffModifyDialog extends React.Component {
     formData.append("table_name", this.state.table_name);
 
     const data = {
-      code: this.state.code,
-      rank: this.state.rank,
-      salary: this.state.salary,
+      Code: this.state.code,
+      Rank: this.state.rank,
+      Salary: this.state.salary,
     };
 
     formData.append("data", JSON.stringify(data));

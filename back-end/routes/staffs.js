@@ -11,6 +11,10 @@ const jwt = require('jsonwebtoken');
 const secretObj = require('../jwt');
 const ip = require('ip');
 
+// FormData parser
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+
 // 세션
 var session = require('express-session');
 
@@ -248,6 +252,7 @@ router.post('/addStaff', upload.any(), async (req, res) => {
   let ret = await pwEncrpt();
 });
 
+/* 검색 기능 */
 router.post('/search', (req, res) => {
   const startTime = new Date();
   console.log('검색 시작합니다 : ' + startTime);
@@ -286,6 +291,51 @@ router.post('/search', (req, res) => {
       res.send(JSON.stringify(rows));
     });
   }
+});
+
+/* 직원 정보 수정 API */
+router.post('/modifyStaff', multipartMiddleware, async (req, res) => {
+  const startTime = new Date();
+  console.log('정보 수정을 시작합니다 : ' + startTime);
+
+  const body = req.body;
+  table_name = body.table_name;
+  primary = JSON.parse(body.primary_key);
+  data = JSON.parse(body.data);
+
+  console.log('초기화 완료');
+
+  console.log(primary);
+  console.log(data);
+
+  let queryHeader = `UPDATE ${table_name} SET `;
+  let queryChange = ``;
+  let queryCondition = ` WHERE ${primary.primary_key} = ${primary.primary_value};`;
+
+  console.log(queryHeader);
+  console.log(queryCondition);
+
+  for (let key in data) {
+    console.log(key + ' : ' + data[key]);
+    if (data[key] != '' && data[key] !== undefined) {
+      if (queryChange === ``) {
+        queryChange = `${key} = '${data[key]}'`;
+      } else {
+        queryChange = queryChange + `, ${key} = '${data[key]}'`;
+      }
+    }
+  }
+
+  console.log(queryChange);
+
+  const q = queryHeader + queryChange + queryCondition;
+  console.log(q);
+
+  connection.query(q, (err, rows, fields) => {
+    console.log('  데이터베이스에서 수정을 시작합니다.');
+    console.log(JSON.stringify(rows));
+    res.send(JSON.stringify(rows));
+  });
 });
 
 module.exports = router;

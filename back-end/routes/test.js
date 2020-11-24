@@ -29,38 +29,47 @@ router.get('/informs', (req, res, next) => {
   });
 });
 
-/* 이미지 추가를 포함한 직원 추가 */
+/* 손님 정보 수정 API */
 router.post('/test', multipartMiddleware, async (req, res) => {
   const startTime = new Date();
   console.log('손님 수정을 시작합니다 : ' + startTime);
 
   const body = req.body;
-  console.log(body);
   table_name = body.table_name;
-  primary = body.primary_key;
-  data = body.data;
+  primary = JSON.parse(body.primary_key);
+  data = JSON.parse(body.data);
 
-  let queryHeader = `UPDATA ${table_name} SET `;
-  let queryChange = ``;
-  let queryCondition = ` WHERE ${primary.primary_key} = ${primary.primary_value}`;
+  console.log('초기화 완료');
 
-  console.log("테스트 :");
+  console.log(primary);
   console.log(data);
+
+  let queryHeader = `UPDATE ${table_name} SET `;
+  let queryChange = ``;
+  let queryCondition = ` WHERE ${primary.primary_key} = ${primary.primary_value};`;
+
+  console.log(queryHeader);
+  console.log(queryCondition);
 
   for (let key in data) {
     console.log(key + ' : ' + data[key]);
     if (data[key] != '' && data[key] !== undefined) {
       if (queryChange === ``) {
-        queryChange = `${key} = ${data[key]}`;
+        queryChange = `${key} = '${data[key]}'`;
       } else {
-        queryChange = queryChange + `, ${key} = ${data[key]}`;
+        queryChange = queryChange + `, ${key} = '${data[key]}'`;
       }
     }
   }
 
+  console.log(queryChange);
+
   const q = queryHeader + queryChange + queryCondition;
+  console.log(q);
+
   connection.query(q, (err, rows, fields) => {
     console.log('  데이터베이스에서 수정을 시작합니다.');
+    console.log(JSON.stringify(rows));
     res.send(JSON.stringify(rows));
   });
 });
