@@ -39,7 +39,7 @@ class CustomerInfoRow extends React.Component {
         return (
         <TableRow>
             <TableCell className={classes.tablecelling}><strong style={{textJustify:"center"}}>{this.props.data.Last_Name+this.props.data.First_Name}</strong></TableCell>
-            <TableCell className={classes.tablecelling}><strong style={{textJustify:"center"}}>{this.props.data.Last_Name+this.props.data.Nationality}</strong></TableCell>
+            <TableCell className={classes.tablecelling}><strong style={{textJustify:"center"}}>{this.props.data.Nationality}</strong></TableCell>
             <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Rank}</span></TableCell>
             <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Mileage}</span></TableCell>
             <TableCell className={classes.tablecelling}><span style={{textJustify:"center"}}>{this.props.data.Reg_Date.slice(undefined, 10)}</span></TableCell>
