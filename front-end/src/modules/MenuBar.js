@@ -19,13 +19,13 @@ import Addtest from "./Addtest";
 const ParentIcon = (idx) => {
   if (idx == 1) {
     return <AssignmentInd />;
-  } else if (idx == 2) {
+  } else if (idx === 2) {
     return <Person />;
-  } else if (idx == 3) {
+  } else if (idx === 3) {
     return <EventAvailable />;
-  } else if (idx == 4) {
+  } else if (idx === 4) {
     return <MeetingRoom />;
-  } else if (idx == 5) {
+  } else if (idx === 5) {
     return <RoomService />;
   }
 };

@@ -18,9 +18,9 @@ export default async function signIn({ id, password }) {
   const errorCode = resData.errorcode;
   const compResult = resData.compResult;
 
-  if (errorCode == 1) {
+  if (errorCode === 1) {
     // 계정이 존재하지 않는 경우 처리
-  } else if (errorCode == 2) {
+  } else if (errorCode === 2) {
     // 계정이 존재하는 경우 처리
     if (compResult) {
       // 비밀번호 일치하는 경우 처리
