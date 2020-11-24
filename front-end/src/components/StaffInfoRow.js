@@ -23,8 +23,8 @@ class StaffInfoRow extends React.Component {
     };
     this.closeMoreInfoDialog = this.closeMoreInfoDialog.bind(this);
     this.InfoStaffBtnOnclick = this.InfoStaffBtnOnclick.bind(this);
-    this.ModifyStaffBtnOnclick = this.ModifyStaffBtnOnclick(this);
-    this.closeStaffModifyDialog = this.closeStaffModifyDialog(this);
+    this.ModifyStaffBtnOnclick = this.ModifyStaffBtnOnclick.bind(this);
+    this.closeStaffModifyDialog = this.closeStaffModifyDialog.bind(this);
   }
 
   //Info
@@ -47,6 +47,7 @@ class StaffInfoRow extends React.Component {
   };
   
   ModifyStaffBtnOnclick = () => {
+    console.log("test");
     this.setState({ StaffModifyisOpen: true });
     console.log(this.state);
   };
