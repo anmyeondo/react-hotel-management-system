@@ -124,6 +124,7 @@ class StaffInfoRow extends React.Component {
           data={this.props.data}
           open={this.state.StaffModifyisOpen}
           closeDialog={this.closeStaffModifyDialog}
+          refreshTable={this.props.refreshTable}
         /> 
       </TableRow>
     );
