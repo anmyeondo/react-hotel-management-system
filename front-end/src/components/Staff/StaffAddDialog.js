@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import StaffInfoDialog from "./StaffInfoDialog";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "../ImageUpload";
 
 const styles = makeStyles((theme) => ({
   hidden: {

@@ -1,19 +1,19 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Header from "../Header";
+import TablePagination from "@material-ui/core/TablePagination";
+import Button from "@material-ui/core/Button";
+import { Update } from "@material-ui/icons";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import StaffInfoRow from "../StaffInfoRow";
+import Header from "../Header";
+import StaffInfoRow from "../Staff/StaffInfoRow";
+import StaffAddDialog from "../Staff/StaffAddDialog";
+import StaffSearchDialog from "../Staff/StaffSearchDialog";
 import axios from "axios";
-import TablePagination from "@material-ui/core/TablePagination";
-import StaffSearchDialog from "../StaffSearchDialog";
-import Button from "@material-ui/core/Button";
-import { Update } from "@material-ui/icons";
-import StaffAddDialog from "../StaffAddDialog";
 
 const styles = (theme) => ({
   root: {
