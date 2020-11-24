@@ -30,18 +30,22 @@ router.get('/informs', (req, res, next) => {
 });
 
 /* 이미지 추가를 포함한 직원 추가 */
-router.post('/addCustomer', multipartMiddleware, async (req, res) => {
+router.post('/test', multipartMiddleware, async (req, res) => {
   const startTime = new Date();
   console.log('손님 수정을 시작합니다 : ' + startTime);
 
   const body = req.body;
+  console.log(body);
   table_name = body.table_name;
   primary = body.primary_key;
   data = body.data;
 
-  let queryHeader = `UPDATA ${table.name} SET `;
+  let queryHeader = `UPDATA ${table_name} SET `;
   let queryChange = ``;
-  let queryCondition = ` WHERE ${primary[0]} = ${primary[1]}`;
+  let queryCondition = ` WHERE ${primary.primary_key} = ${primary.primary_value}`;
+
+  console.log("테스트 :");
+  console.log(data);
 
   for (let key in data) {
     console.log(key + ' : ' + data[key]);

@@ -41,6 +41,7 @@ class StaffInfoRow extends React.Component {
 
   //Modify
   ModifyStaffBtnOnclick = () => {
+    console.log("test");
     this.setState({ StaffModifyisOpen: true });
     console.log(this.state);
   };
