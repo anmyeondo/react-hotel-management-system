@@ -2,9 +2,9 @@ import React from "react";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
+import { withStyles } from "@material-ui/core/styles";
 import CustomerDeleteBtn from "./CustomerDeleteBtn";
 import CustomerMoreInfoDialog from "./CustomerMoreInfoDialog";
-import { withStyles } from "@material-ui/core/styles";
 import CustomerModifyDialog from "./CustomerModifyDialog";
 
 const Styles = (theme) => ({

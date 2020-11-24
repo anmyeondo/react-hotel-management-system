@@ -9,6 +9,7 @@ import {
   MeetingRoom,
   EventAvailable,
   RoomService,
+  Business,
 } from "@material-ui/icons";
 import menuItems from "./sideBarItems";
 import useStyles from "./menuBarStyles";
@@ -16,7 +17,7 @@ import { NavLink as RouterLink } from "react-router-dom";
 
 // idx에 따라 아이콘 지정하는 함수
 const ParentIcon = (idx) => {
-  if (idx == 1) {
+  if (idx === 1) {
     return <AssignmentInd />;
   } else if (idx === 2) {
     return <Person />;
@@ -26,6 +27,8 @@ const ParentIcon = (idx) => {
     return <MeetingRoom />;
   } else if (idx === 5) {
     return <RoomService />;
+  } else if (idx === 6) {
+    return <Business />;
   }
 };
 

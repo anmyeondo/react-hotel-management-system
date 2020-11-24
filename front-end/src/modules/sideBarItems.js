@@ -50,34 +50,28 @@ export default {
       
     },
     {
-      name: "Hotel Management 수정필요",
+      name: "Room Management",
+      children: [
+        {
+          name: "Room status",
+          url: "/room",
+        }
+      ],
+      icon: 4,
+    },
+    {
+      name: "Hotel Management",
       children: [
         {
           name: "Hotel status",
           url: "/hotel",
         },
         {
-          name: "Add Hotel",
-          url: "/hotel/add",
-        },
-        {
-          name: "Modify Hotel",
-          url: "/hotel/modify",
-        },
-        {
-          name: "Modify Room",
-          url: "/hotel/modify/room",
-        },
-        {
-          name: "Modify Manager",
-          url: "/hotel/modify/manager",
-        },
-        {
           name: "Modify Facility",
-          url: "/hotel/modify/facility",
+          url: "/hotel/facility",
         },
       ],
-      icon: 4,
+      icon: 6,
     },
   ],
   

@@ -62,11 +62,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function LogIn({checkLogined}) {
   const classes = useStyles();
-  const [user, setUser] = useState(null);
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const login = ({ id, password }) => setUser(signIn({ id, password }));
-  const [islogin] = useState(false);
   const handleClick = async () => {
     try {
       let resData = await signIn({ id, password });
@@ -101,7 +98,7 @@ export default function LogIn({checkLogined}) {
   },[])
 
   const onKeyPress = (e) => {
-    if(e.key == 'Enter') {
+    if(e.key === 'Enter') {
       handleClick();
     }
   }

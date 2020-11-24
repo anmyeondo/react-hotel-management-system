@@ -55,7 +55,6 @@ class StaffInfoDialog extends Component {
     }
     
     render() {
-        const classes = makeStyles();
         return (
             <Dialog open={this.props.info} style>
                 <DialogTitle>개인정보</DialogTitle>

@@ -156,7 +156,6 @@ class StaffModifyDialog extends React.Component {
   }
 
   render() {
-    const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
