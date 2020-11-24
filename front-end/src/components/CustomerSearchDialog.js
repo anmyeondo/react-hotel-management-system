@@ -49,11 +49,10 @@ class CustomerSearchDialog extends React.Component {
 
   handleClose() {
     this.setState({
-      HOTEL_Name: "",
-      First_Name: "",
       Last_Name: "",
-      Dept_Name: "",
+      First_Name: "",
       Rank: "",
+      Nationality: ""
     });
     this.props.closeDialog();
   }
@@ -84,13 +83,12 @@ class CustomerSearchDialog extends React.Component {
   searchCustomer() {
     return axios({
       method: "post",
-      url: "/users/test",
+      url: "/customers/search",
       data: {
-        HOTEL_Name: this.state.HOTEL_Name,
-        First_Name: this.state.First_Name,
         Last_Name: this.state.Last_Name,
-        Dept_Name: this.state.Dept_Name,
-        Rank: this.state.Rank
+        First_Name: this.state.First_Name,
+        Rank: this.state.Rank,
+        Nationality: this.state.Nationality
       },
     });
   }
@@ -99,16 +97,8 @@ class CustomerSearchDialog extends React.Component {
     const { classes } = this.props;
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> 직원 검색</DialogTitle>
+        <DialogTitle> 고객 검색</DialogTitle>
         <DialogContent>
-          <TextField
-            label="호텔이름"
-            type="text"
-            name="HOTEL_Name"
-            value={this.state.HOTEL_Name}
-            onChange={this.handleValueChange}
-          />
-          <br />
           <TextField
             label="이름"
             type="text"
@@ -126,15 +116,15 @@ class CustomerSearchDialog extends React.Component {
           />
           <br />
           <TextField
-            label="담당부서"
+            label="국적"
             type="text"
-            name="Dept_Name"
-            value={this.state.Dept_Name}
+            name="Nationality"
+            value={this.state.Nationality}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="직급"
+            label="멤버쉽 등급"
             type="text"
             name="Rank"
             value={this.state.Rank}
