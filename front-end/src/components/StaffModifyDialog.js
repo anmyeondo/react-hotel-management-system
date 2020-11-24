@@ -155,18 +155,20 @@ class StaffModifyDialog extends React.Component {
         "content-type": "multipart/form-data",
       },
     };
-    formData.append("table_name", this.state.table_name)
-    const data={
+    formData.append("table_name", this.state.table_name);
+
+    const data = {
       code: this.state.code,
       rank: this.state.rank,
-      salary: this.state.salary
-    }
-    formData.append("data", data);
-    const primary_key ={
+      salary: this.state.salary,
+    };
+
+    formData.append("data", JSON.stringify(data));
+    const primary_key = {
       primary_key: "Staff_ID",
       primary_value: this.props.data.Staff_ID,
-    }
-    formData.append("primary_key", primary_key);
+    };
+    formData.append("primary_key", JSON.stringify(primary_key));
     // FormData의 value 확인
     await axios.post(url, formData, config);
   }
@@ -184,29 +186,32 @@ class StaffModifyDialog extends React.Component {
             label="부서 코드"
             type="text"
             name="code"
-            defaultValue ={this.props.data.Code}
+            defaultValue={this.props.data.Code}
             onChange={this.handleValueChange}
           />
-          <br/>
+          <br />
           <TextField
             label="직급"
             type="text"
             name="rank"
-            defaultValue ={this.props.data.Rank}
+            defaultValue={this.props.data.Rank}
             onChange={this.handleValueChange}
           />
-          <br/>
+          <br />
           <TextField
             label="연봉"
             type="text"
             name="salary"
-            defaultValue ={this.props.data.Salary}
+            defaultValue={this.props.data.Salary}
             onChange={this.handleValueChange}
           />
-
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="primary" onClick={this.handleFormSubmit}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={this.handleFormSubmit}
+          >
             수정
           </Button>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>

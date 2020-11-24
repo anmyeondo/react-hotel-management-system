@@ -7,18 +7,17 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { makeStyles } from '@material-ui/core/styles';
-import StaffInfoDialog from './StaffInfoDialog';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-
+import { makeStyles } from "@material-ui/core/styles";
+import StaffInfoDialog from "./StaffInfoDialog";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 
 const styles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 720,
     backgroundColor: theme.palette.background.paper,
   },
@@ -53,7 +52,6 @@ class StaffMoreInfoDialog extends React.Component {
       is_able: 1,
       info: {},
       info_open: false,
-
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -79,9 +77,9 @@ class StaffMoreInfoDialog extends React.Component {
       info_open: false,
     });
   }
-  setInfo(data){
+  setInfo(data) {
     this.setState({
-      info: data
+      info: data,
     });
   }
 
@@ -91,10 +89,10 @@ class StaffMoreInfoDialog extends React.Component {
       url: "/users/addInform",
       data: this.state.info,
     }).then((res) => {
-        return res.data.insertId;
+      return res.data.insertId;
     });
     return infoId;
-  }
+  };
 
   handleClickOpen() {
     this.setState({
@@ -172,60 +170,95 @@ class StaffMoreInfoDialog extends React.Component {
   render() {
     const classes = makeStyles();
     return (
-      <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> <strong>직원 상세정보</strong></DialogTitle>
+      <Dialog maxWidth="lg" open={this.props.open} onClose={this.handleClose}>
+        <DialogTitle>
+          {" "}
+          <strong>직원 상세정보</strong>
+        </DialogTitle>
         <DialogContent>
           <List className={classes.root}>
-          <ListItem>
-            <ListItemText primary="소속 호텔" secondary={this.props.data.HOTEL_Name} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemText primary="이름" secondary={this.props.data.Last_Name+this.props.data.First_Name}/>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="담당 부서" secondary={this.props.data.Dept_Name} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="직급" secondary={this.props.data.Rank} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="계정" secondary={this.props.data.Account} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="Phone" secondary={this.props.data.Phone_Number} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="이메일" secondary={this.props.data.E_Mail} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="우편번호" secondary={this.props.data.Zip} />
-          </ListItem>
-          <ListItem>
-          <ListItemText primary="생일" secondary={this.props.data.Birthday.slice(undefined, 10)} />
-          </ListItem>
-          <ListItem>
-          <ListItemText primary="등록 일자" secondary={this.props.data.RegDate.slice(undefined, 10)} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <Divider variant="inset" component="li" />
-          <Divider variant="inset" component="li" />
-        </List>
+            <ListItem>
+              <ListItemText
+                primary="소속 호텔"
+                secondary={this.props.data.HOTEL_Name}
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText
+                primary="이름"
+                secondary={
+                  this.props.data.Last_Name + this.props.data.First_Name
+                }
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText
+                primary="담당 부서"
+                secondary={this.props.data.Dept_Name}
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText primary="직급" secondary={this.props.data.Rank} />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText
+                primary="계정"
+                secondary={this.props.data.Account}
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText
+                primary="Phone"
+                secondary={this.props.data.Phone_Number}
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText
+                primary="이메일"
+                secondary={this.props.data.E_Mail}
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemText
+                primary="우편번호"
+                secondary={this.props.data.Zip}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary="생일"
+                secondary={this.props.data.Birthday.slice(undefined, 10)}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary="등록 일자"
+                secondary={this.props.data.RegDate.slice(undefined, 10)}
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <Divider variant="inset" component="li" />
+            <Divider variant="inset" component="li" />
+          </List>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>
             닫기
           </Button>
         </DialogActions>
-        <StaffInfoDialog info={this.state.info_open} handleInfoClose={this.handleInfoClose} setInfo={this.setInfo}/>
+        <StaffInfoDialog
+          info={this.state.info_open}
+          handleInfoClose={this.handleInfoClose}
+          setInfo={this.setInfo}
+        />
       </Dialog>
-      
     );
   }
 }
