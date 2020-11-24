@@ -34,51 +34,6 @@ router.get('/informs', (req, res, next) => {
   });
 });
 
-/* 예전 직원 추가 API -> 사용X */
-router.post('/addStaffPrev', async (req, res, next) => {
-  const startTime = new Date();
-  console.log('직원 추가를 시작합니다 : ' + startTime);
-
-  let body = req.body;
-  const q =
-    'INSERT INTO Staff(Hotel_ID, Inform_ID, CODE, Rank, Bank, ACCOUNT, Staff_Password, RegDate, Salary, Is_Available) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
-
-  // 비밀번호 암호화 -> 암호화 비밀번호로 동기화 -> DB에 추가
-  let pwEncrpt = async () => {
-    console.log(' 비밀번호 암호화를 시작합니다');
-    await bcrypt.genSalt(saltRounds, async (err, salt) => {
-      await bcrypt.hash(body.staff_pw, salt, async (err, hash) => {
-        console.log('  비밀번호가 암호화 되었습니다');
-        let value = await makeValue(body, hash);
-        let pushDB = await dbInsert(q, value);
-        // return pushDB;
-      });
-    });
-  };
-
-  // DB에 추가하는 메소드
-  let dbInsert = async (q, value) => {
-    console.log('  데이터베이스에 쿼리를 입력합니다');
-    connection.query(q, value, (err, rows, fields) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('등록완료');
-        res.send(rows);
-      }
-    });
-  };
-
-  // 암호화 비밀번호 동기화 메소드
-  let makeValue = async (body, sp) => {
-    console.log('  암호화된 비밀번호로 갱신중입니다');
-    body.staff_pw = sp;
-    return Object.values(body);
-  };
-
-  let ret = await pwEncrpt();
-});
-
 /* Delete staff */
 router.get('/del', async (req, res) => {
   var startTime = new Date();

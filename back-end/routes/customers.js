@@ -10,13 +10,13 @@ router.get('/', function (req, res, next) {
 router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Customers 테이블 조회를 시작합니다 : ' + startTime);
-  
-  const q = `SELECT * FROM Customer Natural Join Membership_Rank Natural Join Information Natural Join Membership_Validity Natural Join Zip`;
+
+  const q = `SELECT * FROM Customer Natural Join Membership_Rank Natural Join Information Natural Join Membership_Validity Natural Join Zip Natural Join Card Natural Join Card_BIN`;
 
   connection.query(q, (err, rows, fields) => {
+    // console.log(rows);
     res.send(JSON.stringify(rows));
   });
 });
-
 
 module.exports = router;
