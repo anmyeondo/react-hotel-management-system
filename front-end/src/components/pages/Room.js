@@ -1,22 +1,21 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Header from "../Header";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import CustomerInfoRow from "../CustomerInfoRow";
+// import Paper from "@material-ui/core/Paper";
+// import Container from "@material-ui/core/Container";
+// import Table from "@material-ui/core/Table";
+// import TableHead from "@material-ui/core/TableHead";
+// import TableBody from "@material-ui/core/TableBody";
+// import TableRow from "@material-ui/core/TableRow";
+// import TableCell from "@material-ui/core/TableCell";
+// import CustomerInfoRow from "../CustomerInfoRow";
 import axios from "axios";
-import TablePagination from "@material-ui/core/TablePagination";
-import CustomerSearchDialog from "../CustomerSearchDialog";
-import Button from "@material-ui/core/Button";
-import { Update } from "@material-ui/icons";
-import CustomerAddDialog from "../CustomerAddDialog";
-import Grid from '@material-ui/core/Grid';
-
+// import TablePagination from "@material-ui/core/TablePagination";
+// import CustomerSearchDialog from "../CustomerSearchDialog";
+// import Button from "@material-ui/core/Button";
+// import { Update } from "@material-ui/icons";
+// import CustomerAddDialog from "../CustomerAddDialog";
+import Grid from "@material-ui/core/Grid";
 
 const styles = (theme) => ({
   root: {
@@ -26,10 +25,10 @@ const styles = (theme) => ({
   },
   table: {
     minWidth: 1080,
-    border: '3px solid black',
+    border: "3px solid black",
   },
   tablecelling: {
-    align: "center"
+    align: "center",
   },
 });
 
@@ -104,7 +103,7 @@ class Room extends React.Component {
 
   searchCustomerBtnOnclick = () => {
     this.setState({ searchCustomerIsOpen: true });
-    this.getCustomer()
+    this.getCustomer();
   };
 
   closeSearchDialog = () => {
@@ -116,19 +115,15 @@ class Room extends React.Component {
   };
 
   render() {
-
     const { classes } = this.props;
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{background:"mistyrose"}}><strong>호텔 직원 관리 페이지입니다.</strong></h1>
+        <h1 align="center" style={{ background: "mistyrose" }}>
+          <strong>호텔 직원 관리 페이지입니다.</strong>
+        </h1>
 
-        <Grid
-          direction="row"
-          justify="center"
-          alignItems="center"
-          
-        ></Grid>
+        <Grid direction="row" justify="center" alignItems="center"></Grid>
       </div>
     );
   }

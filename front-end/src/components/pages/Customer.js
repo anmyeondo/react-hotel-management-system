@@ -7,13 +7,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import CustomerInfoRow from "../CustomerInfoRow";
 import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
-import CustomerSearchDialog from "../CustomerSearchDialog";
 import Button from "@material-ui/core/Button";
 import { Update } from "@material-ui/icons";
-import CustomerAddDialog from "../CustomerAddDialog";
+import CustomerSearchDialog from "../Customer/CustomerSearchDialog";
+import CustomerInfoRow from "../Customer/CustomerInfoRow";
+import CustomerAddDialog from "../Customer/CustomerAddDialog";
 
 const styles = (theme) => ({
   root: {
@@ -23,10 +23,10 @@ const styles = (theme) => ({
   },
   table: {
     minWidth: 1080,
-    border: '3px solid black',
+    border: "3px solid black",
   },
   tablecelling: {
-    align: "center"
+    align: "center",
   },
 });
 
@@ -101,7 +101,7 @@ class Customer extends React.Component {
 
   searchCustomerBtnOnclick = () => {
     this.setState({ searchCustomerIsOpen: true });
-    this.getCustomer()
+    this.getCustomer();
   };
 
   closeSearchDialog = () => {
@@ -117,8 +117,10 @@ class Customer extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{background:"aquamarine"}}><strong>호텔 손님 관리 페이지입니다.</strong></h1>
-        <hr/>
+        <h1 align="center" style={{ background: "aquamarine" }}>
+          <strong>호텔 손님 관리 페이지입니다.</strong>
+        </h1>
+        <hr />
         <div align="right">
           {/* <Button  
             variant="contained"
@@ -128,7 +130,7 @@ class Customer extends React.Component {
           >
             손님 추가
           </Button> */}
-          <Button 
+          <Button
             variant="contained"
             color="primary"
             className={classes.button}
@@ -152,25 +154,38 @@ class Customer extends React.Component {
           closeDialog={this.closeAddDialog}
           refreshTable={this.refreshTable}
         />
-        <CustomerSearchDialog 
-          data = {this.state.customers}
-          getCustomer= {this.getCustomer}
+        <CustomerSearchDialog
+          data={this.state.customers}
+          getCustomer={this.getCustomer}
           open={this.state.searchCustomerIsOpen}
           closeDialog={this.closeSearchDialog}
           setTableOnSearch={this.setTableOnSearch}
         />
         <Paper className={classes.root}>
           <Table className={classes.table}>
-            <TableHead >  
+            <TableHead>
               <TableRow className={classes.table}>
-                <TableCell className={classes.tablecelling}><strong>이름</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>국적</strong></TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>이름</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>국적</strong>
+                </TableCell>
                 <TableCell className={classes.tablecelling}>멤버쉽</TableCell>
                 <TableCell className={classes.tablecelling}>마일리지</TableCell>
                 <TableCell className={classes.tablecelling}>등록일자</TableCell>
-                <TableCell className={classes.tablecelling}>멤버쉽 만료일자</TableCell>
-                <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
+                <TableCell className={classes.tablecelling}>
+                  멤버쉽 만료일자
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "dimgray" }}>수정</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "blue" }}>상세정보 조회</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "red" }}>삭제</strong>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -178,7 +193,7 @@ class Customer extends React.Component {
                 .slice(
                   this.state.page * this.state.rowsPerPage,
                   this.state.page * this.state.rowsPerPage +
-                  this.state.rowsPerPage
+                    this.state.rowsPerPage
                 )
                 .map((c) => {
                   return (

@@ -11,7 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomerInfoDialog from "./CustomerInfoDialog";
 import { ImageSearch } from "@material-ui/icons";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "../ImageUpload";
 
 const styles = makeStyles((theme) => ({
   hidden: {
@@ -35,14 +35,14 @@ class CustomerAddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        i_id: "",
-        rank: "",
-        valid_month: "",
-        login_id: "",
-        login_pw: "",
-        mileage: "",
-        r_date: "2020-11-24",
-        m_due: "2020-11-24",
+      i_id: "",
+      rank: "",
+      valid_month: "",
+      login_id: "",
+      login_pw: "",
+      mileage: "",
+      r_date: "2020-11-24",
+      m_due: "2020-11-24",
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
