@@ -92,6 +92,15 @@ class ImageUploadCard extends React.Component {
   handleUploadClick = (event) => {
     var file = event.target.files[0];
     this.props.updateImage(file);
+    const reader = new FileReader();
+    var url = reader.readAsDataURL(file);
+
+    reader.onloadend = function(e) {
+      this.setState({
+        selectedFile: [reader.result]
+      });
+    }.bind(this);
+
     this.setState({
       mainState: "uploaded",
       selectedFile: event.target.files[0],
@@ -132,15 +141,15 @@ class ImageUploadCard extends React.Component {
     return (
       <React.Fragment>
         <CardActionArea onClick={this.imageResetHandler}>
-          이미지 업로드 완료!
+          <strong align="center">이미지 업로드 완료!</strong>
           <br />
-          {/* <img
+          <img
             justify="center"
-            width="10%"
-            height="5%"
+            width="128px"
+            height="128px"
             className={classes.media}
             src={this.state.selectedFile}
-          /> */}
+          />
         </CardActionArea>
       </React.Fragment>
     );

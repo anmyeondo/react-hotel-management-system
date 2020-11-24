@@ -127,7 +127,7 @@
 //             className={classes.button}
 //             onClick={this.addCustomerBtnOnclick}
 //           >
-//             고객 추가
+//             손님 추가
 //           </Button>
 //           <Button 
 //             variant="contained"
@@ -135,7 +135,7 @@
 //             className={classes.button}
 //             onClick={this.searchCustomerBtnOnclick}
 //           >
-//             고객 검색
+//             손님 검색
 //           </Button>
 //           <Button
 //             variant="contained"
@@ -144,7 +144,7 @@
 //             startIcon={<Update />}
 //             onClick={this.refreshTable}
 //           >
-//             모든 직원 조회
+//             모든 손님 조회
 //           </Button>
 //         </div>
 //         {/* Dialog 표현 */}
