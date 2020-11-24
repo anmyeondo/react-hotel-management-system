@@ -173,27 +173,23 @@ class CustomerMoreInfoDialog extends React.Component {
     const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> <strong>직원 상세정보</strong></DialogTitle>
+        <DialogTitle> <strong>고객 상세정보</strong></DialogTitle>
         <DialogContent>
           <List className={classes.root}>
-          <ListItem>
-            <ListItemText primary="소속 호텔" secondary={this.props.data.HOTEL_Name} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
           <ListItem>
             <ListItemText primary="이름" secondary={this.props.data.Last_Name+this.props.data.First_Name}/>
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
-          <ListItemText primary="담당 부서" secondary={this.props.data.Dept_Name} />
+          <ListItemText primary="국적" secondary={this.props.data.Nationality} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
-          <ListItemText primary="직급" secondary={this.props.data.Rank} />
+          <ListItemText primary="Gender" secondary={this.props.data.Gender} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
-          <ListItemText primary="계정" secondary={this.props.data.Account} />
+          <ListItemText primary="멤버쉽 등급" secondary={this.props.data.Rank} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
@@ -201,17 +197,14 @@ class CustomerMoreInfoDialog extends React.Component {
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
-          <ListItemText primary="이메일" secondary={this.props.data.E_Mail} />
+          <ListItemText primary="E-Mail" secondary={this.props.data.E_Mail} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
-          <ListItemText primary="우편번호" secondary={this.props.data.Zip} />
+          <ListItemText primary="생일" secondary={this.props.data.Birthday.slice(undefined, 10)} />
           </ListItem>
           <ListItem>
-          <ListItemText primary="생일" secondary={this.props.data.Birthday} />
-          </ListItem>
-          <ListItem>
-          <ListItemText primary="등록 일자" secondary={this.props.data.RegDate} />
+          <ListItemText primary="등록 일자" secondary={this.props.data.Reg_Date.slice(undefined, 10)} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <Divider variant="inset" component="li" />
