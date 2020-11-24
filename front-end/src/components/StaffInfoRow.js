@@ -40,19 +40,17 @@ class StaffInfoRow extends React.Component {
   };
 
   //Modify
-  closeStaffModifyDialog = () => {
-    console.log("값이 변경됨");
-    this.setState({ StaffModifyisOpen: false });
-    console.log(this.state);
-  };
-  
   ModifyStaffBtnOnclick = () => {
     console.log("test");
     this.setState({ StaffModifyisOpen: true });
     console.log(this.state);
   };
 
-
+  closeStaffModifyDialog = () => {
+    console.log("값이 변경됨");
+    this.setState({ StaffModifyisOpen: false });
+    console.log(this.state);
+  };
 
   render() {
     const { classes } = this.props;
@@ -124,6 +122,7 @@ class StaffInfoRow extends React.Component {
           data={this.props.data}
           open={this.state.StaffModifyisOpen}
           closeDialog={this.closeStaffModifyDialog}
+          refreshTable={this.props.refreshTable}
         /> 
       </TableRow>
     );

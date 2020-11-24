@@ -6,6 +6,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from '@material-ui/core/styles';
+import SelectCountry from "../modules/SelectCountry";
 import Button from "@material-ui/core/Button";
 
 const styles = makeStyles((theme) => ({
@@ -117,15 +118,9 @@ class StaffInfoDialog extends Component {
                     // className={classes.textField}
                     onChange={this.handleValueChange}
                     />
-                    
                     <br/>
-                    <TextField
-                        label="국가"
-                        type="text"
-                        name="nationality"
-                        value={this.state.nationality}
-                        onChange={this.handleValueChange}
-                    />
+                    <p>국가</p>
+                    <SelectCountry/>
                     <br/>
                     <TextField
                         label="전화번호"
