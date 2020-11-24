@@ -96,7 +96,6 @@ class StaffSearchDialog extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle> 직원 검색</DialogTitle>

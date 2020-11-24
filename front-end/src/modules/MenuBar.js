@@ -16,7 +16,7 @@ import { NavLink as RouterLink } from "react-router-dom";
 
 // idx에 따라 아이콘 지정하는 함수
 const ParentIcon = (idx) => {
-  if (idx == 1) {
+  if (idx === 1) {
     return <AssignmentInd />;
   } else if (idx === 2) {
     return <Person />;

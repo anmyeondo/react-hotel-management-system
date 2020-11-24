@@ -44,8 +44,7 @@ const logout = async () => {
 function Header(props) {
   
   useEffect(() => {
-    const x = props.checkPermission;
-    x();
+    props.checkPermission();
   }, []);
 
   return (

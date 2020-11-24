@@ -80,9 +80,7 @@ const styles = (theme) => ({
 });
 
 class ImageUploadCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   state = {
     mainState: "initial", // initial, search, gallery, uploaded
     imageUploaded: 0,
@@ -93,7 +91,6 @@ class ImageUploadCard extends React.Component {
     var file = event.target.files[0];
     this.props.updateImage(file);
     const reader = new FileReader();
-    var url = reader.readAsDataURL(file);
 
     reader.onloadend = function(e) {
       this.setState({
@@ -109,8 +106,7 @@ class ImageUploadCard extends React.Component {
   };
 
   renderInitialState() {
-    const { classes, theme } = this.props;
-    const { value } = this.state;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -136,7 +132,7 @@ class ImageUploadCard extends React.Component {
   }
 
   renderUploadedState() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -162,11 +158,11 @@ class ImageUploadCard extends React.Component {
       <React.Fragment>
         <div className={classes.root}>
           <Card className={this.props.cardName}>
-            {(this.state.mainState == "initial" && this.renderInitialState()) ||
-              (this.state.mainState == "search" && this.renderSearchState()) ||
-              (this.state.mainState == "gallery" &&
+            {(this.state.mainState === "initial" && this.renderInitialState()) ||
+              (this.state.mainState === "search" && this.renderSearchState()) ||
+              (this.state.mainState === "gallery" &&
                 this.renderGalleryState()) ||
-              (this.state.mainState == "uploaded" &&
+              (this.state.mainState === "uploaded" &&
                 this.renderUploadedState())}
           </Card>
         </div>
