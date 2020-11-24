@@ -121,14 +121,14 @@ class Customer extends React.Component {
         <h1 align="center" style={{background:"aquamarine"}}><strong>호텔 손님 관리 페이지입니다.</strong></h1>
         <hr/>
         <div align="right">
-          <Button  
+          {/* <Button  
             variant="contained"
             color="primary"
             className={classes.button}
             onClick={this.addCustomerBtnOnclick}
           >
             손님 추가
-          </Button>
+          </Button> */}
           <Button 
             variant="contained"
             color="primary"
