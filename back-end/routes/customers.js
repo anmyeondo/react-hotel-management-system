@@ -12,7 +12,8 @@ router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Customers 테이블 조회를 시작합니다 : ' + startTime);
 
-  const q = `SELECT * FROM Customer Natural Join Membership_Rank Information Natural Join Zip Natural Join Card Card_BIN Natural Join Membership_Validity `;
+  const q = `SELECT * FROM Customer Natural Join Membership_Rank Natural Join Information Natural Join Zip Natural Join Card Card_BIN Natural Join Membership_Validity
+  `;
 
   connection.query(q, (err, rows, fields) => {
     // console.log(rows);
@@ -39,7 +40,7 @@ router.get('/del', async (req, res) => {
       }
     });
   };
-  
+
   await dbInsert(q_customer, [customerID]);
   await dbInsert(q_info, [infoID]);
 
