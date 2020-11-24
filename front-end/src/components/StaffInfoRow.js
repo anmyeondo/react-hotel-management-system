@@ -23,8 +23,8 @@ class StaffInfoRow extends React.Component {
     };
     this.closeMoreInfoDialog = this.closeMoreInfoDialog.bind(this);
     this.InfoStaffBtnOnclick = this.InfoStaffBtnOnclick.bind(this);
-    this.ModifyStaffBtnOnclick = this.ModifyStaffBtnOnclick(this);
-    this.closeStaffModifyDialog = this.closeStaffModifyDialog(this);
+    this.ModifyStaffBtnOnclick = this.ModifyStaffBtnOnclick.bind(this);
+    this.closeStaffModifyDialog = this.closeStaffModifyDialog.bind(this);
   }
 
   //Info
@@ -40,18 +40,16 @@ class StaffInfoRow extends React.Component {
   };
 
   //Modify
-  closeStaffModifyDialog = () => {
-    console.log("값이 변경됨");
-    this.setState({ StaffModifyisOpen: false });
-    console.log(this.state);
-  };
-  
   ModifyStaffBtnOnclick = () => {
     this.setState({ StaffModifyisOpen: true });
     console.log(this.state);
   };
 
-
+  closeStaffModifyDialog = () => {
+    console.log("값이 변경됨");
+    this.setState({ StaffModifyisOpen: false });
+    console.log(this.state);
+  };
 
   render() {
     const { classes } = this.props;

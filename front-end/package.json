@@ -22,6 +22,8 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-select": "^3.1.1",
+    "react-select-country-list": "^2.2.1",
     "react-tap-event-plugin": "2.0.1",
     "recharts": "0.20.8",
     "web-vitals": "^0.2.4"

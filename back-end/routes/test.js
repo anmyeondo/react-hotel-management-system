@@ -1,5 +1,4 @@
 const express = require('express');
-import { jQuery } from 'jquery';
 const connection = require('../database/database');
 const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
