@@ -4,10 +4,14 @@ import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import StaffDeleteBtn from "./StaffDeleteBtn";
 import StaffMoreInfoDialog from "./StaffMoreInfoDialog";
+import StaffModifyDialog from "./StaffModifyDialog";
 import { withStyles } from "@material-ui/core/styles";
 
 const Styles = theme => ({
-
+  thirdary: {
+    // This is green.A700 as hex.
+    main: '#81c784',
+  },
 });
 
 class StaffInfoRow extends React.Component {
@@ -15,11 +19,15 @@ class StaffInfoRow extends React.Component {
     super(props);
     this.state = {
       StaffMoreInfoisOpen: false,
+      StaffModifyisOpen: false,
     };
     this.closeMoreInfoDialog = this.closeMoreInfoDialog.bind(this);
     this.InfoStaffBtnOnclick = this.InfoStaffBtnOnclick.bind(this);
+    this.ModifyStaffBtnOnclick = this.ModifyStaffBtnOnclick(this);
+    this.closeStaffModifyDialog = this.closeStaffModifyDialog(this);
   }
 
+  //Info
   closeMoreInfoDialog = () => {
     console.log("값이 변경됨");
     this.setState({ StaffMoreInfoisOpen: false });
@@ -30,6 +38,20 @@ class StaffInfoRow extends React.Component {
     this.setState({ StaffMoreInfoisOpen: true });
     console.log(this.state);
   };
+
+  //Modify
+  closeStaffModifyDialog = () => {
+    console.log("값이 변경됨");
+    this.setState({ StaffModifyisOpen: false });
+    console.log(this.state);
+  };
+  
+  ModifyStaffBtnOnclick = () => {
+    this.setState({ StaffModifyisOpen: true });
+    console.log(this.state);
+  };
+
+
 
   render() {
     const { classes } = this.props;
@@ -69,6 +91,13 @@ class StaffInfoRow extends React.Component {
             {this.props.data.Salary}
           </span>
         </TableCell>
+        
+        <TableCell align='center'>
+          <Button onClick={this.ModifyStaffBtnOnclick} color="primary" variant="contained" >
+            수정
+          </Button>
+        </TableCell>
+
         <TableCell align="center">
           <Button
             onClick={this.InfoStaffBtnOnclick}
@@ -90,6 +119,11 @@ class StaffInfoRow extends React.Component {
           open={this.state.StaffMoreInfoisOpen}
           closeDialog={this.closeMoreInfoDialog}
         />
+        <StaffModifyDialog
+          data={this.props.data}
+          open={this.state.StaffModifyisOpen}
+          closeDialog={this.closeStaffModifyDialog}
+        /> 
       </TableRow>
     );
   }
