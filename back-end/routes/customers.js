@@ -48,7 +48,7 @@ router.get('/del', async (req, res) => {
 });
 
 //고객 조회
-router.post('/seach', (req, res) => {
+router.post('/search', (req, res) => {
   const startTime = new Date();
   console.log('검색 시작합니다 : ' + startTime);
 

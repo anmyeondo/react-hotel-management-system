@@ -248,7 +248,7 @@ router.post('/addStaff', upload.any(), async (req, res) => {
   let ret = await pwEncrpt();
 });
 
-router.post('/seach', (req, res) => {
+router.post('/search', (req, res) => {
   const startTime = new Date();
   console.log('검색 시작합니다 : ' + startTime);
 
