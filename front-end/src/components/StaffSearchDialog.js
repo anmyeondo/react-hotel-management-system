@@ -84,7 +84,7 @@ class StaffSearchDialog extends React.Component {
   searchCustomer() {
     return axios({
       method: "post",
-      url: "/users/test",
+      url: "/staffs/search",
       data: {
         HOTEL_Name: this.state.HOTEL_Name,
         First_Name: this.state.First_Name,

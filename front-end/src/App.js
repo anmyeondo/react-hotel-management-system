@@ -4,7 +4,7 @@ import Login from "./components/pages/Login";
 import Header from "./components/Header";
 import Customer from "./components/pages/Customer";
 import Staff from "./components/pages/Staff";
-import Test from "./components/pages/Test";
+import Test from "./components/pages/Room";
 import axios from "axios"
 import "./App.css";
 

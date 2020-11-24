@@ -185,7 +185,7 @@ class StaffAddDialog extends React.Component {
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
           {" "}
-          <span>고객 추가</span>{" "}
+          <span>직원 추가</span>{" "}
         </DialogTitle>
         <DialogContent className={classes.dialogcss}>
           <ImageUpload updateImage={this.handleImageAddClick} />
