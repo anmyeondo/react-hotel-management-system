@@ -25,7 +25,7 @@ export default {
       children: [
         {
           name: "Reservation Status",
-          url: "/reserve/status",
+          url: "/reservation",
         },
         {
           name: "Add Reservation",
