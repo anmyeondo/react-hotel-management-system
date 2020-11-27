@@ -14,6 +14,7 @@ var staffsRouter = require('./routes/staffs');
 var reservationRouter = require('./routes/reservations');
 var testRouter = require('./routes/test');
 var roomsRouter = require('./routes/rooms');
+var facilityRouter = require('./routes/facility');
 
 // 포트 정보 설정
 var port = process.env.PORT || 5000;
@@ -47,6 +48,7 @@ app.use('/staffs', staffsRouter);
 app.use('/reservations', reservationRouter);
 app.use('/test', testRouter);
 app.use('/rooms', roomsRouter);
+app.use('/facility', facilityRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
