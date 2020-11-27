@@ -32,3 +32,5 @@ router.post('/restaurantSearch', multipartMiddleware, (res, req) => {
   const startTime = new Date();
   console.log();
 });
+
+module.exports = router;
