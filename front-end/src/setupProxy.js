@@ -32,7 +32,7 @@ module.exports = function (app) {
     })
   );
   app.use(
-    createProxyMiddleware("/test", {
+    createProxyMiddleware("/modules", {
       target: "http://localhost:5000/",
       changeOrigin: true,
     })

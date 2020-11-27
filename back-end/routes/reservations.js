@@ -4,13 +4,6 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var fs = require('fs');
 
-// 암호화 모듈
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const jwt = require('jsonwebtoken');
-const secretObj = require('../jwt');
-const ip = require('ip');
-
 // FormData parser
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
