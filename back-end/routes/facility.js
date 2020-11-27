@@ -55,12 +55,12 @@ router.post('/addRestaurant', upload.any(), async (req, res) => {
   const startTime = new Date();
   console.log('레스토랑 추가를 시작합니다 : ' + startTime);
 
-  let image = '/facility_image/' + 'basicImage';
+  let image = '/facilityImage/' + 'basicImage';
   let body = req.body;
 
   if (Object(req.files).length > 0) {
     console.log('  이미지가 존재합니다. 경로를 설정합니다.');
-    image = '/facility_image/' + req.files[0].filename;
+    image = '/facilityImage/' + req.files[0].filename;
   } else {
     console.log('  이미지가 없습니다. 기본 이미지로 설정합니다.');
     delete body.Restaurant_Img;

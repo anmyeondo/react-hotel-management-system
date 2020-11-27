@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/image', express.static('./image'));
-app.use('/facilityImage', express.static('./facility_image'));
+app.use('/facilityImage', express.static('./facilityimage'));
 app.use(
   session({
     key: 'userid',
