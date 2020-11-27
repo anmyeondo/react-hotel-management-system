@@ -14,7 +14,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 // multer middleware 선언
-const upload = multer({ dest: './image' });
+const upload = multer({ dest: './facilityImage' });
 
 router.get('/asd', (req, res) => {
   console.log('hi');
@@ -66,13 +66,17 @@ router.post('/addRestaurant', upload.any(), async (req, res) => {
     delete body.Restaurant_Img;
   }
 
+  // console.log(image);
+  body['img'] = image;
   const value = Object.values(body);
+  // console.log(value);
 
   // 레스토랑 추가 쿼리
   // (Restaurant_Name, Hotel_ID, Open_Time, Close_Time, Available, Restaurant_Img)
   const q = `INSERT INTO Restaurant VALUES(?, ?, ?, ?, ?, ?);`;
 
   connection.query(q, value, (err, rows, fields) => {
+    console.log(rows);
     res.json(rows);
   });
 });
