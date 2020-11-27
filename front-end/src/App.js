@@ -5,7 +5,7 @@ import Header from "./components/pages/Header";
 import Customer from "./components/pages/Customer";
 import Staff from "./components/pages/Staff";
 import Test from "./components/pages/Room";
-import Reservation from "./components/pages/Reservation/Reservation";
+import Reservation from "./components/pages/Reservation";
 import Room from "./components/pages/Room";
 import axios from "axios"
 import "./App.css";
