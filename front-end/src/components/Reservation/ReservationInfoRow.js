@@ -94,6 +94,12 @@ class ReservationInfoRow extends React.Component {
             삭제
           </Button>
         </TableCell>
+        <ReservationMoreInfoDialog
+          data={this.props.data}
+          open={this.state.StaffMoreInfoisOpen}
+          closeDialog={this.closeMoreInfoDialog}
+        />
+
         <ReservationModifyDialog
           data={this.props.data}
           open={this.state.ReservationModifyisOpen}
