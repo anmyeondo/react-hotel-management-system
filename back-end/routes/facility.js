@@ -13,6 +13,9 @@ var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+// multer middleware 선언
+const upload = multer({ dest: './image' });
+
 router.get('/asd', (req, res) => {
   console.log('hi');
   res.send({ hi: 'hi' });
