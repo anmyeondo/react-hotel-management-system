@@ -20,13 +20,13 @@ const upload = multer({ dest: './facilityImage' });
 router.post('/delCourse', (req, res) => {
   console.log('delCourse 실행');
   const body = req.body;
-  const q = `DELETE * FROM Course_Menu WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}'`;
+  const q = `DELETE FROM Course_Menu WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}' AND Course_Name = '${body.Course_Name}'`;
 
   console.log(q);
-  // connection.query(q, (err, rows, fields) => {
-  //   // console.log(rows);
-  //   res.json(rows);
-  // });
+  connection.query(q, (err, rows, fields) => {
+    // console.log(rows);
+    res.json(rows);
+  });
 });
 
 // 호텔의 코스 반환

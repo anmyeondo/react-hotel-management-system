@@ -18,6 +18,11 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TablePagination from "@material-ui/core/TablePagination";
+import CourseDeleteBtn from "./CourseDeleteBtn";
+import Grid from "@material-ui/core/Grid";
+import RestaurantModifyDialog from "./RestaurantModifyDialog";
+import { Refresh } from "@material-ui/icons/Refresh";
+
 const styles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -55,7 +60,7 @@ class RestaurantInfoDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      info_open: false,
+      modify_ofen: false,
       course: [],
       page: 0,
       rowsPerPage: 2,
@@ -80,21 +85,12 @@ class RestaurantInfoDialog extends React.Component {
     });
   };
 
-  // 코스 삭제
-  deleteCourse = () => {
-    console.log("삭제");
-    axios({
-      method: "post",
-      url: "/facility/delCourse",
-      data: {
-        Hotel_ID: 1,
-        Restaurant_Name: "1234",
-      },
-    });
+  // 수정 Dialog를 변경하는 메소드
+  onModifyDialog = () => {
+    this.setState({ modify_ofen: true });
   };
-  // 종료 시 창 닫기
-  closeDialog = () => {
-    this.props.dialogClose();
+  offModifyDialog = () => {
+    this.setState({ modify_ofen: false });
   };
 
   // 코스 페이지 변경 메소드
@@ -105,11 +101,18 @@ class RestaurantInfoDialog extends React.Component {
     this.setState({ RowsPerPage: +event.target.value });
     this.setState({ page: 0 });
   };
+  handlePageRest = () => {
+    this.setState({ page: 0 });
+  };
 
   render() {
     const classes = makeStyles();
     return (
-      <Dialog open={this.props.open} onClose={this.handleClose} maxWidth={"lg"}>
+      <Dialog
+        open={this.props.open}
+        onClose={this.props.dialogClose}
+        maxWidth={"lg"}
+      >
         <DialogTitle>
           {" "}
           <strong>레스토랑 상세정보</strong>
@@ -117,10 +120,20 @@ class RestaurantInfoDialog extends React.Component {
         <DialogContent>
           <List className={classes.root}>
             <ListItem>
-              <img
-                src={this.props.data.Restaurant_Img}
-                style={{ width: "128px", height: "128px" }}
-              />
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <Grid item>
+                  <img
+                    src={this.props.data.Restaurant_Img}
+                    style={{ width: "256px", height: "256px", align: "center" }}
+                  />
+                </Grid>
+              </Grid>
             </ListItem>
             <Divider />
             <ListItem>
@@ -130,7 +143,7 @@ class RestaurantInfoDialog extends React.Component {
               />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <ListItemText
-                primary="가게명"
+                primary="레스토랑명"
                 secondary={this.props.data.Restaurant_Name}
               />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -170,71 +183,79 @@ class RestaurantInfoDialog extends React.Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {this.state.course
-                      .slice(
-                        this.state.page * this.state.rowsPerPage,
-                        this.state.page * this.state.rowsPerPage +
-                          this.state.rowsPerPage
-                      )
-                      .map((c) => {
-                        return (
-                          <TableRow>
-                            <TableCell className={classes.tablecelling}>
-                              {c.Course_Name}
-                            </TableCell>
-                            <TableCell className={classes.tablecelling}>
-                              {c.Price_Won}
-                            </TableCell>
-                            <TableCell className={classes.tablecelling}>
-                              {c.Appetizer}
-                            </TableCell>
-                            <TableCell className={classes.tablecelling}>
-                              {c.Main1}
-                            </TableCell>
-                            <TableCell className={classes.tablecelling}>
-                              {c.Main2}
-                            </TableCell>
-                            <TableCell className={classes.tablecelling}>
-                              {c.Dessert}
-                            </TableCell>
-                            <TableCell className={classes.tablecelling}>
-                              <Button
-                                onclick={this.deleteCourse}
-                                color="secondary"
-                                variant="contained"
-                              >
-                                삭제
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
+                    {this.state.course.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={7} align="center">
+                          코스 메뉴가 없습니다. 메뉴를 등록해주세요.
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      this.state.course
+                        .slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                        .map((c) => {
+                          return (
+                            <TableRow>
+                              <TableCell className={classes.tablecelling}>
+                                {c.Course_Name}
+                              </TableCell>
+                              <TableCell className={classes.tablecelling}>
+                                {c.Price_Won}
+                              </TableCell>
+                              <TableCell className={classes.tablecelling}>
+                                {c.Appetizer}
+                              </TableCell>
+                              <TableCell className={classes.tablecelling}>
+                                {c.Main1}
+                              </TableCell>
+                              <TableCell className={classes.tablecelling}>
+                                {c.Main2}
+                              </TableCell>
+                              <TableCell className={classes.tablecelling}>
+                                {c.Dessert}
+                              </TableCell>
+                              <TableCell className={classes.tablecelling}>
+                                <CourseDeleteBtn
+                                  data={c}
+                                  getCourse={this.getCourse}
+                                  resetPage={this.handlePageRest}
+                                />
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })
+                    )}
                   </TableBody>
-                  <TablePagination
-                    rowsPerPageOptions={[2]}
-                    component="div"
-                    count={this.state.course.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    className={classes.table}
-                  />
                 </Table>
+                <TablePagination
+                  rowsPerPageOptions={[2]}
+                  component="div"
+                  count={this.state.course.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onChangePage={this.handleChangePage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  className={classes.table}
+                />
               </Paper>
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-              <ListItemText
-                primary="영업시간"
-                secondary={
-                  this.props.data.Open_Time + " ~ " + this.props.data.Close_Time
-                }
-              />
+              <ListItemText primary="식당 내선번호" secondary={5397} />
             </ListItem>
           </List>
         </DialogContent>
         <DialogActions>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={this.onModifyDialog}
+          >
+            수정
+          </Button>
           <Button
             variant="outlined"
             color="primary"
@@ -243,6 +264,13 @@ class RestaurantInfoDialog extends React.Component {
             닫기
           </Button>
         </DialogActions>
+        <RestaurantModifyDialog
+          data={this.props.data}
+          course={this.state.course}
+          open={this.state.modify_ofen}
+          closeDialog={this.offModifyDialog}
+          RefreshTable={this.getCourse}
+        />
       </Dialog>
     );
   }

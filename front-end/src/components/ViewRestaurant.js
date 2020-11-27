@@ -30,6 +30,7 @@ class ViewRestaurant extends Component {
       infoOpen: false,
     };
     this.restaurantInfoOpen = this.restaurantInfoOpen.bind(this);
+    this.restaurantInfoClose = this.restaurantInfoClose.bind(this);
   }
 
   // 정보 창을 열고 닫는 메소드
@@ -39,6 +40,7 @@ class ViewRestaurant extends Component {
     });
   };
   restaurantInfoClose = () => {
+    console.log("악");
     this.setState({
       infoOpen: false,
     });
