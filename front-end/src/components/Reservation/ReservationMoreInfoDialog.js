@@ -37,29 +37,14 @@ class ReservationMoreInfoDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
-      bank: "",
-      account: "",
-      reservation_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 1,
       info: {},
       info_open: false,
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleFileChange = this.handleFileChange.bind(this);
-    this.handleValueChange = this.handleValueChange.bind(this);
-    this.callApi = this.callApi.bind(this);
     this.handleInfoOpen = this.handleInfoOpen.bind(this);
     this.handleInfoClose = this.handleInfoClose.bind(this);
-    this.setInfo = this.setInfo.bind(this);
   }
 
   // Info dialog 관련 메서드
@@ -74,22 +59,7 @@ class ReservationMoreInfoDialog extends React.Component {
       info_open: false,
     });
   }
-  setInfo(data) {
-    this.setState({
-      info: data,
-    });
-  }
 
-  sendData = async () => {
-    const infoId = await axios({
-      method: "post",
-      url: "/users/addInform",
-      data: this.state.info,
-    }).then((res) => {
-      return res.data.insertId;
-    });
-    return infoId;
-  };
 
   handleClickOpen() {
     this.setState({
@@ -97,72 +67,10 @@ class ReservationMoreInfoDialog extends React.Component {
     });
   }
 
-  onDateChange = () => {
-    console.log("Changed data");
-  };
-
   handleClose() {
-    this.setState({
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
-      bank: "",
-      account: "",
-      reservation_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 1,
-    });
     this.props.closeDialog();
   }
 
-  async handleFormSubmit(e) {
-    e.preventDefault();
-    this.setState({
-      i_id: await this.sendData(),
-    });
-
-    await this.callApi()
-      .then(() => {
-        this.handleClose();
-      })
-      .then(() => {
-        this.props.refreshTable();
-      });
-  }
-
-  handleFileChange(e) {
-    this.setState({
-      file: e.target.files[0],
-      fileName: e.target.value,
-    });
-  }
-
-  handleValueChange(e) {
-    let nextState = {};
-    nextState[e.target.name] = e.target.value;
-    this.setState(nextState);
-  }
-
-  async callApi() {
-    await axios({
-      method: "post",
-      url: "/reservations/addReservation",
-      data: {
-        h_id: this.state.h_id,
-        i_id: this.state.i_id,
-        code: this.state.code,
-        rank: this.state.rank,
-        bank: this.state.bank,
-        account: this.state.account,
-        reservation_pw: this.state.reservation_pw,
-        r_date: this.state.r_date,
-        salary: this.state.salary,
-        is_able: this.state.is_able,
-      },
-    });
-  }
 
   render() {
     const classes = makeStyles();
@@ -170,38 +78,82 @@ class ReservationMoreInfoDialog extends React.Component {
       <Dialog maxWidth="lg" open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
           {" "}
-          <strong>직원 상세정보</strong>
+          <strong>예약 상세정보</strong>
         </DialogTitle>
         <DialogContent>
           <List className={classes.root}>
             <ListItem>
               <ListItemText
-                primary="소속 호텔"
-                secondary={this.props.data.HOTEL_Name}
+                primary="예약 번호"
+                secondary={this.props.data.Reservation_ID}
               />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider />
             <ListItem>
               <ListItemText
-                primary="이름"
-                secondary={
-                  this.props.data.Last_Name + this.props.data.First_Name
-                }
+                primary="손님 이름(ID)"
+                secondary={this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Customer_ID + ")"}
               />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary="방 번호(결제 금액)"
+                secondary={this.props.data.Room_Num + "  (" + this.props.data.Price_Won + ")"}
+              />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary="체크인 ~ 체크아웃 날짜"
+                secondary={this.props.data.Check_In + " ~ " + this.props.data.Check_Out}
+              />
+            </ListItem>
+            <Divider  />
+            <ListItem>
+              <ListItemText
+                primary="어른"
+                secondary={this.props.data.Adult}
+              />
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <ListItemText
+                primary="아이"
+                secondary={this.props.data.Child}
+              />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary="결제예정 날짜"
+                secondary={this.props.data.Pay_Date}
+              />
+          </ListItem>
+          <Divider  />
+          <ListItem>
+              <ListItemText
+                primary="카드 시리얼"
+                secondary={this.props.data.Card_Serial}
+              />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <ListItemText
+                primary="카드 종류"
+                secondary={this.props.data.Bank + " " + this.props.data.Card_Type}
+              />
+              <br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <ListItemText
+                primary="CVC"
+                secondary={this.props.data.CVC}
+              />  
+          </ListItem>
           </List>
+          <Divider />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="primary" onClick={this.handleClose}>
             닫기
           </Button>
         </DialogActions>
-        {/* <ReservationInfoDialog
-          info={this.state.info_open}
-          handleInfoClose={this.handleInfoClose}
-          setInfo={this.setInfo}
-        /> */}
       </Dialog>
     );
   }
