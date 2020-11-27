@@ -67,11 +67,15 @@ export default {
           url: "/hotel",
         },
         {
-          name: "Modify Facility",
-          url: "/hotel/facility",
+          name: "Restaurant status",
+          url: "/restaurant"
+        },
+        {
+          name: "Parking lot status",
+          url: "/parking_lot",
         },
       ],
-      icon: 6,
+      icon:6,
     },
   ],
   
