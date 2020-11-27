@@ -22,6 +22,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import AddBox from '@material-ui/icons/AddBox';
 import ReservationInfoRow from "../Reservation/ReservationInfoRow";
+import ReservationAddDialog from "../Reservation/ReservationAddDialog";
 import Checkbox from '@material-ui/core/Checkbox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -84,11 +85,15 @@ class Reservation extends React.Component {
     this.callApi();
   };
 
-  refreshSearchTable = () => {
+  refreshSearchTable = async() => {
     this.setState({
       reservations: [],
     });
-    this.callSearchApi();
+    const newReservations = await this.callSearchApi();
+    console.log(newReservations);
+    this.setState({
+      reservations: newReservations
+    })
   };
 
   setTableOnSearch = (arr) => {
@@ -132,7 +137,8 @@ class Reservation extends React.Component {
     formData.append("Check_Out", JSON.stringify(check_out));
     formData.append("Room_Type", this.state.room_type);
 
-    await axios.post(url, formData, config);
+    const res = await axios.post(url, formData, config);
+    return res.data;
   }
 
   handleChangePage = (event, newPage) => {
@@ -159,8 +165,6 @@ class Reservation extends React.Component {
 
   searchReservationBtnOnclick = () => {
     this.refreshSearchTable();
-    // this.setState({ searchReservationIsOpen: true });
-    // this.getReservation()
   };
 
   closeSearchDialog = () => {
@@ -294,12 +298,12 @@ class Reservation extends React.Component {
               </IconButton>
             </form>
 
-            {/* Dialog 표현
-            <StaffAddDialog
-              open={this.state.addStaffIsOpen}
+            {/* <ReservationAddDialog
+              open={this.state.addReservationIsOpen}
               closeDialog={this.closeAddDialog}
               refreshTable={this.refreshTable}
             /> */}
+
           <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead >  
