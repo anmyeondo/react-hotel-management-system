@@ -23,8 +23,8 @@ router.post('/restaurantInforms', multipartMiddleware, (req, res) => {
   const startTime = new Date();
   console.log('레스토랑 검색을 시작합니다 : ' + startTime);
 
-  // const Hotel_ID = req.body.Hotel_ID;
-  const Hotel_ID = undefined;
+  const Hotel_ID = req.body.Hotel_ID;
+  // const Hotel_ID = undefined;
   let q = '';
   console.log(Hotel_ID);
   if (Hotel_ID === '' || Hotel_ID === null || Hotel_ID === undefined) {
