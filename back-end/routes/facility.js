@@ -31,9 +31,9 @@ router.post('/restaurantInforms', multipartMiddleware, (req, res) => {
   let q = '';
   console.log(Hotel_ID);
   if (Hotel_ID === '' || Hotel_ID === null || Hotel_ID === undefined) {
-    q = 'SELECT * FROM Restaurant';
+    q = 'SELECT * FROM Restaurant NATURAL JOIN Hotel';
   } else {
-    q = `SELECT * FROM Restaurant WHERE Hotel_ID = ${Hotel_ID}`;
+    q = `SELECT * FROM Restaurant NATURAL JOIN Hotel WHERE Hotel_ID = ${Hotel_ID}`;
   }
 
   console.log(q);

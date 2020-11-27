@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import RestaurantInfoDialog from "./Restaurant/RestaurantInfoDialog";
 
 const styles = (theme) => ({
   paper: {
@@ -25,7 +26,24 @@ const styles = (theme) => ({
 class ViewRestaurant extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      infoOpen: false,
+    };
+    this.restaurantInfoOpen = this.restaurantInfoOpen.bind(this);
   }
+
+  // 정보 창을 열고 닫는 메소드
+  restaurantInfoOpen = () => {
+    this.setState({
+      infoOpen: true,
+    });
+  };
+  restaurantInfoClose = () => {
+    this.setState({
+      infoOpen: false,
+    });
+  };
+
   render() {
     const { classes } = this.props;
     const red = { background: "red" };
@@ -70,13 +88,22 @@ class ViewRestaurant extends Component {
                 </Typography>
               </Grid>
               <Grid item container justify="center">
-                <Button variant="outlined" color="primary">
-                    상세 정보
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={this.restaurantInfoOpen}
+                >
+                  상세 정보
                 </Button>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        <RestaurantInfoDialog
+          open={this.state.infoOpen}
+          data={this.props.data}
+          dialogClose={this.restaurantInfoClose}
+        />
       </Paper>
     );
   }
