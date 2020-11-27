@@ -12,6 +12,7 @@ const connection = mysql.createConnection({
   password: conf.password,
   port: conf.port,
   database: conf.database,
+  dateStrings: 'date',
 });
 
 connection.connect(function (err) {
