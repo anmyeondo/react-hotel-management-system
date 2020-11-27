@@ -82,3 +82,45 @@ router.post('/addRestaurant', upload.any(), async (req, res) => {
 });
 
 module.exports = router;
+
+// 주차장 검색하기
+router.post('/parkinglotInforms', multipartMiddleware, (req, res) => {
+  const startTime = new Date();
+  console.log('주차장 검색을 시작합니다 : ' + startTime);
+
+  const Hotel_ID = req.body.Hotel_ID;
+  // const Hotel_ID = undefined;
+  let q = '';
+  console.log(Hotel_ID);
+  if (Hotel_ID === '' || Hotel_ID === null || Hotel_ID === undefined) {
+    q = 'SELECT * FROM Parking_Lot natural join Hotel';
+  } else {
+    q = `SELECT * FROM Parking_Lot natural join Hotel WHERE Hotel_ID = ${Hotel_ID}`;
+  }
+
+  console.log(q);
+
+  connection.query(q, (err, rows, fields) => {
+    console.log(rows);
+    res.json(rows);
+  });
+});
+
+/* 주차장 추가 쿼리 */
+router.post('/addParkinglot', multipartMiddleware, async (req, res) => {
+  const startTime = new Date();
+  console.log('주차장 추가를 시작합니다 : ' + startTime);
+
+  let body = req.body;
+  // console.log(image);
+  const value = Object.values(body);
+
+  // 주차장 추가 쿼리
+  // (ZONE, Hotel_ID, Capacity, Max_Height_in_Meter, Valet_Parking_is_Able)
+  const q = `INSERT INTO Parking_Lot VALUES(?, ?, ?, ?, ?);`;
+
+  connection.query(q, value, (err, rows, fields) => {
+    console.log(rows);
+    res.json(rows);
+  });
+});
