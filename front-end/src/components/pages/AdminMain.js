@@ -1,19 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TablePagination from "@material-ui/core/TablePagination";
-import Button from "@material-ui/core/Button";
-import { Update } from "@material-ui/icons";
-import CustomerAddDialog from "../Customer/CustomerAddDialog";
-import CustomerSearchDialog from "../Customer/CustomerSearchDialog";
-import CustomerInfoRow from "../Customer/CustomerInfoRow";
 import Header from "./Header";
-import axios from "axios";
 
 const styles = (theme) => ({
   root: {

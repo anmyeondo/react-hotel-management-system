@@ -18,8 +18,11 @@ class Room extends Component {
     this.state = {
       room: [],
       floor: 200,
+      reservation: {},
     };
+
     this.getRoomInfo = this.getRoomInfo.bind(this);
+    this.getRoomRes = this.getRoomRes.bind(this);
   }
 
   getRoomInfo = async (value) => {
@@ -29,10 +32,25 @@ class Room extends Component {
       data: { floor: value.value },
     }).then((res) => {
       this.setState({
+        floor: value.value,
         room: res.data,
       });
     });
-    console.log(this.state.room);
+
+    this.getRoomRes(value)
+    
+  };
+
+  getRoomRes = async (value) => {
+    await axios({
+      method: "post",
+      url: "/rooms/reservations",
+      data: {floor: value.value},
+    }).then((res) => {
+      this.setState({
+        reservation: res.data,
+      });
+    });
   };
 
   render() {
@@ -44,8 +62,8 @@ class Room extends Component {
           <strong>호텔 방 관리 페이지</strong>
         </h1>
         <hr />
-        <Grid xs={1}>
-          <SelectFloor getRoomInfo={this.getRoomInfo} />
+        <Grid item xs={1}>
+          <SelectFloor getRoomInfo={this.getRoomInfo}/>
         </Grid>
 
         <div className={classes.body}>
@@ -53,7 +71,7 @@ class Room extends Component {
             {this.state.room.map((c) => {
               return (
                 <Grid item xs={6} sm={6} md={3} lg={2}>
-                  <ViewRoom data={c} />
+                  <ViewRoom data={c} reservation={this.state.reservation} />
                 </Grid>
               );
             })}
