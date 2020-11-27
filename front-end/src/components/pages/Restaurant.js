@@ -22,10 +22,7 @@ import Refresh from '@material-ui/icons/Refresh';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import RestaurantInfoRow from "../Restaurant/RestaurantInfoRow";
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RestaurantAddDialog from "../Restaurant/RestaurantAddDialog";
 import ViewRestaurant from "../ViewRestaurant";
 
 const styles = (theme) => ({
@@ -172,9 +169,16 @@ class Restaurant extends React.Component {
                 <Search />
               </IconButton>
 
-              <IconButton aria-label="Add" onClick={this.refreshSearchTable}>
+              <IconButton aria-label="Add" onClick={this.addRestaurantBtnOnclick}>
                 <AddBox />
               </IconButton>
+              <div>
+              <RestaurantAddDialog
+                open={this.state.addRestaurantIsOpen}
+                closeDialog={this.closeAddDialog}
+                refreshTable={this.refreshTable}
+              />
+              </div>
 {/* 
               <IconButton aria-label="Refresh" onClick={this.refreshTable}>
                 <Refresh />

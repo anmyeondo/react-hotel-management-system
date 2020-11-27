@@ -71,7 +71,7 @@ class ViewRestaurant extends Component {
               </Grid>
               <Grid item container justify="center">
                 <Button variant="outlined" color="primary">
-                  코스 정보
+                    상세 정보
                 </Button>
               </Grid>
             </Grid>

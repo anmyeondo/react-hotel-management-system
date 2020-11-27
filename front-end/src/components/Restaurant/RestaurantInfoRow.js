@@ -78,7 +78,7 @@ class RestaurantInfoRow extends React.Component {
         </TableCell>
         <TableCell className={classes.tablecelling}>
         <Button onClick={this.InfoReservationBtnOnclick} color="primary" variant="contained" >
-            상세정보
+            상세 정보
           </Button>
           </TableCell>
       </TableRow>
