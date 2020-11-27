@@ -22,7 +22,7 @@ router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Reservation 정보를 불러옵니다 : ' + startTime);
 
-  const q = `SELECT * FROM Reservation NATURAL JOIN Room NATURAL JOIN Customer NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Card NATURAL JOIN Card_BIN`;
+  const q = `SELECT * FROM Reservation NATURAL JOIN Room NATURAL JOIN Customer NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Card NATURAL JOIN Card_BIN NATURAL JOIN Hotel`;
   console.log(q);
   connection.query(q, (err, rows, fields) => {
     console.log(rows);
@@ -37,7 +37,7 @@ router.post('/searchReservation', multipartMiddleware, (req, res) => {
   const body = req.body; // { Check_In, Check_Out, Room_Type }
   console.log(body);
 
-  let q = `SELECT * FROM Reservation NATURAL JOIN Room NATURAL JOIN Customer NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Card NATURAL JOIN Card_BIN`;
+  let q = `SELECT * FROM Reservation NATURAL JOIN Room NATURAL JOIN Customer NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Card NATURAL JOIN Card_BIN NATURAL JOIN Hotel`;
   // let q = `SELECT * FROM Reservation NATURAL JOIN Room`;
   let addq = ' WHERE';
 
