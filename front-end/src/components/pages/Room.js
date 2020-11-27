@@ -18,12 +18,14 @@ class Room extends Component {
     this.state = {
       room: [],
       floor: 200,
-      reservation: {},
+      reservation: [],
+      moreInfoisOpen: false,
     };
 
     this.getRoomInfo = this.getRoomInfo.bind(this);
     this.getRoomRes = this.getRoomRes.bind(this);
   }
+
 
   getRoomInfo = async (value) => {
     await axios({

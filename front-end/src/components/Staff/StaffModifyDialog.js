@@ -5,18 +5,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import { withStyles } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";
 import StaffInfoDialog from "./StaffInfoDialog";
 import axios from "axios";
-
-const styles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 720,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 class StaffModifyDialog extends React.Component {
   constructor(props) {
@@ -209,4 +199,4 @@ class StaffModifyDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(StaffModifyDialog);
+export default StaffModifyDialog;

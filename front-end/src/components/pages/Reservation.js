@@ -2,7 +2,6 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Header from "./Header";
 import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,20 +10,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
-import Button from "@material-ui/core/Button";
-import { Update } from "@material-ui/icons";
-import Grid from '@material-ui/core/Grid';
-import DatePicker from "react-datepicker";
 import IconButton from '@material-ui/core/IconButton';
 import Search from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import AddBox from '@material-ui/icons/AddBox';
 import ReservationInfoRow from "../Reservation/ReservationInfoRow";
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const styles = (theme) => ({
