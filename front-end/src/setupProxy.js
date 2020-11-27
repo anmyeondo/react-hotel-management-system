@@ -20,6 +20,12 @@ module.exports = function (app) {
     })
   );
   app.use(
+    createProxyMiddleware("/reservations", {
+      target: "http://localhost:5000/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     createProxyMiddleware("/image", {
       target: "http://localhost:5000/",
       changeOrigin: true,
