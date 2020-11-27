@@ -3,7 +3,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
-
+import ReservationModifyDialog from './ReservationModifyDialog';
 const Styles = theme => ({
   thirdary: {
     // This is green.A700 as hex.
@@ -15,37 +15,37 @@ class ReservationInfoRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      StaffMoreInfoisOpen: false,
-      StaffModifyisOpen: false,
+      MoreInfoisOpen: false,
+      ReservationModifyisOpen: false,
     };
     this.closeMoreInfoDialog = this.closeMoreInfoDialog.bind(this);
-    this.InfoStaffBtnOnclick = this.InfoStaffBtnOnclick.bind(this);
-    this.ModifyStaffBtnOnclick = this.ModifyStaffBtnOnclick.bind(this);
-    this.closeStaffModifyDialog = this.closeStaffModifyDialog.bind(this);
+    this.InfoReservationBtnOnclick = this.InfoReservationBtnOnclick.bind(this);
+    this.ModifyReservationBtnOnclick = this.ModifyReservationBtnOnclick.bind(this);
+    this.closeReservationModifyDialog = this.closeReservationModifyDialog.bind(this);
   }
 
   //Info
   closeMoreInfoDialog = () => {
     console.log("값이 변경됨");
-    this.setState({ StaffMoreInfoisOpen: false });
+    this.setState({ ReservationMoreInfoisOpen: false });
     console.log(this.state);
   };
 
-  InfoStaffBtnOnclick = () => {
-    this.setState({ StaffMoreInfoisOpen: true });
+  InfoReservationBtnOnclick = () => {
+    this.setState({ ReservationMoreInfoisOpen: true });
     console.log(this.state);
   };
 
   //Modify
-  ModifyStaffBtnOnclick = () => {
+  ModifyReservationBtnOnclick = () => {
     console.log("test");
-    this.setState({ StaffModifyisOpen: true });
+    this.setState({ ReservationModifyisOpen: true });
     console.log(this.state);
   };
 
-  closeStaffModifyDialog = () => {
+  closeReservationModifyDialog = () => {
     console.log("값이 변경됨");
-    this.setState({ StaffModifyisOpen: false });
+    this.setState({ ReservationModifyisOpen: false });
     console.log(this.state);
   };
 
@@ -60,12 +60,12 @@ class ReservationInfoRow extends React.Component {
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
-            {this.props.data.Customer_ID}
+            {this.props.data.Last_Name + this.props.data.First_Name}
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
-            {this.props.data.Room_Num}
+            <strong>{this.props.data.HOTEL_Name}</strong> {" " + this.props.data.Room_Num+"호"}
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
@@ -79,16 +79,27 @@ class ReservationInfoRow extends React.Component {
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>{this.props.data.Check_Out}</span>
         </TableCell>
-        <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>
-            {this.props.data.Price_Won}
-          </span>
+        <TableCell align='center'>
+          <Button onClick={this.ModifyReservationBtnOnclick} color="primary" variant="contained" >
+            수정
+          </Button>
         </TableCell>
-        <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>
-            {this.props.data.Pay_Date}
-          </span>
+        <TableCell align='center'>
+          <Button onClick={this.ModifyReservationBtnOnclick} color="primary" variant="contained" >
+            상세정보
+          </Button>
         </TableCell>
+        <TableCell align='center'>
+          <Button onClick={this.ModifyReservationBtnOnclick} color="secondary" variant="contained" >
+            삭제
+          </Button>
+        </TableCell>
+        <ReservationModifyDialog
+          data={this.props.data}
+          open={this.state.ReservationModifyisOpen}
+          closeDialog={this.closeReservationModifyDialog}
+          refreshTable={this.props.refreshTable}
+        /> 
       </TableRow>
     );
   }

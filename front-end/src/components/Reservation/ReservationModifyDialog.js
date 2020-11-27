@@ -7,10 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-// import CustomerInfoDialog from "./CustomerInfoDialog";
 import axios from "axios";
-// import { TableHead } from "@material-ui/core/TableHead";
-// import { TableRow } from "@material-ui/core";
 import SelectRank from "./../../modules/SelectRank";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -22,18 +19,19 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-class CustomerModifyDialog extends React.Component {
+class ReservationModifyDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // info_open: false,
-      CustomerModifyisOpen: false,
-      table_name: "Customer",
-      E_Mail: "",
-      Fax: "",
-      Phone_Number: "",
-      Rank: "",
-      Mileage: "",
+      ReservationModifyisOpen: false,
+      table_name: "Reservation",
+      HOTEL_Name: "",
+      Room_Num: "",
+      Check_In: "",
+      Check_Out: "",
+      Adult: "",
+      Child: "",
+      Pay_Date: "",
     };
     this.handleClose = this.handleClose.bind(this);
     this.modifyBtnSubmit = this.modifyBtnSubmit.bind(this);
@@ -46,13 +44,15 @@ class CustomerModifyDialog extends React.Component {
   handleClose() {
     this.setState({
       // info_open: false,
-      CustomerModifyisOpen: false,
-      table_name: "Customer",
-      E_Mail: "",
-      Fax: "",
-      Phone_Number: "",
-      Rank: "",
-      Mileage: "",
+      ReservationModifyisOpen: false,
+      table_name: "Reservation",
+      HOTEL_Name: "",
+      Room_Num: "",
+      Check_In: "",
+      Check_Out: "",
+      Adult: "",
+      Child: "",
+      Pay_Date: "",
     });
     this.props.closeDialog();
   }
@@ -87,28 +87,20 @@ class CustomerModifyDialog extends React.Component {
   async postData() {
     // 기본설정
     const formData = new FormData();
-    const url = "/customers/modifyCustomer";
+    const url = "/reservations/modifyReservation";
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    const data = {
-      E_Mail: this.state.E_Mail,
-      Fax: this.state.Fax,
-      Phone_Number: this.state.Phone_Number,
-      Rank: this.state.Rank,
-      Mileage: this.state.Mileage,
-    };
-    const primary_key = {
-      primary_key: "Customer_ID",
-      primary_value: this.props.data.Customer_ID,
-    };
 
     formData.append("table_name", this.state.table_name);
-    formData.append("primary_key", JSON.stringify(primary_key));
-    formData.append("data", JSON.stringify(data));
-
+    formData.append("Room_Num", this.state.Room_Num);
+    formData.append("Check_In", this.state.Check_In);
+    formData.append("Check_Out", this.state.Check_In);
+    formData.append("Adult", this.state.Adult);
+    formData.append("Child", this.state.Child);
+    formData.append("Pay_Date", this.state.Pay_Date);
     await axios.post(url, formData, config);
   }
 
@@ -120,53 +112,71 @@ class CustomerModifyDialog extends React.Component {
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
           {" "}
-          <strong>고객 정보 수정</strong>
+          <strong>예약 정보 수정</strong>
         </DialogTitle>
         <DialogContent>
           <TextField
-            label="고객 이름"
+            label="호텔 이름"
             type="text"
-            name="Customer_Name"
+            name="HOTEL_Name"
             defaultValue={
-              this.props.data.Last_Name + this.props.data.First_Name
+              this.props.data.HOTEL_Name
             }
             InputProps={{
               readOnly: true,
             }}
           />
-          <br />
-          <InputLabel htmlFor="max-width">MVP 등급</InputLabel>
-          <SelectRank changeHandler={this.handleRankChange} />
-          <br />
+          <br/>
+          <br/>
           <TextField
-            label="이메일"
+            label="방 번호"
             type="text"
-            name="E_Mail"
-            defaultValue={this.props.data.E_Mail}
+            name="Room_Num"
+            defaultValue={this.props.data.Room_Num}
             onChange={this.handleValueChange}
           />
           <br />
+          <br />
           <TextField
-            label="팩스번호"
-            type="text"
-            name="Fax"
-            defaultValue={this.props.data.Fax}
+            label="체크 인"
+            type="date"
+            name="Check_In"
+            defaultValue={this.props.data.Check_In}
+            onChange={this.handleValueChange}
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            label="체크 아웃"
+            type="date"
+            name="Check_Out"
+            defaultValue={this.props.data.Check_Out}
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
-            label="전화번호"
-            type="text"
-            name="Phone_Number"
-            defaultValue={this.props.data.Phone_Number}
-            onChange={this.handleValueChange}
-          />
           <br />
           <TextField
-            label="마일리지"
+            label="어른"
             type="text"
-            name="Mileage"
-            defaultValue={this.props.data.Mileage}
+            name="Adult"
+            defaultValue={this.props.data.Adult}
+            onChange={this.handleValueChange}
+          />
+          &nbsp;&nbsp;&nbsp;
+          <TextField
+            label="아이"
+            type="text"
+            name="Child"
+            defaultValue={this.props.data.Child}
+            onChange={this.handleValueChange}
+          />
+
+          <br />
+          <br />
+          <TextField
+            label="결제 예정일"
+            type="date"
+            name="Pay_Date"
+            defaultValue={this.props.data.Pay_Date}
             onChange={this.handleValueChange}
           />
         </DialogContent>
@@ -187,4 +197,4 @@ class CustomerModifyDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(CustomerModifyDialog);
+export default withStyles(styles)(ReservationModifyDialog);

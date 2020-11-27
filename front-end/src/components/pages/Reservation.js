@@ -22,7 +22,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import AddBox from '@material-ui/icons/AddBox';
 import ReservationInfoRow from "../Reservation/ReservationInfoRow";
-import ReservationAddDialog from "../Reservation/ReservationAddDialog";
 import Checkbox from '@material-ui/core/Checkbox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -57,6 +56,7 @@ class Reservation extends React.Component {
       cout_date_start: "2020-11-24",
       cout_date_end: "2020-11-24",
       room_type: "",
+      room_num: "",
       checkbox_cin: false,
       checkbox_cout: false,
     };
@@ -136,6 +136,7 @@ class Reservation extends React.Component {
     formData.append("Check_In", JSON.stringify(check_in));
     formData.append("Check_Out", JSON.stringify(check_out));
     formData.append("Room_Type", this.state.room_type);
+    formData.append("Room_Num", this.state.room_num);
 
     const res = await axios.post(url, formData, config);
     return res.data;
@@ -152,7 +153,7 @@ class Reservation extends React.Component {
 
   // 버튼으로 Dialog를 조작하는 메소드
   addReservationBtnOnclick = () => {
-    console.log("Customer.js 버튼 눌림");
+    console.log("예약 추가버튼 눌림");
     this.setState({ addReservationIsOpen: true });
     console.log(this.state);
   };
@@ -279,11 +280,18 @@ class Reservation extends React.Component {
               <MenuItem value={"Triple"}>Triple</MenuItem>
               <MenuItem value={"Derux_Twin"}>Derux_Twin</MenuItem>
               <MenuItem value={"Ondol"}>Ondol</MenuItem>
-              <MenuItem value={"Sweat"}>Sweat</MenuItem>
+              <MenuItem value={"Sweet"}>Sweet</MenuItem>
               <MenuItem value={""}>-</MenuItem>
               </Select>
-              &nbsp;&nbsp;&nbsp;
-
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <TextField
+                label="방 번호"
+                type="text"
+                id="room_num"
+                name="room_num"
+                value={this.state.room_num}
+                onChange={this.handleValueChange}
+              />
               <IconButton aria-label="Search" onClick={this.searchReservationBtnOnclick}>
                 <Search />
               </IconButton>
@@ -292,34 +300,22 @@ class Reservation extends React.Component {
                 <Refresh />
 
               </IconButton>
-
-              <IconButton aria-label="Add" onClick = {this.fordebug}>
-                <AddBox />
-              </IconButton>
             </form>
 
-            {/* <ReservationAddDialog
-              open={this.state.addReservationIsOpen}
-              closeDialog={this.closeAddDialog}
-              refreshTable={this.refreshTable}
-            /> */}
 
           <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead >  
               <TableRow className={classes.table}>
               <TableCell className={classes.tablecelling}><strong>예약 번호</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>손님 번호</strong></TableCell>
+                <TableCell className={classes.tablecelling}><strong>손님 이름</strong></TableCell>
                 <TableCell className={classes.tablecelling}><strong>방 번호</strong></TableCell>
                 <TableCell className={classes.tablecelling}><strong>방 유형</strong></TableCell>
                 <TableCell className={classes.tablecelling}>체크인 날짜</TableCell>
                 <TableCell className={classes.tablecelling}>체크아웃 날짜</TableCell>
-                <TableCell className={classes.tablecelling}>결제 가격</TableCell>
-                <TableCell className={classes.tablecelling}>결제 일자</TableCell>
-                {/* <TableCell className={classes.tablecelling}>월급</TableCell> */}
-                {/* <TableCell align="center"><strong style={{color:"dimgray"}}>수정</strong></TableCell>
+                <TableCell align="center"><strong style={{color:"dimgray"}}>수정</strong></TableCell>
                 <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell> */}
+                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -349,12 +345,6 @@ class Reservation extends React.Component {
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
           />
         </Paper>
-        {/* <Grid
-          direction="row"
-          justify="center"
-          alignItems="center"
-          
-        ></Grid> */}
       </div>
     );
   }
