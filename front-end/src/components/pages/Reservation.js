@@ -201,9 +201,9 @@ class Reservation extends React.Component {
                 value={this.state.room_type}
                 onChange={this.handleValueChange}
               >
-              <MenuItem value={"Single Room"}>Single Room</MenuItem>
-              <MenuItem value={"Double Room"}>Double Room</MenuItem>
-              <MenuItem value={"Special Room"}>Speical Room</MenuItem>
+              <MenuItem value={"Single Room"}>Single</MenuItem>
+              <MenuItem value={"Double Room"}>Double</MenuItem>
+              <MenuItem value={"Special Room"}>Speical</MenuItem>
               </Select>
               &nbsp;&nbsp;&nbsp;
 
