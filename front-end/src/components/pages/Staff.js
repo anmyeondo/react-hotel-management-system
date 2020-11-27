@@ -45,7 +45,6 @@ class Staff extends React.Component {
     this.closeAddDialog = this.closeAddDialog.bind(this);
     this.setTableOnSearch = this.setTableOnSearch.bind(this);
     this.getCustomer = this.getCustomer.bind(this);
-    this.callApi();
   }
 
   componentDidMount() {
