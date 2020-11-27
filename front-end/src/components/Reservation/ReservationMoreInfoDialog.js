@@ -7,7 +7,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import ReservationInfoDialog from "./ReservationInfoDialog";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -191,59 +190,6 @@ class ReservationMoreInfoDialog extends React.Component {
               />
             </ListItem>
             <Divider variant="inset" component="li" />
-            <ListItem>
-              <ListItemText
-                primary="담당 부서"
-                secondary={this.props.data.Dept_Name}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <ListItemText primary="직급" secondary={this.props.data.Rank} />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <ListItemText
-                primary="계정"
-                secondary={this.props.data.Account}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <ListItemText
-                primary="Phone"
-                secondary={this.props.data.Phone_Number}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <ListItemText
-                primary="이메일"
-                secondary={this.props.data.E_Mail}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <ListItemText
-                primary="우편번호"
-                secondary={this.props.data.Zip}
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary="생일"
-                secondary={this.props.data.Birthday.slice(undefined, 10)}
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary="등록 일자"
-                secondary={this.props.data.RegDate.slice(undefined, 10)}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <Divider variant="inset" component="li" />
-            <Divider variant="inset" component="li" />
           </List>
         </DialogContent>
         <DialogActions>
@@ -251,11 +197,11 @@ class ReservationMoreInfoDialog extends React.Component {
             닫기
           </Button>
         </DialogActions>
-        <ReservationInfoDialog
+        {/* <ReservationInfoDialog
           info={this.state.info_open}
           handleInfoClose={this.handleInfoClose}
           setInfo={this.setInfo}
-        />
+        /> */}
       </Dialog>
     );
   }

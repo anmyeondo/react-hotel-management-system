@@ -97,7 +97,7 @@ class ReservationModifyDialog extends React.Component {
     formData.append("table_name", this.state.table_name);
     formData.append("Room_Num", this.state.Room_Num);
     formData.append("Check_In", this.state.Check_In);
-    formData.append("Check_Out", this.state.Check_Out);
+    formData.append("Check_Out", this.state.Check_Outn);
     formData.append("Adult", this.state.Adult);
     formData.append("Child", this.state.Child);
     formData.append("Pay_Date", this.state.Pay_Date);

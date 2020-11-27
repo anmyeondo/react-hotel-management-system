@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
 import ReservationModifyDialog from './ReservationModifyDialog';
+import ReservationMoreInfoDialog from './ReservationMoreInfoDialog';
 const Styles = theme => ({
   thirdary: {
     // This is green.A700 as hex.
