@@ -118,13 +118,13 @@ class Reservation extends React.Component {
       },
     };
     const check_in = {
-      Check_In_Start: this.state.cin_date_start,
-      Check_In_End: this.state.cin_date_end,
+      Start: this.state.cin_date_start,
+      End: this.state.cin_date_end,
       Check: this.state.checkbox_cin,
     };
     const check_out = {
-      Check_Out_Start: this.state.cout_date_start,
-      Check_Out_End: this.state.cout_date_end,
+      Start: this.state.cout_date_start,
+      End: this.state.cout_date_end,
       Check: this.state.checkbox_cout,
     };
 
