@@ -105,3 +105,26 @@ router.post('/modifyReservation', multipartMiddleware, (req, res) => {
 });
 
 module.exports = router;
+
+//예약 삭제
+router.get('/del', async (req, res) => {
+  var startTime = new Date();
+  console.log('Delete Reservation API Start at ' + startTime);
+  let reservationID = req.query.reservationID;
+  const q_reservation = `DELETE FROM Reservation WHERE Reservation_ID=?;`;
+
+  let dbInsert = async (q, value) => {
+    console.log('데이터베이스에 쿼리를 입력합니다');
+    connection.query(q, value, (err, rows, fields) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('삭제완료');
+      }
+    });
+  };
+
+  await dbInsert(q_reservation, [reservationID]);
+
+  res.send();
+});
