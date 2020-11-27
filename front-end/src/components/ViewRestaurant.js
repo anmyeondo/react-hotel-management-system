@@ -76,7 +76,7 @@ class ViewRestaurant extends Component {
                 align="center"
               >
                 <img
-                  src="/image/basicImage"
+                  src={this.props.data.Restaurant_Img}
                   style={{ width: "128px", height: "128px" }}
                 />
                 <Typography align="center" gutterBottom variant="subtitle1">
