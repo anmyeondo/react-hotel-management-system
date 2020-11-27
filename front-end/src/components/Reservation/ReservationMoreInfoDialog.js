@@ -80,88 +80,12 @@ class ReservationMoreInfoDialog extends React.Component {
     });
   }
 
-  sendData = async () => {
-    const infoId = await axios({
-      method: "post",
-      url: "/users/addInform",
-      data: this.state.info,
-    }).then((res) => {
-      return res.data.insertId;
-    });
-    return infoId;
-  };
-
-  handleClickOpen() {
-    this.setState({
-      open: true,
-    });
-  }
-
   onDateChange = () => {
     console.log("Changed data");
   };
 
   handleClose() {
-    this.setState({
-      h_id: "",
-      i_id: "",
-      code: "",
-      rank: "",
-      bank: "",
-      account: "",
-      reservation_pw: "",
-      r_date: "",
-      salary: "",
-      is_able: 1,
-    });
     this.props.closeDialog();
-  }
-
-  async handleFormSubmit(e) {
-    e.preventDefault();
-    this.setState({
-      i_id: await this.sendData(),
-    });
-
-    await this.callApi()
-      .then(() => {
-        this.handleClose();
-      })
-      .then(() => {
-        this.props.refreshTable();
-      });
-  }
-
-  handleFileChange(e) {
-    this.setState({
-      file: e.target.files[0],
-      fileName: e.target.value,
-    });
-  }
-
-  handleValueChange(e) {
-    let nextState = {};
-    nextState[e.target.name] = e.target.value;
-    this.setState(nextState);
-  }
-
-  async callApi() {
-    await axios({
-      method: "post",
-      url: "/reservations/addReservation",
-      data: {
-        h_id: this.state.h_id,
-        i_id: this.state.i_id,
-        code: this.state.code,
-        rank: this.state.rank,
-        bank: this.state.bank,
-        account: this.state.account,
-        reservation_pw: this.state.reservation_pw,
-        r_date: this.state.r_date,
-        salary: this.state.salary,
-        is_able: this.state.is_able,
-      },
-    });
   }
 
   render() {
