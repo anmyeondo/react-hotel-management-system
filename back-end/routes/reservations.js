@@ -25,7 +25,7 @@ router.get('/informs', (req, res, next) => {
   const q = `SELECT * FROM Reservation NATURAL JOIN Room NATURAL JOIN Customer NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Card NATURAL JOIN Card_BIN NATURAL JOIN Hotel`;
   console.log(q);
   connection.query(q, (err, rows, fields) => {
-    console.log(rows);
+    // console.log(rows);
     res.send(JSON.stringify(rows));
   });
 });
