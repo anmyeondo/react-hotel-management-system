@@ -7,6 +7,7 @@ import Staff from "./components/pages/Staff";
 import Test from "./components/pages/Room";
 import Reservation from "./components/pages/Reservation";
 import Room from "./components/pages/Room";
+import AdminMain from "./components/pages/AdminMain";
 import axios from "axios"
 import "./App.css";
 
@@ -66,7 +67,7 @@ class App extends React.Component {
     return(
       <Router>
         <Route exact path="/" render={() => (<Login checkLogined={this.checkLogined}/>)}/>
-        <Route path="/header" render={() => (<Header checkPermission={this.checkPermission}/>)} />
+        <Route path="/header" render={() => (<AdminMain checkPermission={this.checkPermission}/>)} />
         <Route path="/staff" render={() => (<Staff checkPermission={this.checkPermission}/>)} />
         <Route path="/customer" render={() => (<Customer checkPermission={this.checkPermission}/>)} />
         <Route path="/test" render={() => (<Test checkPermission={this.checkPermission}/>)}/>
