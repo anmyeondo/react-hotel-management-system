@@ -86,7 +86,7 @@ class ReservationInfoRow extends React.Component {
           </Button>
         </TableCell>
         <TableCell align='center'>
-          <Button onClick={this.ModifyReservationBtnOnclick} color="primary" variant="contained" >
+          <Button onClick={this.InfoReservationBtnOnclick} color="primary" variant="contained" >
             상세정보
           </Button>
         </TableCell>
@@ -97,7 +97,7 @@ class ReservationInfoRow extends React.Component {
         </TableCell>
         <ReservationMoreInfoDialog
           data={this.props.data}
-          open={this.state.StaffMoreInfoisOpen}
+          open={this.state.ReservationMoreInfoisOpen}
           closeDialog={this.closeMoreInfoDialog}
         />
 
