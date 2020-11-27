@@ -74,10 +74,10 @@ class ReservationInfoRow extends React.Component {
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>{this.props.data.Check_In.slice(undefined, 10)}</span>
+          <span style={{ textJustify: "center" }}>{this.props.data.Check_In}</span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>{this.props.data.Check_Out.slice(undefined, 10)}</span>
+          <span style={{ textJustify: "center" }}>{this.props.data.Check_Out}</span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
@@ -86,7 +86,7 @@ class ReservationInfoRow extends React.Component {
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
-            {this.props.data.Pay_Date.slice(undefined, 10)}
+            {this.props.data.Pay_Date}
           </span>
         </TableCell>
       </TableRow>

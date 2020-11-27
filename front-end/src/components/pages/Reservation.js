@@ -22,6 +22,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import AddBox from '@material-ui/icons/AddBox';
 import ReservationInfoRow from "../Reservation/ReservationInfoRow";
+import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const styles = (theme) => ({
   root: {
@@ -47,18 +51,24 @@ class Reservation extends React.Component {
       rowsPerPage: 10,
       addReservationIsOpen: false,
       searchReservationIsOpen: false,
-      cin_date: "2020-11-24",
-      cout_date: "2020-11-24",
-      room_type: "Regular"
+      cin_date_start: "2020-11-24",
+      cin_date_end: "2020-11-24",
+      cout_date_start: "2020-11-24",
+      cout_date_end: "2020-11-24",
+      room_type: "",
+      checkbox_cin: false,
+      checkbox_cout: false,
     };
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.fordebug = this.fordebug.bind(this);
     this.callApi = this.callApi.bind(this);
     this.callSearchApi = this.callSearchApi.bind(this);
     this.addReservationBtnOnclick = this.addReservationBtnOnclick.bind(this);
     this.closeAddDialog = this.closeAddDialog.bind(this);
     this.setTableOnSearch = this.setTableOnSearch.bind(this);
     this.getReservation = this.getReservation.bind(this);
+    this.changecbox1 = this.changecbox1.bind(this);
+    this.changecbox2 = this.changecbox2.bind(this);
+    this.fordebug = this.fordebug.bind(this);
     this.callApi();
   }
 
@@ -99,19 +109,29 @@ class Reservation extends React.Component {
   };
 
   async callSearchApi() {
+    // 기본설정
     const formData = new FormData();
-    const url = "/customers/addCustomer";
+    const url = "/reservations/searchReservation";
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
+    const check_in = {
+      Check_In_Start: this.state.cin_date_start,
+      Check_In_End: this.state.cin_date_end,
+      Check: this.state.checkbox_cin,
+    };
+    const check_out = {
+      Check_Out_Start: this.state.cout_date_start,
+      Check_Out_End: this.state.cout_date_end,
+      Check: this.state.checkbox_cout,
+    };
 
-    formData.append("Check_In", this.state.cin_date);
-    formData.append("Check_Out", this.state.cout_date);
+    formData.append("Check_In", JSON.stringify(check_in));
+    formData.append("Check_Out", JSON.stringify(check_out));
     formData.append("Room_Type", this.state.room_type);
 
-    // FormData의 value 확인
     await axios.post(url, formData, config);
   }
 
@@ -137,7 +157,7 @@ class Reservation extends React.Component {
     console.log(this.state);
   };
 
-  searchCustomerBtnOnclick = () => {
+  searchReservationBtnOnclick = () => {
     this.refreshSearchTable();
     // this.setState({ searchReservationIsOpen: true });
     // this.getReservation()
@@ -157,13 +177,38 @@ class Reservation extends React.Component {
     this.setState(nextState);
   }
 
-  fordebug = () => {
-    console.log(this.state.cin_date);
-    console.log(this.state.cout_date);
-    console.log(this.state.room_type)
-  }
-  render() {
+  changecbox1 = () => {
+    if(this.state.checkbox_cin === true) {
+      this.setState({
+        checkbox_cin: false,
+      });
+    }
+    else {
+      this.setState({
+        checkbox_cin: true,
+      });
+    }
+  };
 
+  changecbox2 = () => {
+    if(this.state.checkbox_cout === true) {
+      this.setState({
+        checkbox_cout: false,
+      });
+    }
+    else {
+      this.setState({
+        checkbox_cout: true,
+      });
+    }
+  };
+
+  fordebug = () => {
+    console.log(this.state.checkbox_cin);
+    console.log(this.state.checkbox_cout);
+  }
+
+  render() {
     const { classes } = this.props;
     return (
       <div>
@@ -171,27 +216,51 @@ class Reservation extends React.Component {
         <h1 align="center" style={{background:"lightblue"}}><strong>호텔 예약 관리 페이지입니다.</strong></h1>
           <form className={classes.container} noValidate>
               <br />
-              <br />
               &nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
-                id="cin_date"
-                name="cin_date"
-                label="체크인 날짜"
+                id="cin_date_start"
+                name="cin_date_start"
+                label="체크인시작 날짜"
                 type="date"
-                value={this.state.cin_date}
+                value={this.state.cin_date_start}
                 className={classes.textField}
                 onChange={this.handleValueChange}
               />
+              &nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
-                id="cout_date"
-                name="cout_date"
-                label="체크아웃 날짜"
+                id="cout_date_start"
+                name="cout_date_start"
+                label="체크인종료 날짜"
                 type="date"
-                defaultValue={this.state.cout_date}
+                defaultValue={this.state.cin_date_end}
                 className={classes.textField}
                 onChange={this.handleValueChange}
               />
+              <FormControlLabel control={<Checkbox color="primary" value={this.state.checkbox_cin} onClick={this.changecbox1}/>} label="상관없음" labelPlacement="start" />
+              <br/><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <TextField
+                id="cin_date_start"
+                name="cin_date_start"
+                label="체크아웃시작 날짜"
+                type="date"
+                value={this.state.cout_date_start}
+                className={classes.textField}
+                onChange={this.handleValueChange}
+              />
+              &nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <TextField
+                id="cout_date_start"
+                name="cout_date_start"
+                label="체크아웃종료 날짜"
+                type="date"
+                defaultValue={this.state.cout_date_end}
+                className={classes.textField}
+                onChange={this.handleValueChange}
+              />
+              <FormControlLabel control={<Checkbox value={this.state.checkbox_cout} onClick={this.changecbox2}/>} label="상관없음" labelPlacement="start" />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <strong><span>방 유형 : </span></strong>
               &nbsp;&nbsp;
@@ -201,13 +270,18 @@ class Reservation extends React.Component {
                 value={this.state.room_type}
                 onChange={this.handleValueChange}
               >
-              <MenuItem value={"Single Room"}>Single</MenuItem>
-              <MenuItem value={"Double Room"}>Double</MenuItem>
-              <MenuItem value={"Special Room"}>Speical</MenuItem>
+              <MenuItem value={"Single"}>Single</MenuItem>
+              <MenuItem value={"Double"}>Double</MenuItem>
+              <MenuItem value={"Twin"}>Twin</MenuItem>
+              <MenuItem value={"Triple"}>Triple</MenuItem>
+              <MenuItem value={"Derux_Twin"}>Derux_Twin</MenuItem>
+              <MenuItem value={"Ondol"}>Ondol</MenuItem>
+              <MenuItem value={"Sweat"}>Sweat</MenuItem>
+              <MenuItem value={""}>-</MenuItem>
               </Select>
               &nbsp;&nbsp;&nbsp;
 
-              <IconButton aria-label="Search" onClick={this.searchCustomerBtnOnclick}>
+              <IconButton aria-label="Search" onClick={this.searchReservationBtnOnclick}>
                 <Search />
               </IconButton>
 
@@ -221,7 +295,12 @@ class Reservation extends React.Component {
               </IconButton>
             </form>
 
-
+            {/* Dialog 표현
+            <StaffAddDialog
+              open={this.state.addStaffIsOpen}
+              closeDialog={this.closeAddDialog}
+              refreshTable={this.refreshTable}
+            /> */}
           <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead >  
