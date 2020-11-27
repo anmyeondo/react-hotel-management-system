@@ -5,6 +5,8 @@ import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
 import ReservationModifyDialog from './ReservationModifyDialog';
 import ReservationMoreInfoDialog from './ReservationMoreInfoDialog';
+import ReservationDeleteBtn from './ReservationDeleteBtn';
+
 const Styles = theme => ({
   thirdary: {
     // This is green.A700 as hex.
@@ -91,9 +93,10 @@ class ReservationInfoRow extends React.Component {
           </Button>
         </TableCell>
         <TableCell align='center'>
-          <Button onClick={this.ModifyReservationBtnOnclick} color="secondary" variant="contained" >
-            삭제
-          </Button>
+          <ReservationDeleteBtn
+              reservationID={this.props.data.Reservation_ID}
+              refreshTable={this.props.refreshTable}
+            />
         </TableCell>
         <ReservationMoreInfoDialog
           data={this.props.data}

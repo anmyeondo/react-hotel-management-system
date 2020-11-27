@@ -53,7 +53,7 @@ function Header(props) {
         <Toolbar>
           <LeftSidebar />
           <Grid container spacing={1} alignItems="center">
-            <h2> ADMIN </h2>
+            <a href="/header"><h2> ADMIN </h2></a>
             <Grid item xs />
             <Grid item>
               <Button
