@@ -16,9 +16,30 @@ router.use(bodyParser.urlencoded({ extended: true }));
 // multer middleware 선언
 const upload = multer({ dest: './facilityImage' });
 
-router.get('/asd', (req, res) => {
-  console.log('hi');
-  res.send({ hi: 'hi' });
+// 코스 삭제
+router.post('/delCourse', (req, res) => {
+  console.log('delCourse 실행');
+  const body = req.body;
+  const q = `DELETE * FROM Course_Menu WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}'`;
+
+  console.log(q);
+  // connection.query(q, (err, rows, fields) => {
+  //   // console.log(rows);
+  //   res.json(rows);
+  // });
+});
+
+// 호텔의 코스 반환
+router.post('/getCourse', (req, res) => {
+  console.log('getCourse 실행');
+  const body = req.body;
+  const q = `SELECT * FROM Course_Menu WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}'`;
+
+  console.log(q);
+  connection.query(q, (err, rows, fields) => {
+    // console.log(rows);
+    res.json(rows);
+  });
 });
 
 // 모든(혹은 특정한) 레스토랑 정보 불러오기
@@ -39,7 +60,7 @@ router.post('/restaurantInforms', multipartMiddleware, (req, res) => {
   console.log(q);
 
   connection.query(q, (err, rows, fields) => {
-    console.log(rows);
+    // console.log(rows);
     res.json(rows);
   });
 });
