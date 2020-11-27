@@ -56,7 +56,27 @@ router.post('/reservations', async (req, res) => {
 
   };
   await dbInsert(q);
-})
+});
 
+router.post('/moreInform', async (req, res) => {
+  const startTime = new Date();
+  console.log('방 상세 정보 반환을 시작합니다 : ' + startTime);
+
+  const q = `SELECT * FROM Reservation NATURAL JOIN Room NATURAL JOIN Customer NATURAL JOIN Information NATURAL JOIN Zip`;
+  
+  let dbInsert = async (q) => {
+    console.log('데이터베이스에 쿼리를 입력합니다');
+    connection.query(q, (err, rows, fields) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('정보 출력');
+        res.send(JSON.stringify(rows));
+      }
+    });
+
+  };
+  await dbInsert(q);
+});
 
 module.exports = router;
