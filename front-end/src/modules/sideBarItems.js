@@ -27,10 +27,6 @@ export default {
           name: "Reservation Status",
           url: "/reservation",
         },
-        {
-          name: "Add Reservation",
-          url: "/reserve/add",
-        },
       ],
       icon: 3,
     },

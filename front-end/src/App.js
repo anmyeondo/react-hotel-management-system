@@ -6,6 +6,7 @@ import Customer from "./components/pages/Customer";
 import Staff from "./components/pages/Staff";
 // import Test from "./components/pages/Test";
 import Reservation from "./components/pages/Reservation";
+import Restaurant from "./components/pages/Restaurant";
 import Room from "./components/pages/Room";
 import AdminMain from "./components/pages/AdminMain";
 import axios from "axios";
@@ -89,6 +90,7 @@ class App extends React.Component {
           path="/room"
           render={() => <Room checkPermission={this.checkPermission} />}
         />
+        <Route path="/restaurant" render={() => (<Restaurant checkPermission={this.checkPermission}/>)}/>
       </Router>
     );
   }
