@@ -17,6 +17,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 const multipartMiddleware = multipart();
 
+router.get('/', (req, res, next) => {
+  const q = 'SELECT Hotel_ID, Hotel_Name From Hotel';
+  connection.query(q, (err, rows, fields) => {
+    console.log('호텔 정보를 불러왔습니다.');
+    res.json(rows);
+  });
+});
+
 router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Customers 테이블 조회를 시작합니다 : ' + startTime);

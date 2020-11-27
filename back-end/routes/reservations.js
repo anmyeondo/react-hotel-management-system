@@ -30,6 +30,7 @@ router.get('/informs', (req, res, next) => {
   });
 });
 
+// 예약정보 검색
 router.post('/searchReservation', multipartMiddleware, (req, res) => {
   const startTime = new Date();
   console.log('예약 정보 검색을 시작합니다 : ' + startTime);
@@ -73,6 +74,40 @@ router.post('/searchReservation', multipartMiddleware, (req, res) => {
   connection.query(q, (err, rows, fields) => {
     // console.log(JSON.stringify(rows));
     res.send(JSON.stringify(rows));
+  });
+});
+
+// 예약정보 수정
+router.post('/modifyReservation', multipartMiddleware, (req, res) => {
+  const startTime = new Date();
+  console.log('예약 수정을 시작합니다 : ' + startTime);
+
+  const body = req.body; // { Check_In, Check_Out, Room_Type }
+  const data = JSON.parse(req.body.data);
+  console.log(body);
+  console.log(data);
+
+  let queryHeader = `UPDATE ${body.table_name} SET`;
+  let queryChange = ``;
+  let queryCondition = ` WHERE ${body.pk} = ${body.pk_value}`;
+
+  for (let key in data) {
+    if (data[key] !== '' && data[key] !== undefined && data[key] !== null) {
+      if (queryChange !== '') queryChange = queryChange + ',';
+      queryChange = queryChange + ` ${key} = '${data[key]}'`;
+    }
+  }
+
+  const q = queryHeader + queryChange + queryCondition;
+  console.log(q);
+
+  connection.query(q, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(rows);
+      res.json(rows);
+    }
   });
 });
 

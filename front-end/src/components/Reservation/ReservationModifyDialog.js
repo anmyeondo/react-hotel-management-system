@@ -95,12 +95,23 @@ class ReservationModifyDialog extends React.Component {
     };
 
     formData.append("table_name", this.state.table_name);
-    formData.append("Room_Num", this.state.Room_Num);
-    formData.append("Check_In", this.state.Check_In);
-    formData.append("Check_Out", this.state.Check_Out);
-    formData.append("Adult", this.state.Adult);
-    formData.append("Child", this.state.Child);
-    formData.append("Pay_Date", this.state.Pay_Date);
+    formData.append("pk", "Reservation_ID");
+    formData.append("pk_value", this.props.data.Reservation_ID);
+    const data = {
+      Room_Num: this.state.Room_Num,
+      Check_In: this.state.Check_In,
+      Check_Out: this.state.Check_Out,
+      Adult: this.state.Adult,
+      Child: this.state.Child,
+      Pay_Date: this.state.Pay_Date,
+    };
+    formData.append("data", JSON.stringify(data));
+    // formData.append("Room_Num", this.state.Room_Num);
+    // formData.append("Check_In", this.state.Check_In);
+    // formData.append("Check_Out", this.state.Check_Out);
+    // formData.append("Adult", this.state.Adult);
+    // formData.append("Child", this.state.Child);
+    // formData.append("Pay_Date", this.state.Pay_Date);
     await axios.post(url, formData, config);
   }
 
@@ -119,15 +130,13 @@ class ReservationModifyDialog extends React.Component {
             label="호텔 이름"
             type="text"
             name="HOTEL_Name"
-            defaultValue={
-              this.props.data.HOTEL_Name
-            }
+            defaultValue={this.props.data.HOTEL_Name}
             InputProps={{
               readOnly: true,
             }}
           />
-          <br/>
-          <br/>
+          <br />
+          <br />
           <TextField
             label="방 번호"
             type="text"
@@ -169,7 +178,6 @@ class ReservationModifyDialog extends React.Component {
             defaultValue={this.props.data.Child}
             onChange={this.handleValueChange}
           />
-
           <br />
           <br />
           <TextField

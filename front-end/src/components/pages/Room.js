@@ -49,10 +49,10 @@ class Room extends Component {
         </Grid>
 
         <div className={classes.body}>
-          <Grid container spacing={10} xs={12} justify="center">
+          <Grid container spacing={10} xs={12} sm={10}>
             {this.state.room.map((c) => {
               return (
-                <Grid item justify="center">
+                <Grid item>
                   <ViewRoom data={c} />
                 </Grid>
               );
