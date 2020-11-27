@@ -241,8 +241,8 @@ class Reservation extends React.Component {
               <br/><br/>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
-                id="cin_date_start"
-                name="cin_date_start"
+                id="cout_date_start"
+                name="cout_date_start"
                 label="체크아웃시작 날짜"
                 type="date"
                 value={this.state.cout_date_start}
@@ -252,8 +252,8 @@ class Reservation extends React.Component {
               &nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
-                id="cout_date_start"
-                name="cout_date_start"
+                id="cout_date_end"
+                name="cout_date_end"
                 label="체크아웃종료 날짜"
                 type="date"
                 defaultValue={this.state.cout_date_end}
