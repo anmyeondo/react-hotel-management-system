@@ -7,10 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-// import CustomerInfoDialog from "./CustomerInfoDialog";
 import axios from "axios";
-// import { TableHead } from "@material-ui/core/TableHead";
-// import { TableRow } from "@material-ui/core";
 import SelectRank from "./../../modules/SelectRank";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -26,7 +23,6 @@ class CustomerModifyDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // info_open: false,
       CustomerModifyisOpen: false,
       table_name: "Customer",
       E_Mail: "",
@@ -45,7 +41,6 @@ class CustomerModifyDialog extends React.Component {
   // Dialog 종료시 실행
   handleClose() {
     this.setState({
-      // info_open: false,
       CustomerModifyisOpen: false,
       table_name: "Customer",
       E_Mail: "",

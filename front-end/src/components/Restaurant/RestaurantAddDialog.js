@@ -9,6 +9,9 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageUpload from "../ImageUpload";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 
 const styles = makeStyles((theme) => ({
   hidden: {
@@ -32,10 +35,13 @@ class RestaurantAddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      file: null,
+      fileName: "",
       r_name: "",
       h_id: "",
       o_time: "",
       c_time: "",
+      available: 0,
       restaurant_image: null,
     };
 
@@ -70,17 +76,6 @@ class RestaurantAddDialog extends React.Component {
     });
   }
 
-  sendData = async () => {
-    const infoId = await axios({
-      method: "post",
-      url: "/users/addInform",
-      data: this.state.info,
-    }).then((res) => {
-      return res.data.insertId;
-    });
-    return infoId;
-  };
-
   handleClickOpen() {
     this.setState({
       open: true,
@@ -93,10 +88,13 @@ class RestaurantAddDialog extends React.Component {
 
   handleClose() {
     this.setState({
+      file: null,
+      fileName: "",
       r_name: "",
       h_id: "",
       o_time: "",
       c_time: "",
+      available: "",
       restaurant_image: null,
     });
     this.props.closeDialog();
@@ -108,18 +106,16 @@ class RestaurantAddDialog extends React.Component {
 
   async handleFormSubmit(e) {
     e.preventDefault();
-    this.setState({
-      i_id: await this.sendData(),
-    });
 
     await this.callApi()
       .then(() => {
-        this.handleClose();
+         this.handleClose();
       })
       .then(() => {
         this.props.refreshTable();
       });
   }
+
   addRestaurantBtnOnclick = () => {
     this.setState({ addRestaurantIsOpen: true });
     console.log(this.state);
@@ -147,17 +143,12 @@ class RestaurantAddDialog extends React.Component {
       },
     };
 
-    formData.append("restaurant_image", this.state.restaurant_image);
-    formData.append("h_id", this.state.h_id);
-    formData.append("i_id", this.state.i_id);
-    formData.append("code", this.state.code);
-    formData.append("rank", this.state.rank);
-    formData.append("bank", this.state.bank);
-    formData.append("account", this.state.account);
-    formData.append("restaurant_pw", this.state.restaurant_pw);
-    formData.append("r_date", this.state.r_date);
-    formData.append("salary", this.state.salary);
-    formData.append("is_able", this.state.is_able);
+    formData.append("Restaurant_Name", this.state.r_name);
+    formData.append("Hotel_ID", this.state.h_id);
+    formData.append("Open_Time", this.state.o_time);
+    formData.append("Close_Time", this.state.c_time);
+    formData.append("Available", this.state.available);
+    formData.append("Restaurant_Img", this.state.restaurant_image);
 
     // FormData의 value 확인
     await axios.post(url, formData, config);
@@ -177,79 +168,57 @@ class RestaurantAddDialog extends React.Component {
             {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
             <br />
             <br />
-            <TextField
-              id="r_date"
-              name="r_date"
-              label="등록일자"
-              type="date"
-              value={this.state.r_date}
-              className={classes.textField}
-              onChange={this.handleValueChange}
-            />
+            호텔 선택 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <Select
+                id="h_id"
+                name="h_id"
+                value={this.state.h_id}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;
+              <MenuItem value={"1"}>Deluna</MenuItem>
+              <MenuItem value={"2"}>BaeJJang</MenuItem>
+              <MenuItem value={"3"}>Heaven</MenuItem>
+              </Select>
           </form>
           <TextField
-            label="호텔번호"
+            label="레스토랑 이름"
             type="text"
-            name="h_id"
-            value={this.state.h_id}
+            name="r_name"
+            value={this.state.r_name}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="코드"
+            label="영업시작 시간"
             type="text"
-            name="code"
-            value={this.state.code}
+            name="o_time"
+            value={this.state.o_time}
             onChange={this.handleValueChange}
           />
           <br />
           <TextField
-            label="등급"
+            label="영업종료 시간"
             type="text"
-            name="rank"
-            value={this.state.rank}
+            name="c_time"
+            value={this.state.c_time}
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
-            label="은행"
-            type="text"
-            name="bank"
-            value={this.state.bank}
-            onChange={this.handleValueChange}
-          />
           <br />
-          <TextField
-            label="계좌"
-            type="text"
-            name="account"
-            value={this.state.account}
-            onChange={this.handleValueChange}
-          />
+          영업 상태
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Select
+                id="available"
+                name="available"
+                value={this.state.available}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;
+              <MenuItem value={0}>영업 안함</MenuItem>
+              <MenuItem value={1}>영업 중</MenuItem>
+          </Select>
           <br />
-          <TextField
-            label="비번"
-            type="text"
-            name="restaurant_pw"
-            value={this.state.restaurant_pw}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="연봉"
-            type="text"
-            name="salary"
-            value={this.state.salary}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="가능여부"
-            type="text"
-            name="is_able"
-            value={this.state.is_able}
-            onChange={this.handleValueChange}
-          />
           <br />
         </DialogContent>
         <DialogActions>

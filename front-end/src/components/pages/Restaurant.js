@@ -151,7 +151,7 @@ class Restaurant extends React.Component {
         <Header checkPermission={this.props.checkPermission} idx={0} />
         <h1 align="center" style={{background:"lightblue"}}><strong>호텔 레스토랑 관리 페이지입니다.</strong></h1>
           <form className={classes.container} noValidate>
-              호텔 선택 : 
+              호텔 선택 : &nbsp; &nbsp;
               <Select
                 id="Hotel_ID"
                 name="Hotel_ID"
@@ -176,7 +176,7 @@ class Restaurant extends React.Component {
               <RestaurantAddDialog
                 open={this.state.addRestaurantIsOpen}
                 closeDialog={this.closeAddDialog}
-                refreshTable={this.refreshTable}
+                refreshTable={this.refreshSearchTable}
               />
               </div>
 {/* 
