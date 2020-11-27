@@ -11,7 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var customersRouter = require('./routes/customers');
 var staffsRouter = require('./routes/staffs');
-var reservationRouter = require('./routes/reservation');
+var reservationRouter = require('./routes/reservations');
 var testRouter = require('./routes/test');
 
 // 포트 정보 설정
@@ -43,7 +43,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/customers', customersRouter);
 app.use('/staffs', staffsRouter);
-app.use('/reservation', reservationRouter);
+app.use('/reservations', reservationRouter);
 app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
