@@ -47,7 +47,6 @@ class Room extends Component {
         <Grid xs={1}>
           <SelectFloor getRoomInfo={this.getRoomInfo} />
         </Grid>
-
         <div className={classes.body}>
           <Grid container spacing={5} justify="center">
             {this.state.room.map((c) => {
