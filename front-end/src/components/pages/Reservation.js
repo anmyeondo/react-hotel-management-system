@@ -204,8 +204,7 @@ class Reservation extends React.Component {
   };
 
   fordebug = () => {
-    console.log(this.state.checkbox_cin);
-    console.log(this.state.checkbox_cout);
+    console.log(this.state);
   }
 
   render() {
@@ -230,7 +229,7 @@ class Reservation extends React.Component {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <TextField
                 id="cin_date_end"
-                name="cint_date_end"
+                name="cin_date_end"
                 label="체크인종료 날짜"
                 type="date"
                 defaultValue={this.state.cin_date_end}
