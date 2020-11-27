@@ -17,15 +17,13 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from "react-datepicker";
 import IconButton from '@material-ui/core/IconButton';
 import Search from '@material-ui/icons/Search';
+import AddBox from '@material-ui/icons/AddBox';
 import Refresh from '@material-ui/icons/Refresh';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import AddBox from '@material-ui/icons/AddBox';
-import ReservationInfoRow from "../Reservation/ReservationInfoRow";
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RestaurantInfoRow from "../Restaurant/RestaurantInfoRow";
+import RestaurantAddDialog from "../Restaurant/RestaurantAddDialog";
+import ViewRestaurant from "../ViewRestaurant";
 
 const styles = (theme) => ({
   root: {
@@ -40,105 +38,65 @@ const styles = (theme) => ({
   tablecelling: {
     align: "center"
   },
+  body: {
+    margin: "30px",
+  },
 });
 
 class Restaurant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reservations: [],
+      restaurants: [],
       page: 0,
       rowsPerPage: 10,
-      addReservationIsOpen: false,
-      searchReservationIsOpen: false,
-      cin_date_start: "2020-11-24",
-      cin_date_end: "2020-11-24",
-      cout_date_start: "2020-11-24",
-      cout_date_end: "2020-11-24",
+      addRestaurantIsOpen: false,
+      searchRestaurantIsOpen: false,
       Hotel_ID: "",
-      room_num: "",
-      checkbox_cin: false,
-      checkbox_cout: false,
     };
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.callApi = this.callApi.bind(this);
     this.callSearchApi = this.callSearchApi.bind(this);
-    this.addReservationBtnOnclick = this.addReservationBtnOnclick.bind(this);
+    this.addRestaurantBtnOnclick = this.addRestaurantBtnOnclick.bind(this);
     this.closeAddDialog = this.closeAddDialog.bind(this);
     this.setTableOnSearch = this.setTableOnSearch.bind(this);
-    this.getReservation = this.getReservation.bind(this);
-    this.changecbox1 = this.changecbox1.bind(this);
-    this.changecbox2 = this.changecbox2.bind(this);
+    this.getRestaurant = this.getRestaurant.bind(this);
     this.fordebug = this.fordebug.bind(this);
-    this.callApi();
+    this.callSearchApi(); 
   }
 
   componentDidMount() {
     this.props.checkPermission();
-    this.callApi(); 
+    this.refreshSearchTable(); 
   }
-
-  refreshTable = () => {
-    this.setState({
-      reservations: [],
-    });
-    this.callApi();
-  };
 
   refreshSearchTable = async() => {
     this.setState({
-      reservations: [],
+      restaurants: [],
     });
-    const newReservations = await this.callSearchApi();
-    console.log(newReservations);
+    const newRestaurants = await this.callSearchApi();
+    console.log(newRestaurants);
     this.setState({
-      reservations: newReservations
+      restaurants: newRestaurants
     })
   };
 
   setTableOnSearch = (arr) => {
     this.setState({
-      reservations: arr,
-    });
-  };
-
-  callApi = () => {
-    axios({
-      method: "get",
-      url: "/reservations/informs",
-    }).then((res) => {
-      this.setState({
-        reservations: res.data,
-      });
+      restaurants: arr,
     });
   };
 
   async callSearchApi() {
-    // 기본설정
     const formData = new FormData();
-    const url = "/reservations/searchReservation";
+    const url = "/facility/restaurantInforms";
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    const check_in = {
-      Start: this.state.cin_date_start,
-      End: this.state.cin_date_end,
-      Check: this.state.checkbox_cin,
-    };
-    const check_out = {
-      Start: this.state.cout_date_start,
-      End: this.state.cout_date_end,
-      Check: this.state.checkbox_cout,
-    };
-
-    formData.append("Check_In", JSON.stringify(check_in));
-    formData.append("Check_Out", JSON.stringify(check_out));
-    formData.append("Room_Type", this.state.room_type);
-    formData.append("Room_Num", this.state.room_num);
-
+    formData.append("Hotel_ID", this.state.Hotel_ID);
     const res = await axios.post(url, formData, config);
+    console.log(res.data);
     return res.data;
   }
 
@@ -152,28 +110,28 @@ class Restaurant extends React.Component {
   };
 
   // 버튼으로 Dialog를 조작하는 메소드
-  addReservationBtnOnclick = () => {
+  addRestaurantBtnOnclick = () => {
     console.log("예약 추가버튼 눌림");
-    this.setState({ addReservationIsOpen: true });
+    this.setState({ addRestaurantIsOpen: true });
     console.log(this.state);
   };
 
   closeAddDialog = () => {
     console.log("값이 변경됨");
-    this.setState({ addReservationIsOpen: false });
+    this.setState({ addRestaurantIsOpen: false });
     console.log(this.state);
   };
 
-  searchReservationBtnOnclick = () => {
+  searchRestaurantBtnOnclick = () => {
     this.refreshSearchTable();
   };
 
   closeSearchDialog = () => {
-    this.setState({ searchReservationIsOpen: false });
+    this.setState({ searchRestaurantIsOpen: false });
   };
 
-  getReservation = () => {
-    return this.state.reservations;
+  getRestaurant = () => {
+    return this.state.restaurants;
   };
 
   handleValueChange(e) {
@@ -182,34 +140,8 @@ class Restaurant extends React.Component {
     this.setState(nextState);
   }
 
-  changecbox1 = () => {
-    if(this.state.checkbox_cin === true) {
-      this.setState({
-        checkbox_cin: false,
-      });
-    }
-    else {
-      this.setState({
-        checkbox_cin: true,
-      });
-    }
-  };
-
-  changecbox2 = () => {
-    if(this.state.checkbox_cout === true) {
-      this.setState({
-        checkbox_cout: false,
-      });
-    }
-    else {
-      this.setState({
-        checkbox_cout: true,
-      });
-    }
-  };
-
   fordebug = () => {
-    console.log(this.state);
+    console.log(this.state.restaurants);
   }
 
   render() {
@@ -233,59 +165,37 @@ class Restaurant extends React.Component {
               <MenuItem value={""}>All</MenuItem>
               </Select>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <IconButton aria-label="Search" onClick={this.fordebug}>
+              <IconButton aria-label="Search" onClick={this.refreshSearchTable}>
                 <Search />
               </IconButton>
+
+              <IconButton aria-label="Add" onClick={this.addRestaurantBtnOnclick}>
+                <AddBox />
+              </IconButton>
+              <div>
+              <RestaurantAddDialog
+                open={this.state.addRestaurantIsOpen}
+                closeDialog={this.closeAddDialog}
+                refreshTable={this.refreshTable}
+              />
+              </div>
 {/* 
               <IconButton aria-label="Refresh" onClick={this.refreshTable}>
                 <Refresh />
 
               </IconButton> */}
             </form>
-
-
-          {/* <Paper className={classes.root}>
-          <Table className={classes.table}>
-            <TableHead >  
-              <TableRow className={classes.table}>
-              <TableCell className={classes.tablecelling}><strong>예약 번호</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>손님 이름</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>방 번호</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>방 유형</strong></TableCell>
-                <TableCell className={classes.tablecelling}>체크인 날짜</TableCell>
-                <TableCell className={classes.tablecelling}>체크아웃 날짜</TableCell>
-                <TableCell align="center"><strong style={{color:"dimgray"}}>수정</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.state.reservations
-                .slice(
-                  this.state.page * this.state.rowsPerPage,
-                  this.state.page * this.state.rowsPerPage +
-                  this.state.rowsPerPage
-                )
-                .map((c) => {
+            <div className={classes.body}>
+              <Grid container spacing={5} justify="center">
+                {this.state.restaurants.map((c) => {
                   return (
-                    <ReservationInfoRow
-                      data={c}
-                      refreshTable={this.refreshTable}
-                    />
+                    <Grid item xs={6} sm={6} md={3} lg={2}>
+                      <ViewRestaurant data={c} />
+                    </Grid>
                   );
                 })}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[10]}
-            component="div"
-            count={this.state.reservations.length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
-        </Paper> */}
+              </Grid>
+            </div>
       </div>
     );
   }
