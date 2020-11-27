@@ -33,6 +33,10 @@ const styles = (theme) => ({
   button: {
     borderColor: lightColor,
   },
+  linked: {
+    textDecoration: "none",
+    color: "white"
+  }
 });
 const logout = async () => {
   await axios({
@@ -53,7 +57,7 @@ function Header(props) {
         <Toolbar>
           <LeftSidebar />
           <Grid container spacing={1} alignItems="center">
-            <a href="/header"><h2> ADMIN </h2></a>
+            <a href="/header" className={props.classes.linked}><h2> ADMIN </h2></a>
             <Grid item xs />
             <Grid item>
               <Button
