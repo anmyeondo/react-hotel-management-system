@@ -41,59 +41,28 @@ class Room extends Component {
       <div>
         <Header checkPermission={this.props.checkPermission} />
         <h1 align="center" style={{ background: "#fefbd8" }}>
-          <strong>호텔 방 관리 페이지입니다.</strong>
+          <strong>호텔 방 관리 페이지</strong>
         </h1>
         <hr />
-        <Grid item xs={1}>
+        <Grid xs={1}>
           <SelectFloor getRoomInfo={this.getRoomInfo} />
         </Grid>
 
         <div className={classes.body}>
-          <Grid container spacing={10} xs={12} justify="center">
+          <Grid container spacing={5} justify="center">
             {this.state.room.map((c) => {
               return (
-                <Grid item justify="center">
+                <Grid item xs={6} sm={6} md={3} lg={2}>
                   <ViewRoom data={c} />
                 </Grid>
               );
             })}
           </Grid>
         </div>
-        {/* <Grid item>
-            <ViewRoom RoomNumber={101} RoomType={'SILVER'} Personnel={5}/>
-          </Grid>
-          <Grid item>
-            <ViewRoom RoomNumber={102} RoomType={'SILVER'} Personnel={5}/>
-          </Grid>
-          <Grid item>
-            <ViewRoom RoomNumber={103} RoomType={'SILVER'} Personnel={5}/>
-          </Grid>
-          <Grid item>
-            <ViewRoom RoomNumber={104} RoomType={'SILVER'} Personnel={5}/>
-          </Grid>
-          <Grid item>
-            <ViewRoom RoomNumber={105} RoomType={'SILVER'} Personnel={5}/>
-          </Grid>
-          <Grid item>
-            <ViewRoom RoomNumber={106} RoomType={'SILVER'} Personnel={5}/>
-          </Grid> */}
+
       </div>
     );
   }
 }
-// {this.state.customers
-//   .slice(
-//     this.state.page * this.state.rowsPerPage,
-//     this.state.page * this.state.rowsPerPage +
-//       this.state.rowsPerPage
-//   )
-//   .map((c) => {
-//     return (
-//       <CustomerInfoRow
-//         data={c}
-//         refreshTable={this.refreshTable}
-//       />
-//     );
-//   })}
 
 export default withStyles(styles)(Room);
