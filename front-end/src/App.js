@@ -8,7 +8,7 @@ import Staff from "./components/pages/Staff";
 import Reservation from "./components/pages/Reservation";
 import Room from "./components/pages/Room";
 import AdminMain from "./components/pages/AdminMain";
-import axios from "axios"
+import axios from "axios";
 import "./App.css";
 
 class App extends React.Component {
@@ -64,7 +64,6 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-<<<<<<< HEAD
         <Route
           exact
           path="/"
@@ -72,7 +71,7 @@ class App extends React.Component {
         />
         <Route
           path="/header"
-          render={() => <Header checkPermission={this.checkPermission} />}
+          render={() => <AdminMain checkPermission={this.checkPermission} />}
         />
         <Route
           path="/staff"
@@ -82,7 +81,6 @@ class App extends React.Component {
           path="/customer"
           render={() => <Customer checkPermission={this.checkPermission} />}
         />
-        {/* <Route path="/aaa" render={() => <Test />} /> */}
         <Route
           path="/reservation"
           render={() => <Reservation checkPermission={this.checkPermission} />}
@@ -94,16 +92,5 @@ class App extends React.Component {
       </Router>
     );
   }
-=======
-        <Route exact path="/" render={() => (<Login checkLogined={this.checkLogined}/>)}/>
-        <Route path="/header" render={() => (<AdminMain checkPermission={this.checkPermission}/>)} />
-        <Route path="/staff" render={() => (<Staff checkPermission={this.checkPermission}/>)} />
-        <Route path="/customer" render={() => (<Customer checkPermission={this.checkPermission}/>)} />
-        <Route path="/test" render={() => (<Test checkPermission={this.checkPermission}/>)}/>
-        <Route path="/reservation" render={() => (<Reservation checkPermission={this.checkPermission}/>)}/>
-        <Route path="/room" render={() => (<Room checkPermission={this.checkPermission}/>)}/>
-     </Router>
-  )};
->>>>>>> 33e530a547d24cf09a3e4734df2e9b12e9186eb3
 }
 export default App;
