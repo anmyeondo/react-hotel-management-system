@@ -40,7 +40,7 @@ app.use(
 );
 
 // 라우터 정보 등록
-app.use('/', indexRouter);
+app.use('/modules', indexRouter);
 app.use('/users', usersRouter);
 app.use('/customers', customersRouter);
 app.use('/staffs', staffsRouter);
