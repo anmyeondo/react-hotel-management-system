@@ -43,16 +43,19 @@ router.post('/searchReservation', multipartMiddleware, (req, res) => {
 
   for (let key in body) {
     if (body[key] != '' && body[key] != undefined && body[key] != null) {
-      if (addq !== ' WHERE') {
-        addq = addq + ' and';
-      }
       if (key === 'Check_In' || key === 'Check_Out') {
         let values = JSON.parse(body[key]); // { Check, Start, End }
         // console.log(!values.Check);
         if (!values.Check) {
+          if (addq !== ' WHERE') {
+            addq = addq + ' and';
+          }
           addq = addq + ` (${key} BETWEEN '${values.Start}' AND '${values.End}')`;
         } else continue;
       } else {
+        if (addq !== ' WHERE') {
+          addq = addq + ' and';
+        }
         let x = body[key];
         x = '"' + x + '"'; // 문자열 처리
         addq = addq + ' ' + key + ' = ' + x;
@@ -64,12 +67,13 @@ router.post('/searchReservation', multipartMiddleware, (req, res) => {
 
   if (addq != ' WHERE') {
     q = q + addq;
-    console.log(q);
-    connection.query(q, (err, rows, fields) => {
-      console.log(JSON.stringify(rows));
-      res.send(JSON.stringify(rows));
-    });
   }
+  console.log(q);
+
+  connection.query(q, (err, rows, fields) => {
+    // console.log(JSON.stringify(rows));
+    res.send(JSON.stringify(rows));
+  });
 });
 
 module.exports = router;
