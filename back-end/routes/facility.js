@@ -275,7 +275,7 @@ router.post('/modifyParkinglot', (req, res) => {
   const queryHeader = `UPDATE Parking_Lot SET`;
   let queryChange = ``;
   const queryCondition = ` WHERE Hotel_ID = ${body.Hotel_ID} AND ZONE = ${body.ZONE}`;
-  console.log(body);
+
   delete body.Hotel_ID;
   delete body.ZONE;
 
@@ -291,10 +291,13 @@ router.post('/modifyParkinglot', (req, res) => {
   const q = queryHeader + queryChange + queryCondition;
   if (queryChange !== ``) {
     console.log(q);
+    connection.query(q, (err, rows, fields) => {
+      res.send(rows);
+    });
   } else {
-    console.log('no update');
+    console.log('변화가 없습니다.');
+    res.send([]);
   }
-  res.send('hi');
 });
 
 module.exports = router;

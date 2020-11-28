@@ -95,7 +95,7 @@ router.get('/sessionLogin', (req, res) => {
   console.log('세션 정보를 확인합니다.');
   if (req.session.user) {
     console.log('세션이 존재합니다');
-    console.log(req.session.user);
+    // console.log(req.session.user);
     res.send({ permission: true, user: req.session.user });
   } else {
     console.log('세션이 없습니다');
@@ -114,7 +114,7 @@ router.post('/sessionLogin', async (req, res) => {
   let errorcode = 0;
   let resData = {};
 
-  console.log('Q', q);
+  // console.log('Q', q);
 
   // DB에서 해당 ID의 (ID, PW)를 불러오는 메소드
   loginApi = async () => {
@@ -148,8 +148,8 @@ router.post('/sessionLogin', async (req, res) => {
             console.log('      비밀번호가 일치합니다');
             console.log('      세션에 로그인 정보를 저장합니다.');
             req.session.user = queryRes;
-            console.log('      세션 정보를 출력합니다.');
-            console.log(req.session.user);
+            // console.log('      세션 정보를 출력합니다.');
+            // console.log(req.session.user);
             console.log('      세션 정보를 response에 추가합니다');
             resData.user = queryRes;
           } else {
@@ -258,7 +258,7 @@ router.post('/search', (req, res) => {
   console.log('검색 시작합니다 : ' + startTime);
 
   const body = req.body; // {h_id, i_id, code, rank} 입력, 없으면 ""
-  console.log(body);
+  // console.log(body);
 
   // 쿼리문 만드는 부분
   let q =
@@ -266,7 +266,7 @@ router.post('/search', (req, res) => {
   let addq = ' WHERE';
 
   for (let key in body) {
-    console.log(body[key]);
+    // console.log(body[key]);
     if (body[key] != '' && body[key] != undefined) {
       if (addq !== ' WHERE') {
         addq = addq + ' and';
@@ -281,13 +281,13 @@ router.post('/search', (req, res) => {
     }
   }
 
-  console.log('큐 : ' + addq);
+  // console.log('큐 : ' + addq);
 
   if (addq != ' WHERE') {
     q = q + addq;
     console.log(q);
     connection.query(q, (err, rows, fields) => {
-      console.log(JSON.stringify(rows));
+      // console.log(JSON.stringify(rows));
       res.send(JSON.stringify(rows));
     });
   }
@@ -305,18 +305,18 @@ router.post('/modifyStaff', multipartMiddleware, async (req, res) => {
 
   console.log('초기화 완료');
 
-  console.log(primary);
-  console.log(data);
+  // console.log(primary);
+  // console.log(data);
 
   let queryHeader = `UPDATE ${table_name} SET `;
   let queryChange = ``;
   let queryCondition = ` WHERE ${primary.primary_key} = ${primary.primary_value};`;
 
-  console.log(queryHeader);
-  console.log(queryCondition);
+  // console.log(queryHeader);
+  // console.log(queryCondition);
 
   for (let key in data) {
-    console.log(key + ' : ' + data[key]);
+    // console.log(key + ' : ' + data[key]);
     if (data[key] != '' && data[key] !== undefined) {
       if (queryChange === ``) {
         queryChange = `${key} = '${data[key]}'`;
@@ -326,14 +326,14 @@ router.post('/modifyStaff', multipartMiddleware, async (req, res) => {
     }
   }
 
-  console.log(queryChange);
+  // console.log(queryChange);
 
   const q = queryHeader + queryChange + queryCondition;
   console.log(q);
 
   connection.query(q, (err, rows, fields) => {
     console.log('  데이터베이스에서 수정을 시작합니다.');
-    console.log(JSON.stringify(rows));
+    // console.log(JSON.stringify(rows));
     res.send(JSON.stringify(rows));
   });
 });
