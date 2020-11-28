@@ -5,6 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import RestaurantInfoDialog from "./Restaurant/RestaurantInfoDialog";
+import RestaurantIcon from "@material-ui/icons/Restaurant";
+import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+import Delete from "@material-ui/icons/Delete";
+import axios from "axios";
 
 const styles = (theme) => ({
   paper: {
@@ -43,7 +47,22 @@ class ViewRestaurant extends Component {
     this.setState({
       infoOpen: false,
     });
-    this.props.refreshSearchTable()
+    this.props.refreshSearchTable();
+  };
+
+  // 삭제 메소드
+  deleteRestaurant = () => {
+    axios({
+      method: "post",
+      url: "/facility/delRestaurant",
+      data: {
+        Hotel_ID: this.props.data.Hotel_ID,
+        Restaurant_Name: this.props.data.Restaurant_Name,
+        Restaurant_Img: this.props.data.Restaurant_Img,
+      },
+    }).then((res) => {
+      this.props.refreshSearchTable();
+    });
   };
 
   render() {
@@ -90,12 +109,24 @@ class ViewRestaurant extends Component {
                 </Typography>
               </Grid>
               <Grid item container justify="center">
+                <Button startIcon={<RestaurantIcon />}>
+                  {/* 레스토랑 아이콘*/}
+                </Button>
                 <Button
-                  variant="outlined"
-                  color="primary"
+                  // variant="outlined"
+                  // color="primary"
                   onClick={this.restaurantInfoOpen}
+                  startIcon={<PlaylistAddIcon />}
                 >
-                  상세 정보
+                  {/* 상세 정보 */}
+                </Button>
+                <Button
+                  // variant="outlined"
+                  // color="primary"
+                  onClick={this.deleteRestaurant}
+                  startIcon={<Delete />}
+                >
+                  {/* 삭제 */}
                 </Button>
               </Grid>
             </Grid>
