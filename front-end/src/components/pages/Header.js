@@ -60,6 +60,18 @@ function Header(props) {
             <a href="/header" className={props.classes.linked}><h2> ADMIN </h2></a>
             <Grid item xs />
             <Grid item>
+              <IconButton color="inherit" className={props.classes.iconButtonAvatar}>
+                <Avatar src="https://blogfiles.pstatic.net/20150401_109/dakyoung0627_1427817713061tqQlE_JPEG/%B0%B3%B9%CC%B9%E8%C2%AF%C0%CC2.jpg" alt="My Avatar" 
+                style={
+                  {    
+                    width: "60px",
+                    height: "60px"
+                  }
+                }
+                />
+              </IconButton>
+            </Grid>
+            <Grid item>
               <Button
                 className={props.classes.link}
                 onClick={logout}
@@ -67,18 +79,13 @@ function Header(props) {
                 Logout
               </Button>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Tooltip title="Alerts • No alerts">
                 <IconButton color="inherit">
                   <NotificationsIcon />
                 </IconButton>
               </Tooltip>
-            </Grid>
-            <Grid item>
-              <IconButton color="inherit" className={props.classes.iconButtonAvatar}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-              </IconButton>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Toolbar>
       </AppBar>
