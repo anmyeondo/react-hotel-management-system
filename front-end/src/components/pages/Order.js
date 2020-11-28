@@ -7,20 +7,18 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TablePagination from "@material-ui/core/TablePagination";
-import Button from "@material-ui/core/Button";
-import { Update } from "@material-ui/icons";
 // import OrderAddDialog from "../Order/OrderAddDialog";
 // import OrderSearchDialog from "../Order/OrderSearchDialog";
 import OrderInfoRow from "../Order/OrderInfoRow";
 import Header from "./Header";
 import axios from "axios";
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import Search from '@material-ui/icons/Search';
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import IconButton from "@material-ui/core/IconButton";
+import Search from "@material-ui/icons/Search";
 import Divider from "@material-ui/core/Divider";
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
 const styles = (theme) => ({
   root: {
@@ -86,7 +84,7 @@ class Orders extends React.Component {
         orders: res.data,
       });
     });
-  }
+  };
   handleChangePage = (event, newPage) => {
     this.setState({ page: newPage });
   };
@@ -122,15 +120,15 @@ class Orders extends React.Component {
     return this.state.orders;
   };
 
-  refreshSearchTable = async() => {
+  refreshSearchTable = async () => {
     this.setState({
       orders: [],
     });
     const newOrders = await this.callSearchApi();
     console.log(newOrders);
     this.setState({
-      orders: newOrders
-    })
+      orders: newOrders,
+    });
   };
 
   setTableOnSearch = (arr) => {
@@ -146,21 +144,19 @@ class Orders extends React.Component {
       data: {
         Hotel_ID: this.state.Hotel_ID,
         Is_Done: this.state.isDone,
-        IsAssigned: this.state.isAssigned
+        IsAssigned: this.state.isAssigned,
       },
     }).then((res) => {
       this.setState({ course: res.data });
     });
   };
 
-
   changecbox1 = () => {
-    if(this.state.isDone === true) {
+    if (this.state.isDone === true) {
       this.setState({
         isDone: false,
       });
-    }
-    else {
+    } else {
       this.setState({
         isDone: true,
       });
@@ -168,18 +164,17 @@ class Orders extends React.Component {
   };
 
   changecbox2 = () => {
-    if(this.state.isAssigned === true) {
+    if (this.state.isAssigned === true) {
       this.setState({
         isAssigned: false,
       });
-    }
-    else {
+    } else {
       this.setState({
         isAssigned: true,
       });
     }
   };
-  
+
   handleValueChange(e) {
     let nextState = {};
     nextState[e.target.name] = e.target.value;
@@ -188,7 +183,7 @@ class Orders extends React.Component {
 
   fordebug = () => {
     console.log(this.state);
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -199,43 +194,78 @@ class Orders extends React.Component {
           <strong>주문 관리 페이지입니다.</strong>
         </h1>
         <hr />
-        <br/>
+        <br />
         <div align="center">
-        호텔 선택 : &nbsp; &nbsp;
-              <Select
-                id="Hotel_ID"
-                name="Hotel_ID"
-                value={this.state.Hotel_ID}
-                onChange={this.handleValueChange}
-              >
-              &nbsp;&nbsp;&nbsp;
-              <MenuItem value={"1"}>Deluna</MenuItem>
-              <MenuItem value={"2"}>BaeJJang</MenuItem>
-              <MenuItem value={"3"}>Heaven</MenuItem>
-              <MenuItem value={""}>All</MenuItem>
-              </Select>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <FormControlLabel control={<Checkbox color="primary" value={this.state.isDone} onClick={this.changecbox1}/>} label="완료 주문만" labelPlacement="start" />
-        <FormControlLabel control={<Checkbox color="secondary" value={this.state.isAssigned} onClick={this.changecbox2}/>} label="배정완료 주문만" labelPlacement="start" />
-        &nbsp;&nbsp;
-        <IconButton aria-label="Search" onClick={this.fordebug}>
+          호텔 선택 : &nbsp; &nbsp;
+          <Select
+            id="Hotel_ID"
+            name="Hotel_ID"
+            value={this.state.Hotel_ID}
+            onChange={this.handleValueChange}
+          >
+            &nbsp;&nbsp;&nbsp;
+            <MenuItem value={"1"}>Deluna</MenuItem>
+            <MenuItem value={"2"}>BaeJJang</MenuItem>
+            <MenuItem value={"3"}>Heaven</MenuItem>
+            <MenuItem value={""}>All</MenuItem>
+          </Select>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControlLabel
+            control={
+              <Checkbox
+                color="primary"
+                value={this.state.isDone}
+                onClick={this.changecbox1}
+              />
+            }
+            label="완료 주문만"
+            labelPlacement="start"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                color="secondary"
+                value={this.state.isAssigned}
+                onClick={this.changecbox2}
+              />
+            }
+            label="배정완료 주문만"
+            labelPlacement="start"
+          />
+          &nbsp;&nbsp;
+          <IconButton aria-label="Search" onClick={this.fordebug}>
             <Search />
-        </IconButton>
+          </IconButton>
         </div>
-        <Divider/>
+        <Divider />
         <Paper className={classes.root}>
           <Table className={classes.table}>
-            <TableHead >  
+            <TableHead>
               <TableRow className={classes.table}>
-              <TableCell className={classes.tablecelling}><strong>주문 번호</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>주문 위치</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>주문 시각</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>&nbsp;&nbsp;&nbsp;요청 사항</strong></TableCell>
-                <TableCell className={classes.tablecelling}>배정 직원</TableCell>
-                <TableCell className={classes.tablecelling}>완료 상태</TableCell>
-                <TableCell align="center"><strong style={{color:"dimgray"}}>직원 배정</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"blue"}}>상태 변경</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>주문 번호</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>주문 위치</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>주문 시각</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>&nbsp;&nbsp;&nbsp;요청 사항</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  배정 직원
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  완료 상태
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "blue" }}>배정</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "red" }}>삭제</strong>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -243,14 +273,11 @@ class Orders extends React.Component {
                 .slice(
                   this.state.page * this.state.rowsPerPage,
                   this.state.page * this.state.rowsPerPage +
-                  this.state.rowsPerPage
+                    this.state.rowsPerPage
                 )
                 .map((c) => {
                   return (
-                    <OrderInfoRow
-                      data={c}
-                      refreshTable={this.refreshTable}
-                    />
+                    <OrderInfoRow data={c} refreshTable={this.refreshTable} />
                   );
                 })}
             </TableBody>

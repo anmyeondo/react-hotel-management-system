@@ -88,6 +88,7 @@ class RestaurantModifyDialog extends React.Component {
     console.log(nextState);
     this.setState({ Available: nextState });
   };
+
   // 수정시 state 변경
   handleValueChange = (e) => {
     let nextState = {};

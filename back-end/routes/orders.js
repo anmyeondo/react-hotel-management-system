@@ -18,30 +18,99 @@ router.get('/informs', (req, res, next) => {
   const q = `SELECT * FROM Room_Service NATURAL JOIN Room NATURAL JOIN Staff NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Hotel`;
   console.log(q);
   connection.query(q, (err, rows, fields) => {
-    console.log(rows);
-    res.send(JSON.stringify(rows));
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Order 정보 출력 완료');
+      res.send(JSON.stringify(rows));
+    }
   });
 });
 
-// router.post('/searchOrder', (req, res) => {
-//   var startTime = new Date();
-//   console.log('필터링된 Order 정보를 불러옵니다 : ' + startTime);
+// 모든 부서 정보 불러 오기
+router.get('/departments', (req, res) => {
+  var startTime = new Date();
+  console.log('부서 정보를 불러옵니다 : ' + startTime);
 
-//   console.log('HOTEL');
-//   var Hotel_ID = req.body.Hotel_ID;
-//   var Is_Done = req.body.Is_Done ? 1 : 0;
-//   var Is_Assigned = req.body.IsAssigned;
+  const q = `SELECT * FROM Department_Code`;
+  connection.query(q, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Order 정보 출력 완료');
+      res.send(JSON.stringify(rows));
+    }
+  });
+});
 
-//   var q =
-//     `SELECT * FROM Room_Service NATURAL JOIN Room NATURAL JOIN Staff NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Hotel ` +
-//     `WHERE Hotel_ID = ${Hotel_ID} AND Is_Done = ${Is_Done}`;
+router.post('/staffInforms', (req, res) => {
+  var startTime = new Date();
+  console.log('부서별 직원 정보를 불러옵니다 : ' + startTime);
 
-//   if (!Is_Assigned) {
-//     q += ' AND Staff_ID = 0';
-//   }
+  var code = req.body.code;
+  var q = `SELECT * FROM Staff NATURAL JOIN Information WHERE Is_Available = 1`;
+  if (code) {
+    q += ` AND Code = ${code}`;
+  }
 
-//   console.log(q);
-// });
+  connection.query(q, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('부서별 Order 정보 출력 완료');
+      res.send(JSON.stringify(rows));
+    }
+  });
+});
+
+router.post('/assign', (req, res) => {
+  const startTime = new Date();
+  console.log('직원 배정을 시작합니다 : ' + startTime);
+
+  var order_id = req.body.order_id;
+  var staff_id = req.body.staff_id;
+  var is_done = req.body.is_done ? 1 : 0;
+
+  var date = new Date();
+  var yyyy = date.getFullYear().toString();
+  var mm = (date.getMonth() + 1).toString();
+  var dd = date.getDate().toString();
+
+  if (mm.length === 1) mm = '0' + mm;
+  if (dd.length === 1) dd = '0' + dd;
+  today = yyyy + '-' + mm + '-' + dd;
+
+  var q1 = `UPDATE Room_Service SET Assigned_Time = '${today}' WHERE Order_ID = ${order_id}`;
+  var q2 = `UPDATE Room_Service SET Is_Done = '${is_done}' WHERE Order_ID = ${order_id}`;
+  var q3 = `UPDATE Staff SET Is_Available = 0 WHERE Staff_ID = ${staff_id}`;
+
+  connection.query(q1, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Order assined time update 완료');
+      res.send();
+    }
+  });
+
+  connection.query(q2, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Order Is_done update 완료');
+      res.send();
+    }
+  });
+
+  connection.query(q3, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Staff Assign 완료');
+      res.send();
+    }
+  });
+});
 
 /* 주문 정보 검색 API */
 router.post('/searchOrder', (req, res) => {

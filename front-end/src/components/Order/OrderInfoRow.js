@@ -3,17 +3,16 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
-import Clear from '@material-ui/icons/Clear';
-import Done from '@material-ui/icons/DoneOutline';
-import OrderMoreInfoDialog from './OrderMoreInfoDialog';
-import OrderDeleteBtn from './OrderDeleteBtn';
-// import OrderModifyDialog from './OrderModifyDialog';
-import axios from "axios";
+import Clear from "@material-ui/icons/Clear";
+import Done from "@material-ui/icons/DoneOutline";
+import OrderMoreInfoDialog from "./OrderMoreInfoDialog";
+import OrderDeleteBtn from "./OrderDeleteBtn";
+import OrderAssigned from "./OrderAssigned";
 
-const Styles = theme => ({
+const Styles = (theme) => ({
   thirdary: {
     // This is green.A700 as hex.
-    main: '#81c784',
+    main: "#81c784",
   },
 });
 
@@ -22,12 +21,8 @@ class OrderInfoRow extends React.Component {
     super(props);
     this.state = {
       MoreInfoisOpen: false,
-      OrderModifyisOpen: false,
+      OrderAssignedisOpen: false,
     };
-    this.closeMoreInfoDialog = this.closeMoreInfoDialog.bind(this);
-    this.InfoOrderBtnOnclick = this.InfoOrderBtnOnclick.bind(this);
-    this.ModifyOrderBtnOnclick = this.ModifyOrderBtnOnclick.bind(this);
-    this.closeOrderModifyDialog = this.closeOrderModifyDialog.bind(this);
   }
 
   //Info
@@ -42,30 +37,13 @@ class OrderInfoRow extends React.Component {
     console.log(this.state);
   };
 
-  //Modify
-  ModifyOrderBtnOnclick = () => {
-    console.log("test");
-    this.setState({ OrderModifyisOpen: true });
-    console.log(this.state);
+  //Assigned
+  handleAssignedOpen = () => {
+    this.setState({ OrderAssignedisOpen: true });
   };
 
-  closeOrderModifyDialog = () => {
-    console.log("값이 변경됨");
-    this.setState({ OrderModifyisOpen: false });
-    console.log(this.state);
-  };
-
-  callModifyApi = () => {
-    axios({
-      method: "post",
-      url: "/orders/modifyOrder",
-      data: {
-        Order_ID: this.props.data.Order_ID,
-        Is_Done: this.props.data.IsDone,
-      },
-    }).then((res) => {
-      this.setState({ course: res.data });
-    });
+  handleAssignedClose = () => {
+    this.setState({ OrderAssignedisOpen: false });
   };
 
   closeOrderModifyDialog = () => {
@@ -85,7 +63,8 @@ class OrderInfoRow extends React.Component {
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
-            <strong>{this.props.data.HOTEL_Name}</strong> {" " + this.props.data.Room_Num+"호"}
+            <strong>{this.props.data.HOTEL_Name}</strong>{" "}
+            {" " + this.props.data.Room_Num + "호"}
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
@@ -94,24 +73,41 @@ class OrderInfoRow extends React.Component {
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <Button onClick={this.InfoOrderBtnOnclick} color="primary" variant="contained" >
+          <Button
+            onClick={this.InfoOrderBtnOnclick}
+            color="primary"
+            variant="contained"
+          >
             주문정보
           </Button>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>&nbsp;&nbsp;&nbsp;&nbsp;{this.props.data.Staff_ID === 0 ? <span style={{color:"red"}}>미지정</span> : this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Staff_ID + ")"}</span>
+          <span style={{ textJustify: "center" }}>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            {this.props.data.Staff_ID === 0 ? (
+              <span style={{ color: "red" }}>미지정</span>
+            ) : (
+              this.props.data.Last_Name +
+              this.props.data.First_Name +
+              "(" +
+              this.props.data.Staff_ID +
+              ")"
+            )}
+          </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>&nbsp;&nbsp;&nbsp;&nbsp;{this.props.data.Is_Done === 0 ? <Clear/> : <Done/>}</span>
+          <span style={{ textJustify: "center" }}>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            {this.props.data.Is_Done === 0 ? <Clear /> : <Done />}
+          </span>
         </TableCell>
-        <TableCell align='center'>
-          <Button onClick={this.ModifyOrderBtnOnclick} color="primary" variant="contained" >
+        <TableCell align="center">
+          <Button
+            onClick={this.handleAssignedOpen}
+            color="primary"
+            variant="contained"
+          >
             배정하기
-          </Button>
-        </TableCell>
-        <TableCell align='center'>
-          <Button onClick={this.callModifyApi} color="primary" variant="contained" >
-            변경
           </Button>
         </TableCell>
         <TableCell align="center">
@@ -125,11 +121,12 @@ class OrderInfoRow extends React.Component {
           open={this.state.OrderMoreInfoisOpen}
           closeDialog={this.closeMoreInfoDialog}
         />
-        {/* <OrderModifyDialog
+        <OrderAssigned
+          open={this.state.OrderAssignedisOpen}
+          handleAssignedClose={this.handleAssignedClose}
           data={this.props.data}
-          open={this.state.OrderModifyisOpen}
-          closeDialog={this.closeOrderModifyDialog}
-        /> */}
+          refreshTable={this.props.refreshTable}
+        />
       </TableRow>
     );
   }
