@@ -43,6 +43,7 @@ class ViewRestaurant extends Component {
     this.setState({
       infoOpen: false,
     });
+    this.props.refreshSearchTable()
   };
 
   render() {

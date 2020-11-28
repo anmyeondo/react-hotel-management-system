@@ -179,18 +179,13 @@ class Restaurant extends React.Component {
                 refreshTable={this.refreshSearchTable}
               />
               </div>
-{/* 
-              <IconButton aria-label="Refresh" onClick={this.refreshTable}>
-                <Refresh />
-
-              </IconButton> */}
             </form>
             <div className={classes.body}>
               <Grid container spacing={5} justify="center">
                 {this.state.restaurants.map((c) => {
                   return (
                     <Grid item xs={6} sm={6} md={3} lg={2}>
-                      <ViewRestaurant data={c} />
+                      <ViewRestaurant data={c} refreshSearchTable={this.refreshSearchTable} />
                     </Grid>
                   );
                 })}
