@@ -6,8 +6,9 @@ router.post('/informs', async (req, res) => {
   const startTime = new Date();
   console.log('방 정보 반환을 시작합니다 : ' + startTime);
 
+  var hotel = req.body.hotel;
   var floor = req.body.floor;
-  var q = `SELECT * FROM Room NATURAL JOIN Room_Type WHERE ${floor} <= Room_Num AND Room_Num < ${floor + 100} ORDER BY Room_Num`;
+  var q = `SELECT * FROM Room NATURAL JOIN Room_Type WHERE Hotel_ID = ${hotel} AND ${floor} <= Room_Num AND Room_Num < ${floor + 100} ORDER BY Room_Num`;
 
   let dbInsert = async (q) => {
     console.log('데이터베이스에 쿼리를 입력합니다');
@@ -28,8 +29,9 @@ router.post('/reservations', async (req, res) => {
   const startTime = new Date();
   console.log('방 예약 정보 반환을 시작합니다 : ' + startTime);
 
+  var hotel = req.body.hotel;
   var floor = req.body.floor;
-
+  console.log(hotel)
   var date = new Date();
   var yyyy = date.getFullYear().toString();
   var mm = (date.getMonth()+1).toString();
@@ -41,7 +43,7 @@ router.post('/reservations', async (req, res) => {
     dd = '0' + dd;
   today = yyyy + '-' + mm + '-' + dd;
 
-  const q = `SELECT * FROM Reservation WHERE (Check_In <= '${today}' AND '${today}' <= Check_Out) AND (${floor} <= Room_Num AND Room_Num < ${floor + 100}) ORDER BY Room_Num`;
+  const q = `SELECT * FROM Reservation WHERE Hotel_ID = ${hotel} AND (Check_In <= '${today}' AND '${today}' <= Check_Out) AND (${floor} <= Room_Num AND Room_Num < ${floor + 100}) ORDER BY Room_Num`;
 
   let dbInsert = async (q) => {
     console.log('데이터베이스에 쿼리를 입력합니다');
