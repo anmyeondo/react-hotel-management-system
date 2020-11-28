@@ -82,37 +82,22 @@ class ParkinglotModifyDialog extends React.Component {
     this.setState({ Available: nextState });
   };
 
-  // DB 변경 쿼리 API 실행
-  async postData() {
-    // 기본설정
-    const formData = new FormData();
-    const url = "/Parkinglots/modifyParkinglot";
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
+  postData = () => {
+    axios({
+      method: "post",
+      url: "/facility/modifyParkinglot",
+      data: {
+        ZONE: this.props.data.ZONE,
+        Hotel_ID: this.props.data.Hotel_ID,
+        Capacity: this.state.cap,
+        Max_Height_in_Meter: this.state.m_meter,
+        Valet_Parking_is_Able: this.state.v_able
       },
-    };
-    formData.append("table_name", this.state.table_name);
-    formData.append("pk", "Parkinglot_ID");
-    formData.append("pk_value", this.props.data.Parkinglot_ID);
-    const data = {
-      Room_Num: this.state.Room_Num,
-      Check_In: this.state.Check_In,
-      Check_Out: this.state.Check_Out,
-      Adult: this.state.Adult,
-      Child: this.state.Child,
-      Pay_Date: this.state.Pay_Date,
-    };
-    formData.append("data", JSON.stringify(data));
-    // formData.append("Room_Num", this.state.Room_Num);
-    // formData.append("Check_In", this.state.Check_In);
-    // formData.append("Check_Out", this.state.Check_Out);
-    // formData.append("Adult", this.state.Adult);
-    // formData.append("Child", this.state.Child);
-    // formData.append("Pay_Date", this.state.Pay_Date);
-    await axios.post(url, formData, config);
-  }
-
+    }).then((res) => {
+      this.setState({ data: res.data });
+    });
+  };
+  
   handleer;
 
   render() {
