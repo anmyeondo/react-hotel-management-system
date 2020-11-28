@@ -266,5 +266,31 @@ router.get('/parkingdel', async (req, res) => {
   res.send();
 });
 
+// 주차장 수정
+router.post('/modifyParkinglot', (req, res) => {
+  var startTime = new Date();
+  console.log('주차장을 수정합니다 : ' + startTime);
+
+  const body = req.body;
+  const queryHeader = `UPDATE Parking_Lot SET`;
+  let queryChange = ``;
+  const queryCondition = `WHERE Hotel_ID = ${Hotel_ID} AND ZONE = ${ZONE}`;
+
+  delete body.Hotel_ID;
+  delete body.ZONE;
+
+  for (let key in body) {
+    if (body[key] !== '' && body[key] !== undefined && body[key] !== null) {
+      if (queryChange !== ``) {
+        queryChange += ` AND`;
+      }
+      queryChange += ` ${key} = ${body[key]}`;
+    }
+  }
+
+  const q = queryHeader + queryChange + queryCondition;
+  console.log(q);
+  res.send('hi');
+});
 
 module.exports = router;
