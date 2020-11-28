@@ -78,8 +78,8 @@ class ParkinglotModifyDialog extends React.Component {
 
   toggleValueChange = () => {
     const nextState = !this.state.v_able;
-    console.log(nextState);
-    this.setState({ Available: nextState });
+    console.log(this.state.v_able);
+    this.setState({ v_able: nextState });
   };
 
   postData = async() => {
@@ -152,7 +152,7 @@ class ParkinglotModifyDialog extends React.Component {
             control={
               <Switch
                 size="small"
-                checked={this.props.data.Valet_Parking_is_Able}
+                checked={this.state.v_able}
                 onChange={this.toggleValueChange}
               />
             }
