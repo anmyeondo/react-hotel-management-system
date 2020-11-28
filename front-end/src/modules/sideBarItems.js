@@ -34,12 +34,8 @@ export default {
       name: "Order Management",
       children: [
         {
-          name: "Current Order",
-          url: "/order/current",
-        },
-        {
-          name: "Order History",
-          url: "/order/history",
+          name: "Order status",
+          url: "/order",
         },
       ],
       icon: 5,
