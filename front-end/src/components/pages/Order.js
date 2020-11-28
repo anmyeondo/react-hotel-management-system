@@ -145,8 +145,8 @@ class Orders extends React.Component {
       url: "/orders/searchOrder",
       data: {
         Hotel_ID: this.state.Hotel_ID,
-        Is_Done: this.state.IsDone,
-        IsAssigned: this.state.IsAssigned
+        Is_Done: this.state.isDone,
+        IsAssigned: this.state.isAssigned
       },
     }).then((res) => {
       this.setState({ course: res.data });
@@ -218,7 +218,7 @@ class Orders extends React.Component {
         <FormControlLabel control={<Checkbox color="primary" value={this.state.isDone} onClick={this.changecbox1}/>} label="미완료 주문만" labelPlacement="start" />
         <FormControlLabel control={<Checkbox color="secondary" value={this.state.isAssigned} onClick={this.changecbox2}/>} label="미배정 주문만" labelPlacement="start" />
         &nbsp;&nbsp;
-        <IconButton aria-label="Search" onClick={this.refreshSearchTable}>
+        <IconButton aria-label="Search" onClick={this.fordebug}>
             <Search />
         </IconButton>
         </div>
