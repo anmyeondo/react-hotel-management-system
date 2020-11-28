@@ -139,24 +139,20 @@ class Orders extends React.Component {
     });
   };
 
-  async callSearchApi() {
-    // 기본설정
-    const formData = new FormData();
-    const url = "/orders/searchOrder";
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
+  callSearchApi = () => {
+    axios({
+      method: "post",
+      url: "/orders/searchOrder",
+      data: {
+        Hotel_ID: this.state.Hotel_ID,
+        Is_Done: this.state.IsDone,
+        IsAssigned: this.state.IsAssigned
       },
-    };
+    }).then((res) => {
+      this.setState({ course: res.data });
+    });
+  };
 
-    // formData.append("Check_In", JSON.stringify(check_in));
-    // formData.append("Check_Out", JSON.stringify(check_out));
-    // formData.append("Room_Type", this.state.room_type);
-    // formData.append("Room_Num", this.state.room_num);
-
-    const res = await axios.post(url, formData, config);
-    return res.data;
-  }
 
   changecbox1 = () => {
     if(this.state.isDone === true) {
@@ -234,11 +230,11 @@ class Orders extends React.Component {
               <TableCell className={classes.tablecelling}><strong>주문 번호</strong></TableCell>
                 <TableCell className={classes.tablecelling}><strong>주문 위치</strong></TableCell>
                 <TableCell className={classes.tablecelling}><strong>주문 시각</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>요청 사항</strong></TableCell>
+                <TableCell className={classes.tablecelling}><strong>&nbsp;&nbsp;&nbsp;요청 사항</strong></TableCell>
                 <TableCell className={classes.tablecelling}>배정 직원</TableCell>
                 <TableCell className={classes.tablecelling}>완료 상태</TableCell>
                 <TableCell align="center"><strong style={{color:"dimgray"}}>직원 배정</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"blue"}}>완료 </strong></TableCell>
+                <TableCell align="center"><strong style={{color:"blue"}}>상태 변경</strong></TableCell>
                 <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
               </TableRow>
             </TableHead>

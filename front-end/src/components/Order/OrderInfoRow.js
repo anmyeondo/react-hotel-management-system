@@ -5,6 +5,8 @@ import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
 import Clear from '@material-ui/icons/Clear';
 import Done from '@material-ui/icons/DoneOutline';
+import OrderMoreInfoDialog from './OrderMoreInfoDialog';
+import OrderDeleteBtn from './OrderDeleteBtn';
 const Styles = theme => ({
   thirdary: {
     // This is green.A700 as hex.
@@ -70,26 +72,37 @@ class OrderInfoRow extends React.Component {
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>
-            {this.props.data.Request}
-          </span>
+          <Button onClick={this.InfoOrderBtnOnclick} color="primary" variant="contained" >
+            주문정보
+          </Button>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>{this.props.data.Staff_ID === null ? <Clear/> : this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Staff_ID + ")"}</span>
+          <span style={{ textJustify: "center" }}>{this.props.data.Staff_ID === 0 ? "미지정" : this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Staff_ID + ")"}</span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>{this.props.data.Is_Done === 0 ? <Clear/> : <Done/>}</span>
         </TableCell>
         <TableCell align='center'>
           <Button onClick={this.ModifyOrderBtnOnclick} color="primary" variant="contained" >
-            수정
+            배정하기
           </Button>
         </TableCell>
         <TableCell align='center'>
           <Button onClick={this.InfoOrderBtnOnclick} color="primary" variant="contained" >
-            상세정보
+            변경
           </Button>
         </TableCell>
+        <TableCell align="center">
+          <OrderDeleteBtn
+            orderID={this.props.data.order_ID}
+            refreshTable={this.props.refreshTable}
+          />
+        </TableCell>
+        <OrderMoreInfoDialog
+          data={this.props.data}
+          open={this.state.OrderMoreInfoisOpen}
+          closeDialog={this.closeMoreInfoDialog}
+        />
       </TableRow>
     );
   }
