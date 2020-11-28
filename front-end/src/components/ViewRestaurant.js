@@ -40,7 +40,6 @@ class ViewRestaurant extends Component {
     });
   };
   restaurantInfoClose = () => {
-    console.log("악");
     this.setState({
       infoOpen: false,
     });

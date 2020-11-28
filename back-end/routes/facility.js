@@ -29,11 +29,26 @@ router.post('/delCourse', (req, res) => {
   });
 });
 
-// 호텔의 코스 반환
+// 레스토랑의 코스 반환
 router.post('/getCourse', (req, res) => {
   console.log('getCourse 실행');
   const body = req.body;
+  // console.log(body);
   const q = `SELECT * FROM Course_Menu WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}'`;
+
+  // console.log(q);
+  connection.query(q, (err, rows, fields) => {
+    // console.log(rows);
+    res.json(rows);
+  });
+});
+
+// 레스토랑의 영업시간 반환
+router.post('/getOthers', (req, res) => {
+  console.log('getOthers 실행');
+  const body = req.body;
+  console.log(body);
+  const q = `SELECT Open_Time, Close_Time, Available FROM Restaurant WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}'`;
 
   console.log(q);
   connection.query(q, (err, rows, fields) => {
@@ -102,7 +117,60 @@ router.post('/addRestaurant', upload.any(), async (req, res) => {
   });
 });
 
-module.exports = router;
+// 레스토랑 수정
+router.post('/modifyRestaurant', (req, res) => {
+  const startTime = new Date();
+  console.log('레스토랑 변경을 시작합니다 : ' + startTime);
+
+  const body = req.body;
+
+  let queryHeader = `UPDATE Restaurant SET`;
+  let queryChange = ``;
+  let queryCondition = ` WHERE Hotel_ID = ${body.Hotel_ID} AND Restaurant_Name = '${body.Restaurant_Name}'`;
+
+  console.log(body);
+
+  if (body.Open_Time !== null && body.Open_Time !== undefined && body.Open_Time !== '') {
+    queryChange = queryChange + ` Open_Time = '${body.Open_Time}'`;
+  }
+  if (body.Close_Time !== null && body.Close_Time !== undefined && body.Close_Time !== '') {
+    if (queryChange === ``) {
+      queryChange = queryChange + ` Close_Time = '${body.Close_Time}'`;
+    } else {
+      queryChange = queryChange + ` , Close_Time = '${body.Close_Time}'`;
+    }
+  }
+  if (body.Available !== null && body.Available !== undefined && body.Available !== '') {
+    if (queryChange === ``) {
+      queryChange = queryChange + ` Available = ${body.Available}`;
+    } else {
+      queryChange = queryChange + ` , Available = ${body.Available}`;
+    }
+  }
+
+  if (queryChange === ``) {
+    res.send([]);
+  } else {
+    const q = queryHeader + queryChange + queryCondition;
+    console.log(q);
+    connection.query(q, (err, rows, fields) => {
+      // console.log(rows);
+      res.json(rows);
+    });
+  }
+});
+
+router.post('/addCourse', (req, res) => {
+  const body = req.body;
+  console.log(body);
+
+  const q = `INSERT INTO Course_Menu VALUES('${body.Course_Name}', ${body.Hotel_ID}, '${body.Restaurant_Name}', ${body.Price_Won},'${body.Appetizer}','${body.Main1}' ,'${body.Main2}', '${body.Dessert}')`;
+  console.log(q);
+  connection.query(q, (err, rows, fields) => {
+    console.log(rows);
+    res.json(rows);
+  });
+});
 
 // 주차장 검색하기
 router.post('/parkinglotInforms', multipartMiddleware, (req, res) => {
@@ -145,3 +213,5 @@ router.post('/addParkinglot', multipartMiddleware, async (req, res) => {
     res.json(rows);
   });
 });
+
+module.exports = router;

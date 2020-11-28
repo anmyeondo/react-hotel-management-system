@@ -21,12 +21,11 @@ import TablePagination from "@material-ui/core/TablePagination";
 import CourseDeleteBtn from "./CourseDeleteBtn";
 import Grid from "@material-ui/core/Grid";
 import RestaurantModifyDialog from "./RestaurantModifyDialog";
-import { Refresh } from "@material-ui/icons/Refresh";
 
-const styles = makeStyles((theme) => ({
+const styles = (theme) => ({
   root: {
     width: "100%",
-    maxWidth: 720,
+    maxWidth: 920,
     backgroundColor: theme.palette.background.paper,
   },
 
@@ -49,12 +48,14 @@ const styles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 800,
-    border: "3px solid black",
   },
   tablecelling: {
     align: "center",
   },
-}));
+  header: {
+    borderRadius: "8px 8px 0px 0px",
+  },
+});
 
 class RestaurantInfoDialog extends React.Component {
   constructor(props) {
@@ -62,13 +63,21 @@ class RestaurantInfoDialog extends React.Component {
     this.state = {
       modify_ofen: false,
       course: [],
+      Open_Time: "",
+      Close_Time: "",
+      Available: 0,
       page: 0,
       rowsPerPage: 2,
     };
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
+    this.refreshDialog();
+  };
+
+  refreshDialog = () => {
     this.getCourse();
+    this.getTime();
   };
 
   // DB에서 해당 레스토랑의 코스들을 가져오는 메소드
@@ -82,6 +91,24 @@ class RestaurantInfoDialog extends React.Component {
       },
     }).then((res) => {
       this.setState({ course: res.data });
+    });
+  };
+
+  // DB에서 해당 레스토랑의 영업시간을 가져오는 메소드
+  getTime = () => {
+    axios({
+      method: "post",
+      url: "/facility/getOthers",
+      data: {
+        Hotel_ID: this.props.data.Hotel_ID,
+        Restaurant_Name: this.props.data.Restaurant_Name,
+      },
+    }).then((res) => {
+      this.setState({
+        Open_Time: res.data[0].Open_Time,
+        Close_Time: res.data[0].Close_Time,
+        Available: res.data[0].Available,
+      });
     });
   };
 
@@ -106,7 +133,7 @@ class RestaurantInfoDialog extends React.Component {
   };
 
   render() {
-    const classes = makeStyles();
+    const { classes } = this.props;
     return (
       <Dialog
         open={this.props.open}
@@ -128,9 +155,19 @@ class RestaurantInfoDialog extends React.Component {
                 justify="center"
               >
                 <Grid item>
+                  <div
+                    className={classes.header}
+                    style={
+                      this.state.Available
+                        ? { background: "green" }
+                        : { background: "red" }
+                    }
+                  >
+                    &nbsp;
+                  </div>
                   <img
                     src={this.props.data.Restaurant_Img}
-                    style={{ width: "256px", height: "256px", align: "center" }}
+                    style={{ width: "200px", height: "200px", align: "center" }}
                   />
                 </Grid>
               </Grid>
@@ -149,9 +186,7 @@ class RestaurantInfoDialog extends React.Component {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <ListItemText
                 primary="영업시간"
-                secondary={
-                  this.props.data.Open_Time + " ~ " + this.props.data.Close_Time
-                }
+                secondary={this.state.Open_Time + " ~ " + this.state.Close_Time}
               />
             </ListItem>
             <ListItem>
@@ -245,6 +280,10 @@ class RestaurantInfoDialog extends React.Component {
             <Divider variant="inset" component="li" />
             <ListItem>
               <ListItemText primary="식당 내선번호" secondary={5397} />
+              <ListItemText
+                primary="매장 운영"
+                secondary={this.state.Available ? "운영중" : "미운영중"}
+              />
             </ListItem>
           </List>
         </DialogContent>
@@ -267,9 +306,14 @@ class RestaurantInfoDialog extends React.Component {
         <RestaurantModifyDialog
           data={this.props.data}
           course={this.state.course}
+          Available={this.state.Available}
+          opening_time={{
+            Open_Time: this.state.Open_Time,
+            Close_Time: this.state.Close_Time,
+          }}
           open={this.state.modify_ofen}
           closeDialog={this.offModifyDialog}
-          RefreshTable={this.getCourse}
+          RefreshTable={this.refreshDialog}
         />
       </Dialog>
     );
