@@ -52,12 +52,8 @@ export default {
       icon: 4,
     },
     {
-      name: "Hotel Management",
+      name: "Facility Management",
       children: [
-        {
-          name: "Hotel status",
-          url: "/hotel",
-        },
         {
           name: "Restaurant status",
           url: "/restaurant"

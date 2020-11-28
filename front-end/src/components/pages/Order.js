@@ -215,8 +215,8 @@ class Orders extends React.Component {
               <MenuItem value={""}>All</MenuItem>
               </Select>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <FormControlLabel control={<Checkbox color="primary" value={this.state.isDone} onClick={this.changecbox1}/>} label="미완료 주문만" labelPlacement="start" />
-        <FormControlLabel control={<Checkbox color="secondary" value={this.state.isAssigned} onClick={this.changecbox2}/>} label="미배정 주문만" labelPlacement="start" />
+        <FormControlLabel control={<Checkbox color="primary" value={this.state.isDone} onClick={this.changecbox1}/>} label="완료 주문만" labelPlacement="start" />
+        <FormControlLabel control={<Checkbox color="secondary" value={this.state.isAssigned} onClick={this.changecbox2}/>} label="배정완료 주문만" labelPlacement="start" />
         &nbsp;&nbsp;
         <IconButton aria-label="Search" onClick={this.fordebug}>
             <Search />

@@ -7,6 +7,7 @@ import Clear from '@material-ui/icons/Clear';
 import Done from '@material-ui/icons/DoneOutline';
 import OrderMoreInfoDialog from './OrderMoreInfoDialog';
 import OrderDeleteBtn from './OrderDeleteBtn';
+// import OrderModifyDialog from './OrderModifyDialog';
 import axios from "axios";
 
 const Styles = theme => ({
@@ -67,6 +68,12 @@ class OrderInfoRow extends React.Component {
     });
   };
 
+  closeOrderModifyDialog = () => {
+    console.log("값이 변경됨");
+    this.setState({ OrderModifyisOpen: false });
+    console.log(this.state);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -118,6 +125,11 @@ class OrderInfoRow extends React.Component {
           open={this.state.OrderMoreInfoisOpen}
           closeDialog={this.closeMoreInfoDialog}
         />
+        {/* <OrderModifyDialog
+          data={this.props.data}
+          open={this.state.OrderModifyisOpen}
+          closeDialog={this.closeOrderModifyDialog}
+        /> */}
       </TableRow>
     );
   }
