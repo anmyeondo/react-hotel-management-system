@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import axios from "axios";
-import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
-import { sizing } from "@material-ui/system";
 
 class HotelSelect extends Component {
   constructor(props) {
@@ -13,7 +10,6 @@ class HotelSelect extends Component {
       value: null,
     };
 
-    this.callData = this.callData.bind(this);
   }
 
   componentDidMount = async () => {
@@ -26,7 +22,6 @@ class HotelSelect extends Component {
       method: "get",
       url: "/modules/hotelselect",
     }).then((res) => {
-      console.log(res.data);
       this.setState({
         options: res.data,
         value: null,
@@ -36,12 +31,13 @@ class HotelSelect extends Component {
 
   changeHandler = async (value) => {
     await this.setState({ value });
-    await console.log(this.state);
+    this.props.getHotel(this.state.value);
   };
 
   render() {
     return (
       <Select
+        placeholder='Select Hotel...'
         options={this.state.options}
         value={this.state.value}
         onChange={this.changeHandler}

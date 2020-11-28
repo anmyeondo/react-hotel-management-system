@@ -10,6 +10,7 @@ import Restaurant from "./components/pages/Restaurant";
 import Parkinglot from "./components/pages/Parkinglot";
 import Room from "./components/pages/Room";
 import AdminMain from "./components/pages/AdminMain";
+import Order from "./components/pages/Order";
 import axios from "axios";
 import "./App.css";
 
@@ -93,6 +94,7 @@ class App extends React.Component {
         />
         <Route path="/restaurant" render={() => (<Restaurant checkPermission={this.checkPermission}/>)}/>
         <Route path="/parking_lot" render={() => (<Parkinglot checkPermission={this.checkPermission}/>)}/>
+        <Route path="/order" render={() => (<Order checkPermission={this.checkPermission}/>)}/>
       </Router>
     );
   }
