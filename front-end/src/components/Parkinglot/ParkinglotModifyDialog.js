@@ -140,7 +140,9 @@ class ParkinglotModifyDialog extends React.Component {
             type="text"
             name="zone"
             defaultValue={this.props.data.ZONE}
-            onChange={this.handleValueChange}
+            InputProps={{
+              readOnly: true,
+            }}
           />
           </div>
           <br />
