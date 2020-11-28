@@ -38,10 +38,10 @@ const inRange = (pday, fday) => {
   return past <= today && today <= future;
 };
 
+
 class ViewRoom extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       moreInfoisOpen: false,
       moreInfo: {},

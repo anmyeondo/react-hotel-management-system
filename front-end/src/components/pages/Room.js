@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import ViewRoom from "../ViewRoom";
+import HotelSelect from "../../modules/HotelSelect";
 import SelectFloor from "../../modules/SelectFloor";
 import Header from "./Header";
 
@@ -17,21 +18,22 @@ class Room extends Component {
     super(props);
     this.state = {
       room: [],
+      hotel: {},
       floor: 200,
       reservation: [],
       moreInfoisOpen: false,
     };
 
-    this.getRoomInfo = this.getRoomInfo.bind(this);
-    this.getRoomRes = this.getRoomRes.bind(this);
   }
-
 
   getRoomInfo = async (value) => {
     await axios({
       method: "post",
       url: "/rooms/informs",
-      data: { floor: value.value },
+      data: { 
+        hotel: this.state.hotel.value,
+        floor: value.value 
+      },
     }).then((res) => {
       this.setState({
         floor: value.value,
@@ -47,13 +49,24 @@ class Room extends Component {
     await axios({
       method: "post",
       url: "/rooms/reservations",
-      data: {floor: value.value},
+      data: {
+        hotel: this.state.hotel.value,
+        floor: value.value
+      },
     }).then((res) => {
       this.setState({
         reservation: res.data,
       });
     });
   };
+
+  getHotel = async (value) => {
+    await this.setState({
+      hotel: value
+    })
+    console.log(this.state.hotel)
+  
+  }
 
   render() {
     const { classes } = this.props;
@@ -64,15 +77,20 @@ class Room extends Component {
           <strong>호텔 방 관리 페이지</strong>
         </h1>
         <hr />
-        <Grid item xs={1}>
-          <SelectFloor getRoomInfo={this.getRoomInfo}/>
+        <Grid container spacing={5}>
+          <Grid item xs={2}>
+            <HotelSelect getHotel={this.getHotel}></HotelSelect>
+          </Grid>
+          <Grid item xs={2}>
+            <SelectFloor getRoomInfo={this.getRoomInfo}/>
+          </Grid> 
         </Grid>
         <div className={classes.body}>
           <Grid container spacing={5} justify="center">
             {this.state.room.map((c) => {
               return (
                 <Grid item xs={6} sm={6} md={3} lg={2}>
-                  <ViewRoom data={c} reservation={this.state.reservation} />
+                  <ViewRoom data={c} reservation={this.state.reservation} hotel={this.state.hotel}/>
                 </Grid>
               );
             })}
