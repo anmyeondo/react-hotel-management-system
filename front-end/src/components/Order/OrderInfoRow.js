@@ -82,6 +82,7 @@ class OrderInfoRow extends React.Component {
           </Button>
         </TableCell>
         <TableCell className={classes.tablecelling}>
+<<<<<<< HEAD
           <span style={{ textJustify: "center" }}>
             &nbsp;&nbsp;&nbsp;&nbsp;
             {this.props.data.Staff_ID === 0 ? (
@@ -94,6 +95,9 @@ class OrderInfoRow extends React.Component {
               ")"
             )}
           </span>
+=======
+          <span style={{ textJustify: "center" }}>&nbsp;&nbsp;&nbsp;{this.props.data.Staff_ID === 0 ? <span style={{color:"red"}}>미지정</span> : this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Staff_ID + ")"}</span>
+>>>>>>> 1c0234dc5b409de2957c1b43512f163ea5092662
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>

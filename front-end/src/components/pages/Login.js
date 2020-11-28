@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-export default function LogIn({checkLogined}) {
+export default function LogIn({ checkLogined }) {
   const classes = useStyles();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -77,11 +77,12 @@ export default function LogIn({checkLogined}) {
         alert("계정이 존재하지 않습니다. 아이디를 확인해주세요.");
       } else if (errorCode === 2) {
         if (compResult) {
-          setTimeout(() => {
-            alert("로그인에 성공하였습니다.");
-            // 여기부분 /header 대신 /main이나 그런 페이지 만들어서 이동해야 할듯
-            document.location.href = "/header";
-          }, 1000);
+          document.location.href = "/header";
+          // setTimeout(() => {
+          //   alert("로그인에 성공하였습니다.");
+          //   // 여기부분 /header 대신 /main이나 그런 페이지 만들어서 이동해야 할듯
+          //   document.location.href = "/header";
+          // }, 1000);
         } else {
           alert("로그인에 실패하였습니다. 비밀번호를 확인해주세요.");
         }
@@ -94,14 +95,14 @@ export default function LogIn({checkLogined}) {
   };
 
   useEffect(() => {
-      checkLogined()
-  },[])
+    checkLogined();
+  }, []);
 
   const onKeyPress = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleClick();
     }
-  }
+  };
 
   return (
     <Grid container component="main" className={classes.root}>

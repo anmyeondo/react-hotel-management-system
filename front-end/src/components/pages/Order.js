@@ -12,10 +12,18 @@ import TablePagination from "@material-ui/core/TablePagination";
 import OrderInfoRow from "../Order/OrderInfoRow";
 import Header from "./Header";
 import axios from "axios";
+<<<<<<< HEAD
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import IconButton from "@material-ui/core/IconButton";
 import Search from "@material-ui/icons/Search";
+=======
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import IconButton from '@material-ui/core/IconButton';
+import Search from '@material-ui/icons/Search';
+import Refresh from '@material-ui/icons/Refresh';
+>>>>>>> 1c0234dc5b409de2957c1b43512f163ea5092662
 import Divider from "@material-ui/core/Divider";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -124,11 +132,15 @@ class Orders extends React.Component {
     this.setState({
       orders: [],
     });
+<<<<<<< HEAD
     const newOrders = await this.callSearchApi();
     console.log(newOrders);
     this.setState({
       orders: newOrders,
     });
+=======
+    this.callSearchApi();
+>>>>>>> 1c0234dc5b409de2957c1b43512f163ea5092662
   };
 
   setTableOnSearch = (arr) => {
@@ -147,7 +159,7 @@ class Orders extends React.Component {
         IsAssigned: this.state.isAssigned,
       },
     }).then((res) => {
-      this.setState({ course: res.data });
+      this.setState({ orders: res.data });
     });
   };
 
@@ -196,6 +208,7 @@ class Orders extends React.Component {
         <hr />
         <br />
         <div align="center">
+<<<<<<< HEAD
           호텔 선택 : &nbsp; &nbsp;
           <Select
             id="Hotel_ID"
@@ -236,6 +249,31 @@ class Orders extends React.Component {
           <IconButton aria-label="Search" onClick={this.fordebug}>
             <Search />
           </IconButton>
+=======
+        호텔 선택 : &nbsp; &nbsp;
+              <Select
+                id="Hotel_ID"
+                name="Hotel_ID"
+                value={this.state.Hotel_ID}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;
+              <MenuItem value={"1"}>Deluna</MenuItem>
+              <MenuItem value={"2"}>BaeJJang</MenuItem>
+              <MenuItem value={"3"}>Heaven</MenuItem>
+              <MenuItem value={""}>All</MenuItem>
+              </Select>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <FormControlLabel control={<Checkbox color="primary" value={this.state.isDone} onClick={this.changecbox1}/>} label="완료 주문만" labelPlacement="start" />
+        <FormControlLabel control={<Checkbox color="secondary" value={this.state.isAssigned} onClick={this.changecbox2}/>} label="배정완료 주문만" labelPlacement="start" />
+        &nbsp;&nbsp;
+        <IconButton aria-label="Search" onClick={this.refreshSearchTable}>
+            <Search />
+        </IconButton>
+        <IconButton aria-label="Refresh" onClick={this.refreshTable}>
+          <Refresh/>
+        </IconButton>
+>>>>>>> 1c0234dc5b409de2957c1b43512f163ea5092662
         </div>
         <Divider />
         <Paper className={classes.root}>

@@ -182,7 +182,8 @@ class Parkinglot extends React.Component {
                 {this.state.parkinglots.map((c) => {
                   return (
                     <Grid item xs={6} sm={6} md={3} lg={2}>
-                      <ViewParkinglot data={c} />
+                      <ViewParkinglot data={c} 
+                      refreshTable = {this.refreshSearchTable}/>
                     </Grid>
                   );
                 })}
