@@ -16,6 +16,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import IconButton from "@material-ui/core/IconButton";
 import Search from "@material-ui/icons/Search";
+import Refresh from "@material-ui/icons/Refresh";
 import Divider from "@material-ui/core/Divider";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -228,9 +229,13 @@ class Orders extends React.Component {
             label="배정완료 주문만"
             labelPlacement="start"
           />
-          &nbsp;&nbsp;
-          <IconButton aria-label="Search" onClick={this.fordebug}>
+          &nbsp;
+          <IconButton aria-label="Search" onClick={this.refreshSearchTable}>
             <Search />
+          </IconButton>
+          &nbsp;&nbsp;
+          <IconButton aria-label="Refresh" onClick={this.refreshTable}>
+            <Refresh />
           </IconButton>
         </div>
         <Divider />
@@ -248,13 +253,13 @@ class Orders extends React.Component {
                   <strong>주문 시각</strong>
                 </TableCell>
                 <TableCell className={classes.tablecelling}>
-                  <strong>&nbsp;&nbsp;&nbsp;요청 사항</strong>
-                </TableCell>
-                <TableCell className={classes.tablecelling}>
                   배정 직원
                 </TableCell>
                 <TableCell className={classes.tablecelling}>
                   완료 상태
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>&nbsp;&nbsp;&nbsp;요청 사항</strong>
                 </TableCell>
                 <TableCell align="center">
                   <strong style={{ color: "blue" }}>배정</strong>

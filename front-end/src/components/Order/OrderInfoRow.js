@@ -73,17 +73,7 @@ class OrderInfoRow extends React.Component {
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <Button
-            onClick={this.InfoOrderBtnOnclick}
-            color="primary"
-            variant="contained"
-          >
-            주문정보
-          </Button>
-        </TableCell>
-        <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
-            &nbsp;&nbsp;&nbsp;&nbsp;
             {this.props.data.Staff_ID === 0 ? (
               <span style={{ color: "red" }}>미지정</span>
             ) : (
@@ -100,6 +90,15 @@ class OrderInfoRow extends React.Component {
             &nbsp;&nbsp;&nbsp;&nbsp;
             {this.props.data.Is_Done === 0 ? <Clear /> : <Done />}
           </span>
+        </TableCell>
+        <TableCell className={classes.tablecelling}>
+          <Button
+            onClick={this.InfoOrderBtnOnclick}
+            color="primary"
+            variant="contained"
+          >
+            주문정보
+          </Button>
         </TableCell>
         <TableCell align="center">
           <Button
