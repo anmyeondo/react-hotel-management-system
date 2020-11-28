@@ -289,7 +289,11 @@ router.post('/modifyParkinglot', (req, res) => {
   }
 
   const q = queryHeader + queryChange + queryCondition;
-  console.log(q);
+  if (queryChange !== ``) {
+    console.log(q);
+  } else {
+    console.log('no update');
+  }
   res.send('hi');
 });
 
