@@ -18,6 +18,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
 import Search from '@material-ui/icons/Search';
+import Refresh from '@material-ui/icons/Refresh';
 import Divider from "@material-ui/core/Divider";
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -126,11 +127,7 @@ class Orders extends React.Component {
     this.setState({
       orders: [],
     });
-    const newOrders = await this.callSearchApi();
-    console.log(newOrders);
-    this.setState({
-      orders: newOrders
-    })
+    this.callSearchApi();
   };
 
   setTableOnSearch = (arr) => {
@@ -149,7 +146,7 @@ class Orders extends React.Component {
         IsAssigned: this.state.isAssigned
       },
     }).then((res) => {
-      this.setState({ course: res.data });
+      this.setState({ orders: res.data });
     });
   };
 
@@ -218,8 +215,11 @@ class Orders extends React.Component {
         <FormControlLabel control={<Checkbox color="primary" value={this.state.isDone} onClick={this.changecbox1}/>} label="완료 주문만" labelPlacement="start" />
         <FormControlLabel control={<Checkbox color="secondary" value={this.state.isAssigned} onClick={this.changecbox2}/>} label="배정완료 주문만" labelPlacement="start" />
         &nbsp;&nbsp;
-        <IconButton aria-label="Search" onClick={this.fordebug}>
+        <IconButton aria-label="Search" onClick={this.refreshSearchTable}>
             <Search />
+        </IconButton>
+        <IconButton aria-label="Refresh" onClick={this.refreshTable}>
+          <Refresh/>
         </IconButton>
         </div>
         <Divider/>

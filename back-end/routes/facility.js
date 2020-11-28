@@ -214,4 +214,29 @@ router.post('/addParkinglot', multipartMiddleware, async (req, res) => {
   });
 });
 
+//고객 삭제
+router.get('/parkingdel', async (req, res) => {
+  var startTime = new Date();
+  console.log('Delete Parking API Start at ' + startTime);
+  let ZONE = req.query.ZONE;
+  let Hotel_ID = req.query.Hotel_ID;
+  const q_parking = `DELETE FROM Parking_Lot WHERE ZONE=? AND Hotel_ID=?;`;
+
+  let dbInsert = async (q, value) => {
+    console.log('데이터베이스에 쿼리를 입력합니다');
+    connection.query(q, value, (err, rows, fields) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('삭제완료');
+      }
+    });
+  };
+
+  await dbInsert(q_parking, [ZONE, Hotel_ID]);
+
+  res.send();
+});
+
+
 module.exports = router;

@@ -4,6 +4,12 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import IconButton from '@material-ui/core/IconButton';
+import Delete from '@material-ui/icons/Delete';
+import LocalParkingIcon from '@material-ui/icons/LocalParking';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import axios from "axios";
+import ParkinglotModifyDialog from './Parkinglot/ParkinglotModifyDialog';
 
 const styles = (theme) => ({
   paper: {
@@ -25,7 +31,39 @@ const styles = (theme) => ({
 class ViewRestaurant extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modifyParkingisOpen: false,
+    }
   }
+
+  handleModifyParkingOpen = async () => {
+    console.log("Modify Open!");
+    this.setState({
+      modifyParkingisOpen: true,
+    });
+
+  };
+
+  handleModifyParkingClose = () => {
+    this.setState({
+      modifyParkingisOpen: false,
+    });
+  };
+
+
+  deleteParking = async() =>{
+    await axios ({
+        method: "get",
+        url: "/facility/parkingdel",
+        params: {
+            ZONE: this.props.data.ZONE,
+            Hotel_ID: this.props.data.Hotel_ID,
+        }
+    }).then(() => {
+        this.props.refreshTable();
+    });
+  }
+
   render() {
     const { classes } = this.props;
     const red = { background: "red" };
@@ -69,10 +107,27 @@ class ViewRestaurant extends Component {
                 justify="flex-start"
                 align="center"
               >
+                <div>
+                <IconButton>
+                  <LocalParkingIcon/>
+                </IconButton>
+                <IconButton onClick={this.handleModifyParkingOpen}>
+                  <PlaylistAddIcon/>
+                </IconButton>
+                <IconButton onClick={this.deleteParking}>
+                  <Delete/>
+                </IconButton>
+                </div>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+          <ParkinglotModifyDialog
+              data={this.props.data}
+              open={this.state.modifyParkingisOpen}
+              closeDialog={this.handleModifyParkingClose}
+              refreshTable={this.props.refreshTable}
+          />
       </Paper>
     );
   }
