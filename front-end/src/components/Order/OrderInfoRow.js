@@ -7,6 +7,8 @@ import Clear from '@material-ui/icons/Clear';
 import Done from '@material-ui/icons/DoneOutline';
 import OrderMoreInfoDialog from './OrderMoreInfoDialog';
 import OrderDeleteBtn from './OrderDeleteBtn';
+import axios from "axios";
+
 const Styles = theme => ({
   thirdary: {
     // This is green.A700 as hex.
@@ -52,6 +54,19 @@ class OrderInfoRow extends React.Component {
     console.log(this.state);
   };
 
+  callModifyApi = () => {
+    axios({
+      method: "post",
+      url: "/orders/modifyOrder",
+      data: {
+        Order_ID: this.props.data.Order_ID,
+        Is_Done: this.props.data.IsDone,
+      },
+    }).then((res) => {
+      this.setState({ course: res.data });
+    });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -77,10 +92,10 @@ class OrderInfoRow extends React.Component {
           </Button>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>{this.props.data.Staff_ID === 0 ? "미지정" : this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Staff_ID + ")"}</span>
+          <span style={{ textJustify: "center" }}>&nbsp;&nbsp;&nbsp;&nbsp;{this.props.data.Staff_ID === 0 ? <span style={{color:"red"}}>미지정</span> : this.props.data.Last_Name + this.props.data.First_Name + "(" + this.props.data.Staff_ID + ")"}</span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>{this.props.data.Is_Done === 0 ? <Clear/> : <Done/>}</span>
+          <span style={{ textJustify: "center" }}>&nbsp;&nbsp;&nbsp;&nbsp;{this.props.data.Is_Done === 0 ? <Clear/> : <Done/>}</span>
         </TableCell>
         <TableCell align='center'>
           <Button onClick={this.ModifyOrderBtnOnclick} color="primary" variant="contained" >
@@ -88,7 +103,7 @@ class OrderInfoRow extends React.Component {
           </Button>
         </TableCell>
         <TableCell align='center'>
-          <Button onClick={this.InfoOrderBtnOnclick} color="primary" variant="contained" >
+          <Button onClick={this.callModifyApi} color="primary" variant="contained" >
             변경
           </Button>
         </TableCell>
