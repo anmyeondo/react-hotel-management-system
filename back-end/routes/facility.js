@@ -274,15 +274,15 @@ router.post('/modifyParkinglot', (req, res) => {
   const body = req.body;
   const queryHeader = `UPDATE Parking_Lot SET`;
   let queryChange = ``;
-  const queryCondition = `WHERE Hotel_ID = ${Hotel_ID} AND ZONE = ${ZONE}`;
-
+  const queryCondition = ` WHERE Hotel_ID = ${body.Hotel_ID} AND ZONE = ${body.ZONE}`;
+  console.log(body);
   delete body.Hotel_ID;
   delete body.ZONE;
 
   for (let key in body) {
     if (body[key] !== '' && body[key] !== undefined && body[key] !== null) {
       if (queryChange !== ``) {
-        queryChange += ` AND`;
+        queryChange += ` ,`;
       }
       queryChange += ` ${key} = ${body[key]}`;
     }

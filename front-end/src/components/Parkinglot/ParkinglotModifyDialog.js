@@ -82,7 +82,7 @@ class ParkinglotModifyDialog extends React.Component {
     this.setState({ Available: nextState });
   };
 
-  postData = () => {
+  postData = async() => {
     axios({
       method: "post",
       url: "/facility/modifyParkinglot",
@@ -94,7 +94,7 @@ class ParkinglotModifyDialog extends React.Component {
         Valet_Parking_is_Able: this.state.v_able
       },
     }).then((res) => {
-      this.setState({ data: res.data });
+      this.handleClose();
     });
   };
   
