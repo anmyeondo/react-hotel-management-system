@@ -8,6 +8,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from '@material-ui/core/styles';
 import SelectCountry from "../../modules/SelectCountry";
 import Button from "@material-ui/core/Button";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = makeStyles((theme) => ({
     hidden: {
@@ -67,6 +69,7 @@ class StaffInfoDialog extends Component {
                         onChange={this.handleValueChange}
                     />
                     <br/>
+                    <br/>
                     <TextField
                         label="상세주소"
                         type="text"
@@ -75,21 +78,23 @@ class StaffInfoDialog extends Component {
                         onChange={this.handleValueChange}
                     />
                     <br/>
+                    <br/>
                     <TextField
-                        label="이름"
+                        label="이름(First_Name)"
                         type="text"
                         name="fName"
                         value={this.state.fName}
                         onChange={this.handleValueChange}
                     />
-                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
-                        label="성"
+                        label="성(Last_Name)"
                         type="text"
                         name="lName"
                         value={this.state.lName}
                         onChange={this.handleValueChange}
                     />
+                    <br/>
                     <br/>
                     <TextField
                         label="Email"
@@ -98,7 +103,7 @@ class StaffInfoDialog extends Component {
                         value={this.state.eMail}
                         onChange={this.handleValueChange}
                     />
-                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         label="Fax"
                         type="text"
@@ -106,6 +111,7 @@ class StaffInfoDialog extends Component {
                         value={this.state.fax}
                         onChange={this.handleValueChange}
                     />
+                    <br/>
                     <br/>
 
                     <TextField
@@ -118,6 +124,7 @@ class StaffInfoDialog extends Component {
                     onChange={this.handleValueChange}
                     />
                     <br/>
+                    <br/>
                     <p>국가</p>
                     <SelectCountry/>
                     <br/>
@@ -129,13 +136,19 @@ class StaffInfoDialog extends Component {
                         onChange={this.handleValueChange}
                     />
                     <br/>
-                    <TextField
-                        label="성별"
-                        type="text"
-                        name="gender"
-                        value={this.state.gender}
-                        onChange={this.handleValueChange}
-                    />
+                    <br/>
+                    <br/>
+                    <strong>성별</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Select
+                            id="gender"
+                            name="gender"
+                            value={this.state.gender}
+                            onChange={this.handleValueChange}
+                        >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <MenuItem value={"남자"}>남자</MenuItem>
+                        <MenuItem value={"여자"}>여자</MenuItem>
+                        </Select>
                 </DialogContent>
                 <DialogActions>
                     <Button

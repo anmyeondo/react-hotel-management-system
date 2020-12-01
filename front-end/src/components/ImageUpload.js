@@ -79,7 +79,7 @@ const styles = (theme) => ({
   },
 });
 
-class ImageUploadCard extends React.Component {
+class ImageUpload extends React.Component {
 
   state = {
     mainState: "initial", // initial, search, gallery, uploaded
@@ -87,17 +87,15 @@ class ImageUploadCard extends React.Component {
     selectedFile: null,
   };
 
-  handleUploadClick = (event) => {
+  handleUploadClick = event => {
     var file = event.target.files[0];
-    this.props.updateImage(file);
     const reader = new FileReader();
-
+    this.props.updateImage(file);
     reader.onloadend = function(e) {
       this.setState({
         selectedFile: [reader.result]
       });
     }.bind(this);
-
     this.setState({
       mainState: "uploaded",
       selectedFile: event.target.files[0],
@@ -132,20 +130,19 @@ class ImageUploadCard extends React.Component {
   }
 
   renderUploadedState() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
 
     return (
       <React.Fragment>
         <CardActionArea onClick={this.imageResetHandler}>
           <strong align="center">이미지 업로드 완료!</strong>
           <br />
-          <img
+          {/* <img
             justify="center"
             width="128px"
-            height="128px"
-            className={classes.media}
+            height="128px"  
             src={this.state.selectedFile}
-          />
+          /> */}
         </CardActionArea>
       </React.Fragment>
     );
@@ -171,4 +168,4 @@ class ImageUploadCard extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(ImageUploadCard);
+export default withStyles(styles, { withTheme: true })(ImageUpload);

@@ -10,6 +10,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import StaffInfoDialog from "./StaffInfoDialog";
 import ImageUpload from "../ImageUpload";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = makeStyles((theme) => ({
   hidden: {
@@ -42,7 +44,7 @@ class StaffAddDialog extends React.Component {
       bank: "",
       account: "",
       staff_pw: "",
-      r_date: "",
+      r_date: "2020-12-01",
       salary: "",
       is_able: 1,
       info: {},
@@ -110,7 +112,7 @@ class StaffAddDialog extends React.Component {
       bank: "",
       account: "",
       staff_pw: "",
-      r_date: "",
+      r_date: "2020-12-01",
       salary: "",
       is_able: 1,
       info: {},
@@ -186,7 +188,40 @@ class StaffAddDialog extends React.Component {
           <span>직원 추가</span>{" "}
         </DialogTitle>
         <DialogContent className={classes.dialogcss}>
-          <ImageUpload updateImage={this.handleImageAddClick} />
+              <ImageUpload updateImage={this.handleImageAddClick} />
+              <br/>
+              <br/>
+              소속 호텔&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="h_id"
+                name="h_id"
+                value={this.state.h_id}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;
+              <MenuItem value={"1"}>Deluna</MenuItem>
+              <MenuItem value={"2"}>BaeJJang</MenuItem>
+              <MenuItem value={"3"}>Heaven</MenuItem>
+              </Select>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              소속 부서&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="code"
+                name="code"
+                value={this.state.code}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <MenuItem value={"1000"}>관리</MenuItem>
+              <MenuItem value={"1001"}>마케팅</MenuItem>
+              <MenuItem value={"1002"}>식음료</MenuItem>
+              <MenuItem value={"1003"}>개발1팀</MenuItem>
+              <MenuItem value={"1004"}>개발2팀</MenuItem>
+              <MenuItem value={"1005"}>청소</MenuItem>
+              <MenuItem value={"1006"}>자재관리</MenuItem>
+              <MenuItem value={"1007"}>IT관리</MenuItem>
+              <MenuItem value={"1008"}>서비스</MenuItem>
+              </Select>
           <form className={classes.container} noValidate>
             {/* 프로필 이미지 :<br /> <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange} /> */}
             <br />
@@ -200,70 +235,82 @@ class StaffAddDialog extends React.Component {
               className={classes.textField}
               onChange={this.handleValueChange}
             />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <br />
+          <br />
           </form>
-          <TextField
-            label="호텔번호"
-            type="text"
-            name="h_id"
-            value={this.state.h_id}
-            onChange={this.handleValueChange}
-          />
+          <br />
+            직급&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="rank"
+                name="rank"
+                value={this.state.rank}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <MenuItem value={"계약직"}>계약직</MenuItem>
+              <MenuItem value={"정규직"}>정규직</MenuItem>
+              <MenuItem value={"매니저"}>매니저</MenuItem>
+              <MenuItem value={"총괄 감독"}>총괄 감독</MenuItem>
+              <MenuItem value={"CEO"}>CEO</MenuItem>
+              </Select>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              은행 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="bank"
+                name="bank"
+                value={this.state.bank}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <MenuItem value={"농협"}>농협</MenuItem>
+              <MenuItem value={"신한"}>신한</MenuItem>
+              <MenuItem value={"국민"}>국민</MenuItem>
+              <MenuItem value={"우체국"}>우체국</MenuItem>
+              <MenuItem value={"카카오뱅크"}>카카오뱅크</MenuItem>
+              <MenuItem value={"기업"}>기업</MenuItem>
+              <MenuItem value={"기타"}>기타</MenuItem>
+              </Select>
+          <br />
           <br />
           <TextField
-            label="코드"
-            type="text"
-            name="code"
-            value={this.state.code}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="등급"
-            type="text"
-            name="rank"
-            value={this.state.rank}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="은행"
-            type="text"
-            name="bank"
-            value={this.state.bank}
-            onChange={this.handleValueChange}
-          />
-          <br />
-          <TextField
-            label="계좌"
+            label="계좌(-을 제외하여 입력)"
             type="text"
             name="account"
             value={this.state.account}
             onChange={this.handleValueChange}
           />
           <br />
+          <br />
           <TextField
-            label="비번"
+            label="비밀번호(계정)"
             type="text"
             name="staff_pw"
             value={this.state.staff_pw}
             onChange={this.handleValueChange}
           />
           <br />
+          <br />
           <TextField
-            label="연봉"
+            label="연봉(won)"
             type="text"
             name="salary"
             value={this.state.salary}
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
-            label="가능여부"
-            type="text"
-            name="is_able"
-            value={this.state.is_able}
-            onChange={this.handleValueChange}
-          />
+          <br />
+          배정가능 여부 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="is_able"
+                name="is_able"
+                value={this.state.is_able}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <MenuItem value={"0"}>불가능</MenuItem>
+              <MenuItem value={"1"}>가능</MenuItem>
+              </Select>
           <br />
         </DialogContent>
         <DialogActions>

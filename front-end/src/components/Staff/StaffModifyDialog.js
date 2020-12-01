@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import StaffInfoDialog from "./StaffInfoDialog";
 import axios from "axios";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 class StaffModifyDialog extends React.Component {
   constructor(props) {
@@ -153,21 +155,42 @@ class StaffModifyDialog extends React.Component {
           <strong>직원 수정</strong>
         </DialogTitle>
         <DialogContent>
-          <TextField
-            label="부서 코드"
-            type="text"
-            name="code"
-            defaultValue={this.props.data.Code}
-            onChange={this.handleValueChange}
-          />
+        소속 부서&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="code"
+                name="code"
+                defaultValue={this.props.data.code}
+                value={this.state.code}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <MenuItem value={"1000"}>관리</MenuItem>
+              <MenuItem value={"1001"}>마케팅</MenuItem>
+              <MenuItem value={"1002"}>식음료</MenuItem>
+              <MenuItem value={"1003"}>개발1팀</MenuItem>
+              <MenuItem value={"1004"}>개발2팀</MenuItem>
+              <MenuItem value={"1005"}>청소</MenuItem>
+              <MenuItem value={"1006"}>자재관리</MenuItem>
+              <MenuItem value={"1007"}>IT관리</MenuItem>
+              <MenuItem value={"1008"}>서비스</MenuItem>
+              </Select>
           <br />
-          <TextField
-            label="직급"
-            type="text"
-            name="rank"
-            defaultValue={this.props.data.Rank}
-            onChange={this.handleValueChange}
-          />
+          <br />
+          직급&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="rank"
+                name="rank"
+                value={this.state.rank}
+                onChange={this.handleValueChange}
+              >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <MenuItem value={"계약직"}>계약직</MenuItem>
+              <MenuItem value={"정규직"}>정규직</MenuItem>
+              <MenuItem value={"매니저"}>매니저</MenuItem>
+              <MenuItem value={"총괄 감독"}>총괄 감독</MenuItem>
+              <MenuItem value={"CEO"}>CEO</MenuItem>
+              </Select>
+          <br />
           <br />
           <TextField
             label="연봉"

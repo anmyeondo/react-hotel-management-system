@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = (theme) => ({
   hidden: {
@@ -100,45 +102,73 @@ class StaffSearchDialog extends React.Component {
       <Dialog open={this.props.open} onClose={this.handleClose}>
         <DialogTitle> 직원 검색</DialogTitle>
         <DialogContent>
-          <TextField
-            label="호텔이름"
-            type="text"
-            name="HOTEL_Name"
-            value={this.state.HOTEL_Name}
-            onChange={this.handleValueChange}
-          />
+            <strong>소속 호텔</strong>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <Select
+                  id="HOTEL_Name"
+                  name="HOTEL_Name"
+                  value={this.state.HOTE_Name}
+                  onChange={this.handleValueChange}
+            >
+                  <MenuItem value={"Deluna"}>Deluna</MenuItem>
+                  <MenuItem value={"BaeJJang"}>BaeJJang</MenuItem>
+                  <MenuItem value={"Heaven"}>Heaven</MenuItem>
+          </Select>
+          <br />
           <br />
           <TextField
-            label="이름"
+            label="이름(First_Name)"
             type="text"
             name="First_Name"
             value={this.state.First_Name}
             onChange={this.handleValueChange}
           />
-          <br />
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <TextField
-            label="성"
+            label="성(Last_Name)"
             type="text"
             name="Last_Name"
             value={this.state.Last_Name}
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
-            label="담당부서"
-            type="text"
-            name="Dept_Name"
-            value={this.state.Dept_Name}
-            onChange={this.handleValueChange}
-          />
           <br />
-          <TextField
-            label="직급"
-            type="text"
-            name="Rank"
-            value={this.state.Rank}
-            onChange={this.handleValueChange}
-          />
+          <br />
+          <strong>소속 부서 : </strong>
+          &nbsp; &nbsp; &nbsp;
+              <Select
+                id="Dept_Name"
+                name="Dept_Name"
+                value={this.state.Dept_Name}
+                onChange={this.handleValueChange}
+              >
+              <MenuItem value={"관리"}>관리</MenuItem>
+              <MenuItem value={"마케팅"}>마케팅</MenuItem>
+              <MenuItem value={"식음료"}>식음료</MenuItem>
+              <MenuItem value={"개발1팀"}>개발1팀</MenuItem>
+              <MenuItem value={"개발2팀"}>개발2팀</MenuItem>
+              <MenuItem value={"청소"}>청소</MenuItem>
+              <MenuItem value={"자재관리"}>자재관리</MenuItem>
+              <MenuItem value={"IT관리"}>IT관리</MenuItem>
+              <MenuItem value={"서비스"}>서비스</MenuItem>
+              </Select>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <strong>직급 :</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="Rank"
+                name="Rank"
+                value={this.state.Rank}
+                onChange={this.handleValueChange}
+              >
+              <MenuItem value={"계약직"}>계약직</MenuItem>
+              <MenuItem value={"정규직"}>정규직</MenuItem>
+              <MenuItem value={"매니저"}>매니저</MenuItem>
+              <MenuItem value={"총괄 감독"}>총괄 감독</MenuItem>
+              <MenuItem value={"CEO"}>CEO</MenuItem>
+              </Select>
+
+
+          <br />
           <br />
         </DialogContent>
         <DialogActions>
