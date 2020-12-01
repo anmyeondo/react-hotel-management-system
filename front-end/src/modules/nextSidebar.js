@@ -98,7 +98,7 @@ export default function LeftSidebar() {
           <ListItemText primary={"Staffs"} />
         </ListItem>
 
-        <ListItem button>
+        <ListItem button component={Link} to="/customer">
           <ListItemIcon>
             <Person />
           </ListItemIcon>
@@ -111,13 +111,13 @@ export default function LeftSidebar() {
           <ListItemText primary="Service Management"></ListItemText>
         </StyledListItemHeader>
 
-        <ListItem button>
+        <ListItem button component={Link} to="/reservation">
           <ListItemIcon>
             <EventAvailable />
           </ListItemIcon>
           <ListItemText primary={"Reservations"} />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/order">
           <ListItemIcon>
             <RoomService />
           </ListItemIcon>
@@ -130,25 +130,25 @@ export default function LeftSidebar() {
           <ListItemText primary="Facility Management"></ListItemText>
         </StyledListItemHeader>
 
-        <ListItem button>
+        <ListItem button component={Link} to="/hotel">
           <ListItemIcon>
             <Business />
           </ListItemIcon>
           <ListItemText primary={"Hotel"} />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/room">
           <ListItemIcon>
             <MeetingRoom />
           </ListItemIcon>
           <ListItemText primary={"Room"} />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/restaurant">
           <ListItemIcon>
             <RestaurantIcon />
           </ListItemIcon>
           <ListItemText primary={"Restaurant"} />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/parking_lot">
           <ListItemIcon>
             <LocalParkingIcon />
           </ListItemIcon>
@@ -156,7 +156,7 @@ export default function LeftSidebar() {
         </ListItem>
       </List>
       <StyledList>
-        <ListItem button>
+        <ListItem button component={Link} to="/header">
           <ListItemIcon>
             <HomeOutlinedIcon />
           </ListItemIcon>
