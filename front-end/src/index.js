@@ -9,6 +9,14 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: '"NSK-Midium"',
   },
+  palette: {
+    secondary: {
+      main: "#b0e0e6",
+    },
+    primary: {
+      main: "#b0e6e0",
+    },
+  },
 });
 
 ReactDOM.render(
