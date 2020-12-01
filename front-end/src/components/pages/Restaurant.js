@@ -21,7 +21,6 @@ import AddBox from '@material-ui/icons/AddBox';
 import Refresh from '@material-ui/icons/Refresh';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import RestaurantInfoRow from "../Restaurant/RestaurantInfoRow";
 import RestaurantAddDialog from "../Restaurant/RestaurantAddDialog";
 import ViewRestaurant from "../ViewRestaurant";
 
@@ -150,6 +149,7 @@ class Restaurant extends React.Component {
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
         <h1 align="center" style={{background:"lightblue"}}><strong>호텔 레스토랑 관리 페이지입니다.</strong></h1>
+        <div align="center">
           <form className={classes.container} noValidate>
               호텔 선택 : &nbsp; &nbsp;
               <Select
@@ -180,6 +180,7 @@ class Restaurant extends React.Component {
               />
               </div>
             </form>
+          </div>
             <div className={classes.body}>
               <Grid container spacing={5} justify="center">
                 {this.state.restaurants.map((c) => {

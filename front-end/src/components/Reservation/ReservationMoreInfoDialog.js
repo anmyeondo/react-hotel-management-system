@@ -10,6 +10,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -77,7 +78,28 @@ class ReservationMoreInfoDialog extends React.Component {
       <Dialog maxWidth="lg" open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
           {" "}
-          <strong>예약 상세정보</strong>
+          <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>예약 상세정보</h3></strong>
+                </Grid>
+          <br/>
+          <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                  <img
+                    src={"https://static.thenounproject.com/png/1131224-200.png"}
+                    style={{ width: "128px", height: "128px", align: "center" }}
+                  />
+                </Grid>
         </DialogTitle>
         <DialogContent>
           <List className={classes.root}>

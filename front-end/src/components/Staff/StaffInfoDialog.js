@@ -55,6 +55,10 @@ class StaffInfoDialog extends Component {
         this.props.setInfo(this.state);
         this.props.handleInfoClose();
     }
+
+    handleNationChange = (value) => {
+        this.setState({nationality: value});
+    }
     
     render() {
         return (
@@ -126,7 +130,7 @@ class StaffInfoDialog extends Component {
                     <br/>
                     <br/>
                     <p>국가</p>
-                    <SelectCountry/>
+                    <SelectCountry changeCountry={this.handleNationChange}/>
                     <br/>
                     <TextField
                         label="전화번호"

@@ -7,6 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import SelectRank from "./../../modules/SelectRank";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = (theme) => ({
   hidden: {
@@ -79,7 +83,10 @@ class CustomerSearchDialog extends React.Component {
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
   }
-
+  // MVP 등급 선택시 실행
+  handleRankChange = (value) => {
+    this.setState({ Rank: value });
+  };
   searchCustomer() {
     return axios({
       method: "post",
@@ -122,13 +129,21 @@ class CustomerSearchDialog extends React.Component {
             onChange={this.handleValueChange}
           />
           <br />
-          <TextField
-            label="멤버쉽 등급"
-            type="text"
-            name="Rank"
-            value={this.state.Rank}
-            onChange={this.handleValueChange}
-          />
+          <br />
+          멤버쉽 등급&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="Rank"
+                name="Rank"
+                value={this.state.Rank}
+                onChange={this.handleValueChange}
+              >
+              <MenuItem value={"REGULAR"}>REGULAR</MenuItem>
+              <MenuItem value={"BRONZE"}>BRONZE</MenuItem>
+              <MenuItem value={"SILVER"}>SILVER</MenuItem>
+              <MenuItem value={"GOLD"}>GOLD</MenuItem>
+              <MenuItem value={"Diamond"}>Diamond</MenuItem>
+              <MenuItem value={"RED"}>RED</MenuItem>
+              </Select>
           <br />
         </DialogContent>
         <DialogActions>
