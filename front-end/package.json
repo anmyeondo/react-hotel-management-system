@@ -12,6 +12,7 @@
     "axios": "^0.21.0",
     "axois": "^0.0.1-security",
     "caniuse-lite": "^1.0.30001161",
+    "file-loader": "^6.2.0",
     "flexboxgrid": "6.3.1",
     "font-awesome": "4.7.0",
     "global": "^4.4.0",
@@ -28,6 +29,7 @@
     "react-select-country-list": "^2.2.1",
     "react-tap-event-plugin": "2.0.1",
     "recharts": "0.20.8",
+    "url-loader": "^4.1.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
