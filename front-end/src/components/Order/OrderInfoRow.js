@@ -3,11 +3,13 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
-import Clear from "@material-ui/icons/Clear";
-import Done from "@material-ui/icons/DoneOutline";
+import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import OrderMoreInfoDialog from "./OrderMoreInfoDialog";
 import OrderDeleteBtn from "./OrderDeleteBtn";
 import OrderAssigned from "./OrderAssigned";
+import DisStaffBtn from "./DisStaffBtn";
+import axios from "axios";
 
 const Styles = (theme) => ({
   thirdary: {
@@ -22,9 +24,16 @@ class OrderInfoRow extends React.Component {
     this.state = {
       MoreInfoisOpen: false,
       OrderAssignedisOpen: false,
+      is_done: 0,
     };
   }
 
+  componentDidMount = () => {
+    const nextState = this.props.data.Is_Done;
+    this.setState({
+      is_done: nextState,
+    });
+  };
   //Info
   closeMoreInfoDialog = () => {
     console.log("값이 변경됨");
@@ -49,7 +58,22 @@ class OrderInfoRow extends React.Component {
   closeOrderModifyDialog = () => {
     console.log("값이 변경됨");
     this.setState({ OrderModifyisOpen: false });
-    console.log(this.state);
+  };
+
+  toggleValueChange = async (e) => {
+    const nextState = !this.state.is_done;
+    await this.setState({ is_done: nextState });
+    console.log(this.state.is_done);
+    await axios({
+      method: "post",
+      url: "/orders/isdone",
+      data: {
+        hotel: this.props.data.Hotel_ID,
+        order_id: this.props.data.Order_ID,
+        is_done: this.state.is_done,
+      },
+    });
+    console.log(this.state.is_done);
   };
 
   render() {
@@ -74,7 +98,7 @@ class OrderInfoRow extends React.Component {
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <span style={{ textJustify: "center" }}>
-            {this.props.data.Staff_ID === 0 ? (
+            {this.props.data.Staff_ID < 0 ? (
               <span style={{ color: "red" }}>미지정</span>
             ) : (
               this.props.data.Last_Name +
@@ -86,10 +110,16 @@ class OrderInfoRow extends React.Component {
           </span>
         </TableCell>
         <TableCell className={classes.tablecelling}>
-          <span style={{ textJustify: "center" }}>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            {this.props.data.Is_Done === 0 ? <Clear /> : <Done />}
-          </span>
+          <FormControlLabel
+            control={
+              <Switch
+                size="small"
+                checked={this.state.is_done}
+                onChange={this.toggleValueChange}
+              />
+            }
+            labelPlacement="start"
+          />
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <Button
@@ -101,13 +131,21 @@ class OrderInfoRow extends React.Component {
           </Button>
         </TableCell>
         <TableCell align="center">
-          <Button
-            onClick={this.handleAssignedOpen}
-            color="primary"
-            variant="contained"
-          >
-            배정하기
-          </Button>
+          {this.props.data.Staff_ID < 0 && (
+            <Button
+              color="primary"
+              onClick={this.handleAssignedOpen}
+              variant="contained"
+            >
+              배정
+            </Button>
+          )}
+          {this.props.data.Staff_ID > 0 && (
+            <DisStaffBtn
+              data={this.props.data}
+              refreshTable={this.props.refreshTable}
+            />
+          )}
         </TableCell>
         <TableCell align="center">
           <OrderDeleteBtn

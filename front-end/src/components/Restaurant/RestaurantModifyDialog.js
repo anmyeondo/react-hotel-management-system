@@ -7,12 +7,12 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import { Divider } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import CourseAddDialog from "./CourseAddDialog";
+import axios from "axios";
 
 const styles = makeStyles((theme) => ({
   root: {

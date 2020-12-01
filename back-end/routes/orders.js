@@ -50,7 +50,7 @@ router.post('/staffInforms', (req, res) => {
 
   var hotel = req.body.hotel;
   var code = req.body.code;
-  var q = `SELECT * FROM Staff NATURAL JOIN Information WHERE Hotel_ID = ${hotel} AND Is_Available = 1`;
+  var q = `SELECT * FROM Staff NATURAL JOIN Information WHERE Hotel_ID = ${hotel} AND Is_Available = 1 AND Staff_ID > 1`;
   if (code) {
     q += ` AND Code = ${code}`;
   }
@@ -72,7 +72,6 @@ router.post('/assign', (req, res) => {
   var hotel = req.body.hotel;
   var order_id = req.body.order_id;
   var staff_id = req.body.staff_id;
-  var is_done = req.body.is_done ? 1 : 0;
 
   var date = new Date();
   var yyyy = date.getFullYear().toString();
@@ -84,10 +83,8 @@ router.post('/assign', (req, res) => {
   today = yyyy + '-' + mm + '-' + dd;
 
   var q1 = `UPDATE Room_Service SET Assigned_Time = '${today}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
-  var q2 = `UPDATE Room_Service SET Is_Done = '${is_done}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
-  var q3 = `UPDATE Room_Service SET Staff_ID = '${staff_id}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
-  var q4 = `UPDATE Staff SET Is_Available = 0 WHERE Hotel_ID = ${hotel} AND Staff_ID = ${staff_id}`;
-  var q5 = `UPDATE Staff SET Is_Available = 1 WHERE Hotel_ID = ${hotel} AND Staff_ID = ${staff_id}`;
+  var q2 = `UPDATE Room_Service SET Staff_ID = '${staff_id}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
+  var q3 = `UPDATE Staff SET Is_Available = 0 WHERE Hotel_ID = ${hotel} AND Staff_ID = ${staff_id}`;
 
   let dbInsert = (q) => {
     connection.query(q, (err) => {
@@ -100,18 +97,61 @@ router.post('/assign', (req, res) => {
     });
   };
 
-  if (staff_id !== '') {
-    dbInsert(q1);
-    dbInsert(q2);
-    dbInsert(q3);
-    if (is_done === 1) {
-      dbInsert(q5);
-    } else {
-      dbInsert(q4);
-    }
-  } else {
-    dbInsert(q2);
-  }
+  dbInsert(q1);
+  dbInsert(q2);
+  dbInsert(q3);
+});
+
+/* 직원 배정 해제 */
+router.post('/disstaff', (req, res) => {
+  const startTime = new Date();
+  console.log('직원 배정 해제를 시작합니다 : ' + startTime);
+
+  var hotel = req.body.hotel;
+  var order_id = req.body.order_id;
+  var staff_id = req.body.staff_id;
+
+  var q1 = `UPDATE Staff SET Is_Available = 1 WHERE Hotel_ID = ${hotel} AND Staff_ID = ${staff_id}`;
+  var q2 = `UPDATE Room_Service SET Staff_ID = -${hotel} WHERE Order_ID = ${order_id}`;
+
+  let dbInsert = (q) => {
+    connection.query(q, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('입력 완료');
+        res.send();
+      }
+    });
+  };
+
+  dbInsert(q1);
+  dbInsert(q2);
+});
+
+// 주문 완료 상태 갱신
+router.post('/isdone', (req, res) => {
+  const startTime = new Date();
+  console.log('주문 상태 갱신을 시작합니다 : ' + startTime);
+
+  var hotel = req.body.hotel;
+  var order_id = req.body.order_id;
+  var is_done = req.body.is_done ? 1 : 0;
+
+  var q = `UPDATE Room_Service SET Is_Done = '${is_done}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
+
+  let dbInsert = (q) => {
+    connection.query(q, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('입력 완료');
+        res.send();
+      }
+    });
+  };
+
+  dbInsert(q);
 });
 
 /* 주문 정보 검색 API */

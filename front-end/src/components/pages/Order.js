@@ -262,7 +262,7 @@ class Orders extends React.Component {
                   <strong>&nbsp;&nbsp;&nbsp;요청 사항</strong>
                 </TableCell>
                 <TableCell align="center">
-                  <strong style={{ color: "blue" }}>배정</strong>
+                  <strong style={{ color: "black" }}>배정</strong>
                 </TableCell>
                 <TableCell align="center">
                   <strong style={{ color: "red" }}>삭제</strong>

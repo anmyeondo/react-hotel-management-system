@@ -3,12 +3,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import { withStyles } from "@material-ui/core/styles";
-import Clear from "@material-ui/icons/Clear";
-import Done from "@material-ui/icons/DoneOutline";
-import OrderMoreInfoDialog from "./OrderMoreInfoDialog";
-import OrderDeleteBtn from "./OrderDeleteBtn";
-import OrderAssigned from "./OrderAssigned";
-import axios from "axios";
 
 const Styles = (theme) => ({
   thirdary: {
@@ -18,8 +12,10 @@ const Styles = (theme) => ({
 });
 
 class AssignedInfoRow extends React.Component {
-  clickAssign = () => {
-    this.props.assignStaff(this.props.data.Staff_ID);
+  clickAssign = async () => {
+    await this.props.assignStaff(this.props.data.Staff_ID);
+    this.props.handleClose();
+    this.props.refreshTable();
   };
   render() {
     const { classes } = this.props;
@@ -33,7 +29,7 @@ class AssignedInfoRow extends React.Component {
         </TableCell>
         <TableCell>
           <Button color="primary" onClick={this.clickAssign}>
-            배정하기
+            배정
           </Button>
         </TableCell>
       </TableRow>

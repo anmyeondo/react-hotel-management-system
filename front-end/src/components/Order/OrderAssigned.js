@@ -11,8 +11,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Button } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import AssignedInfoRow from "./AssignedInfoRow";
@@ -46,19 +44,14 @@ class OrderAssigned extends Component {
       dept_staff: [],
       rowsPerPage: 5,
       page: 0,
-      is_done: "",
-      staff_id: "",
+      is_done: 0,
+      staff_id: 0,
     };
   }
 
   componentDidMount() {
     this.getDepartCode();
     this.getStaffs(0);
-
-    const nextState = this.props.data.Is_Done;
-    this.setState({
-      is_done: nextState,
-    });
   }
 
   getDepartCode = async () => {
@@ -97,7 +90,6 @@ class OrderAssigned extends Component {
       data: {
         hotel: this.props.data.Hotel_ID,
         order_id: this.props.data.Order_ID,
-        is_done: this.state.is_done,
         staff_id: this.state.staff_id,
       },
     });
@@ -107,12 +99,12 @@ class OrderAssigned extends Component {
     await this.setState({
       staff_id: id,
     });
+
+    await this.pushData();
   };
 
   handleClose = () => {
-    this.pushData();
     this.props.handleAssignedClose();
-    this.props.refreshTable();
   };
 
   handleValueChange = async (e) => {
@@ -129,11 +121,6 @@ class OrderAssigned extends Component {
   handleChangeRowsPerPage = (event) => {
     this.setState({ RowsPerPage: +event.target.value });
     this.setState({ page: 0 });
-  };
-
-  toggleValueChange = () => {
-    const nextState = !this.state.is_done;
-    this.setState({ is_done: nextState });
   };
 
   render() {
@@ -182,8 +169,9 @@ class OrderAssigned extends Component {
                     return (
                       <AssignedInfoRow
                         data={c}
-                        refreshTable={this.refreshTable}
+                        refreshTable={this.props.refreshTable}
                         assignStaff={this.assignStaff}
+                        handleClose={this.handleClose}
                       />
                     );
                   })}
@@ -201,18 +189,6 @@ class OrderAssigned extends Component {
               />
             )}
           </Paper>
-
-          <FormControlLabel
-            control={
-              <Switch
-                size="small"
-                checked={this.state.is_done}
-                onChange={this.toggleValueChange}
-              />
-            }
-            label={"요청 완료"}
-            labelPlacement="start"
-          />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={this.handleClose}>
