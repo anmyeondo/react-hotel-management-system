@@ -38,7 +38,6 @@ const inRange = (pday, fday) => {
   return past <= today && today <= future;
 };
 
-
 class ViewRoom extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +52,6 @@ class ViewRoom extends Component {
     this.setState({
       moreInfoisOpen: true,
     });
-
   };
 
   handleMoreInfoClose = () => {
@@ -146,6 +144,7 @@ class ViewRoom extends Component {
           handleMoreInfoClose={this.handleMoreInfoClose}
           moreInfo={this.state.moreInfo}
           data={this.props.data}
+          inRange={inRange}
         />
       </Paper>
     );
