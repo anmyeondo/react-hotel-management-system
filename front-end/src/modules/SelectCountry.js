@@ -16,6 +16,7 @@ class SelectCountry extends Component {
  
   changeHandler = value => {
     this.setState({ value })
+    this.props.changeCountry(value.label);
   }
  
   render() {

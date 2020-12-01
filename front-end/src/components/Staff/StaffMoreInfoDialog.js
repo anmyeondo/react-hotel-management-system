@@ -18,6 +18,7 @@ const styles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 720,
+    minHeight: "1080px",
     backgroundColor: theme.palette.background.paper,
   },
 
@@ -191,7 +192,7 @@ class StaffMoreInfoDialog extends React.Component {
               >
                   <img
                     src={this.props.data.Staff_Image}
-                    style={{ width: "96px", height: "96px", align: "center" }}
+                    style={{ width: "112px", height: "112px", align: "center" }}
                   />
                 </Grid>
         </DialogTitle>
