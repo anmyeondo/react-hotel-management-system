@@ -10,6 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import SelectRank from "./../../modules/SelectRank";
 import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -130,8 +132,23 @@ class CustomerModifyDialog extends React.Component {
             }}
           />
           <br />
-          <InputLabel htmlFor="max-width">MVP 등급</InputLabel>
-          <SelectRank changeHandler={this.handleRankChange} />
+          <br />
+          멤버쉽 등급&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Select
+                id="Rank"
+                name="Rank"
+                defaultValue={this.props.data.Rank}
+                value={this.state.Rank}
+                onChange={this.handleValueChange}
+              >
+              <MenuItem value={"REGULAR"}>REGULAR</MenuItem>
+              <MenuItem value={"BRONZE"}>BRONZE</MenuItem>
+              <MenuItem value={"SILVER"}>SILVER</MenuItem>
+              <MenuItem value={"GOLD"}>GOLD</MenuItem>
+              <MenuItem value={"Diamond"}>Diamond</MenuItem>
+              <MenuItem value={"RED"}>RED</MenuItem>
+              </Select>
+          <br />
           <br />
           <TextField
             label="이메일"
@@ -141,6 +158,7 @@ class CustomerModifyDialog extends React.Component {
             onChange={this.handleValueChange}
           />
           <br />
+          <br />
           <TextField
             label="팩스번호"
             type="text"
@@ -149,6 +167,7 @@ class CustomerModifyDialog extends React.Component {
             onChange={this.handleValueChange}
           />
           <br />
+          <br />
           <TextField
             label="전화번호"
             type="text"
@@ -156,6 +175,7 @@ class CustomerModifyDialog extends React.Component {
             defaultValue={this.props.data.Phone_Number}
             onChange={this.handleValueChange}
           />
+          <br />
           <br />
           <TextField
             label="마일리지"

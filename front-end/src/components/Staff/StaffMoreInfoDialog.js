@@ -12,6 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -171,12 +172,39 @@ class StaffMoreInfoDialog extends React.Component {
       <Dialog maxWidth="lg" open={this.props.open} onClose={this.handleClose}>
         <DialogTitle>
           {" "}
-          <strong>직원 상세정보</strong> 
+          <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>직원 상세정보</h3></strong>
+                </Grid>
           <br/>
-          <img src = {this.props.data.Staff_Image} style={{width:"96px",height:"96px"}}/>
+          <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                  <img
+                    src={this.props.data.Staff_Image}
+                    style={{ width: "96px", height: "96px", align: "center" }}
+                  />
+                </Grid>
         </DialogTitle>
         <DialogContent>
-          <h4><strong>About</strong></h4>
+        <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>About</h3></strong>
+                </Grid>
           <List className={classes.root}>
             <Divider/><Divider/>
             <Divider/><Divider/>
@@ -226,7 +254,15 @@ class StaffMoreInfoDialog extends React.Component {
               </ListItem>
             <Divider/><Divider/>
             <Divider/><Divider/>
-            <h4><strong>Contact</strong></h4>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>Contact</h3></strong>
+                </Grid>
             <Divider/>
             <ListItem>
               <ListItemText
@@ -246,7 +282,15 @@ class StaffMoreInfoDialog extends React.Component {
             </ListItem>
             <Divider/><Divider/>
             <Divider/><Divider/>
-            <h4><strong>Address</strong></h4>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>Address</h3></strong>
+                </Grid>
             <Divider/>
             <ListItem>
               <ListItemText
@@ -265,7 +309,15 @@ class StaffMoreInfoDialog extends React.Component {
             </ListItem>
             <Divider/><Divider/>
             <Divider/><Divider/>
-            <h4><strong>Anniversary</strong></h4>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>Anniversary</h3></strong>
+                </Grid>
             <Divider/>
             <ListItem>
               <ListItemText

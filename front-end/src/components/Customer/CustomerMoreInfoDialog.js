@@ -12,11 +12,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import CustomerInfoDialog from './CustomerInfoDialog';
+import Grid from "@material-ui/core/Grid";
 
 const styles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 720,
+    maxWidth: 1080,
     backgroundColor: theme.palette.background.paper,
   },
 
@@ -33,6 +34,7 @@ const styles = makeStyles((theme) => ({
     width: 400,
   },
 }));
+
 
 class CustomerMoreInfoDialog extends React.Component {
   constructor(props) {
@@ -170,42 +172,134 @@ class CustomerMoreInfoDialog extends React.Component {
     const classes = makeStyles();
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <DialogTitle> <strong>고객 상세정보</strong></DialogTitle>
+        <DialogTitle>            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>고객 상세정보</h3></strong>
+                </Grid></DialogTitle>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                  <img
+                    src="https://image.flaticon.com/icons/png/512/185/185538.png"
+                    style={{ width: "96px", height: "96px", align: "center" }}
+                  />
+                </Grid>
+        <br/>
+        <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>About</h3></strong>
+                </Grid>
+        <Divider/><Divider/>
         <DialogContent>
           <List className={classes.root}>
           <ListItem>
-            <ListItemText primary="이름" secondary={this.props.data.Last_Name+this.props.data.First_Name}/>
+            <ListItemText primary="이름(ID)" secondary={this.props.data.Last_Name+this.props.data.First_Name + "(" + this.props.data.Customer_ID + ")"}/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ListItemText primary="국적" secondary={this.props.data.Nationality} />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ListItemText primary="성별" secondary={this.props.data.Gender} />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ListItemText primary="멤버쉽 등급" secondary={this.props.data.Rank} />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ListItemText primary="마일리지" secondary={this.props.data.Mileage} />
           </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="국적" secondary={this.props.data.Nationality} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="Gender" secondary={this.props.data.Gender} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="멤버쉽 등급" secondary={this.props.data.Rank} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="Phone" secondary={this.props.data.Phone_Number} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="E-Mail" secondary={this.props.data.E_Mail} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-          <ListItemText primary="생일" secondary={this.props.data.Birthday.slice(undefined, 10)} />
-          </ListItem>
-          <ListItem>
-          <ListItemText primary="등록 일자" secondary={this.props.data.Reg_Date.slice(undefined, 10)} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <Divider variant="inset" component="li" />
-          <Divider variant="inset" component="li" />
+          <Divider/><Divider/>
+            <Divider/><Divider/>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>Contact</h3></strong>
+                </Grid>
+            <Divider/><Divider/>
+            <ListItem>
+              <ListItemText
+                primary="Phone"
+                secondary={this.props.data.Phone_Number}
+              />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <ListItemText
+                primary="이메일"
+                secondary={this.props.data.E_Mail}
+              />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <ListItemText
+                primary="Fax"
+                secondary={this.props.data.Fax}
+              />
+            </ListItem>
+            <Divider/><Divider/>
+            <Divider/><Divider/>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>Address</h3></strong>
+                </Grid>
+            <Divider/><Divider/>
+            <ListItem>
+              <ListItemText
+                  primary="우편번호"
+                  secondary={this.props.data.Zip}
+                />
+                <br/>
+                <ListItemText
+                  primary="우편번호 정보"
+                  secondary={this.props.data.State + " " + this.props.data.City + " " + this.props.data.Street_Name + " " + this.props.data.Street_Number} 
+                />
+              <ListItemText
+                  primary="상세주소"
+                  secondary={this.props.data.Apt_Num}
+                />
+            </ListItem>
+            <Divider/><Divider/>
+            <Divider/><Divider/>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <strong><h3>Anniversary</h3></strong>
+                </Grid>
+            <Divider/>
+            <ListItem>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                              <ListItemText
+                primary="생일"
+                secondary={this.props.data.Birthday.slice(undefined, 10)}
+              />
+                </Grid>
+            </ListItem>
+            <Divider/><Divider/><Divider/><Divider/>
         </List>
         </DialogContent>
         <DialogActions>

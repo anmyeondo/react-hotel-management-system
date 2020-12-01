@@ -21,7 +21,6 @@ import AddBox from '@material-ui/icons/AddBox';
 import Refresh from '@material-ui/icons/Refresh';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import RestaurantInfoRow from "../Restaurant/RestaurantInfoRow";
 import RestaurantAddDialog from "../Restaurant/RestaurantAddDialog";
 import ViewRestaurant from "../ViewRestaurant";
 
