@@ -49,7 +49,6 @@ class SelectFloor extends Component {
 
   changeHandler = async (value) => {
     await this.setState({ value });
-    this.props.getRoomInfo(this.state.value);
   };
 
   render() {

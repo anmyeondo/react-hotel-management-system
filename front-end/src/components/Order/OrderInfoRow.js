@@ -73,7 +73,6 @@ class OrderInfoRow extends React.Component {
         is_done: this.state.is_done,
       },
     });
-    console.log(this.state.is_done);
   };
 
   render() {
