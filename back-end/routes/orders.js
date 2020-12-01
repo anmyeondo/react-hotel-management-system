@@ -15,7 +15,7 @@ router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Order 정보를 불러옵니다 : ' + startTime);
 
-  const q = `SELECT * FROM Room_Service NATURAL JOIN Room NATURAL JOIN Staff NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Hotel`;
+  const q = `SELECT * FROM Room_Service NATURAL JOIN Room NATURAL JOIN Staff NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Hotel ORDER BY Order_Time`;
   console.log(q);
   connection.query(q, (err, rows, fields) => {
     if (err) {
@@ -28,16 +28,17 @@ router.get('/informs', (req, res, next) => {
 });
 
 // 모든 부서 정보 불러 오기
-router.get('/departments', (req, res) => {
+router.post('/departments', (req, res) => {
   var startTime = new Date();
   console.log('부서 정보를 불러옵니다 : ' + startTime);
 
-  const q = `SELECT * FROM Department_Code`;
+  var hotel = req.body.hotel;
+  const q = `SELECT * FROM Department NATURAL JOIN Department_Code WHERE Hotel_ID = ${hotel}`;
   connection.query(q, (err, rows, fields) => {
     if (err) {
       console.log(err);
     } else {
-      console.log('Order 정보 출력 완료');
+      console.log('부서 정보 출력 완료');
       res.send(JSON.stringify(rows));
     }
   });
@@ -47,8 +48,9 @@ router.post('/staffInforms', (req, res) => {
   var startTime = new Date();
   console.log('부서별 직원 정보를 불러옵니다 : ' + startTime);
 
+  var hotel = req.body.hotel;
   var code = req.body.code;
-  var q = `SELECT * FROM Staff NATURAL JOIN Information WHERE Is_Available = 1`;
+  var q = `SELECT * FROM Staff NATURAL JOIN Information WHERE Hotel_ID = ${hotel} AND Is_Available = 1`;
   if (code) {
     q += ` AND Code = ${code}`;
   }
@@ -67,6 +69,7 @@ router.post('/assign', (req, res) => {
   const startTime = new Date();
   console.log('직원 배정을 시작합니다 : ' + startTime);
 
+  var hotel = req.body.hotel;
   var order_id = req.body.order_id;
   var staff_id = req.body.staff_id;
   var is_done = req.body.is_done ? 1 : 0;
@@ -80,36 +83,35 @@ router.post('/assign', (req, res) => {
   if (dd.length === 1) dd = '0' + dd;
   today = yyyy + '-' + mm + '-' + dd;
 
-  var q1 = `UPDATE Room_Service SET Assigned_Time = '${today}' WHERE Order_ID = ${order_id}`;
-  var q2 = `UPDATE Room_Service SET Is_Done = '${is_done}' WHERE Order_ID = ${order_id}`;
-  var q3 = `UPDATE Staff SET Is_Available = 0 WHERE Staff_ID = ${staff_id}`;
+  var q1 = `UPDATE Room_Service SET Assigned_Time = '${today}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
+  var q2 = `UPDATE Room_Service SET Is_Done = '${is_done}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
+  var q3 = `UPDATE Room_Service SET Staff_ID = '${staff_id}' WHERE Hotel_ID = ${hotel} AND Order_ID = ${order_id}`;
+  var q4 = `UPDATE Staff SET Is_Available = 0 WHERE Hotel_ID = ${hotel} AND Staff_ID = ${staff_id}`;
+  var q5 = `UPDATE Staff SET Is_Available = 1 WHERE Hotel_ID = ${hotel} AND Staff_ID = ${staff_id}`;
 
-  connection.query(q1, (err, rows, fields) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Order assined time update 완료');
-      res.send();
-    }
-  });
+  let dbInsert = (q) => {
+    connection.query(q, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('입력 완료');
+        res.send();
+      }
+    });
+  };
 
-  connection.query(q2, (err, rows, fields) => {
-    if (err) {
-      console.log(err);
+  if (staff_id !== '') {
+    dbInsert(q1);
+    dbInsert(q2);
+    dbInsert(q3);
+    if (is_done === 1) {
+      dbInsert(q5);
     } else {
-      console.log('Order Is_done update 완료');
-      res.send();
+      dbInsert(q4);
     }
-  });
-
-  connection.query(q3, (err, rows, fields) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Staff Assign 완료');
-      res.send();
-    }
-  });
+  } else {
+    dbInsert(q2);
+  }
 });
 
 /* 주문 정보 검색 API */

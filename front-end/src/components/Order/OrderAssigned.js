@@ -63,8 +63,11 @@ class OrderAssigned extends Component {
 
   getDepartCode = async () => {
     await axios({
-      method: "get",
+      method: "post",
       url: "/orders/departments",
+      data: {
+        hotel: this.props.data.Hotel_ID,
+      },
     }).then((res) => {
       this.setState({
         departments: res.data,
@@ -76,7 +79,10 @@ class OrderAssigned extends Component {
     await axios({
       method: "post",
       url: "/orders/staffInforms",
-      data: { code: department_code },
+      data: {
+        hotel: this.props.data.Hotel_ID,
+        code: department_code,
+      },
     }).then((res) => {
       this.setState({
         dept_staff: res.data,
@@ -89,6 +95,7 @@ class OrderAssigned extends Component {
       method: "post",
       url: "/orders/assign",
       data: {
+        hotel: this.props.data.Hotel_ID,
         order_id: this.props.data.Order_ID,
         is_done: this.state.is_done,
         staff_id: this.state.staff_id,
