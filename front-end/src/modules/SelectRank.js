@@ -23,6 +23,14 @@ class SelectRank extends Component {
         value: "Silver",
         label: "Silver",
       },
+      {
+        value: "BRONZE",
+        label: "BRONZE",
+      },  
+      {
+        value: "REGULAR",
+        label: "REGULAR",
+      },
     ];
 
     this.state = {
