@@ -13,6 +13,7 @@ import AdminMain from "./components/pages/AdminMain";
 import Order from "./components/pages/Order";
 import axios from "axios";
 import "./App.css";
+import "./index.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -92,9 +93,18 @@ class App extends React.Component {
           path="/room"
           render={() => <Room checkPermission={this.checkPermission} />}
         />
-        <Route path="/restaurant" render={() => (<Restaurant checkPermission={this.checkPermission}/>)}/>
-        <Route path="/parking_lot" render={() => (<Parkinglot checkPermission={this.checkPermission}/>)}/>
-        <Route path="/order" render={() => (<Order checkPermission={this.checkPermission}/>)}/>
+        <Route
+          path="/restaurant"
+          render={() => <Restaurant checkPermission={this.checkPermission} />}
+        />
+        <Route
+          path="/parking_lot"
+          render={() => <Parkinglot checkPermission={this.checkPermission} />}
+        />
+        <Route
+          path="/order"
+          render={() => <Order checkPermission={this.checkPermission} />}
+        />
       </Router>
     );
   }
