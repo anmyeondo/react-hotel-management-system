@@ -15,7 +15,7 @@ router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Order 정보를 불러옵니다 : ' + startTime);
 
-  const q = `SELECT * FROM Room_Service NATURAL JOIN Room NATURAL JOIN Staff NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Hotel ORDER BY Order_Time`;
+  const q = `SELECT * FROM Room_Service NATURAL JOIN Room NATURAL JOIN Staff NATURAL JOIN Information NATURAL JOIN Zip NATURAL JOIN Hotel ORDER BY Order_Time DESC`;
   console.log(q);
   connection.query(q, (err, rows, fields) => {
     if (err) {
