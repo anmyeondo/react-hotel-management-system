@@ -78,9 +78,16 @@ class RoomMoreInfoDialog extends React.Component {
                   alignItems="center"
                   justify="center"
                 >
-                  <HomeRoundedIcon
-                    style={{ width: "128px", height: "128px", align: "center" }}
-                  />
+                  <div style={{ minWidth: 500 }}>
+                    <HomeRoundedIcon
+                      style={{
+                        width: "128px",
+                        height: "128px",
+                        align: "center",
+                        marginLeft: "38%",
+                      }}
+                    />
+                  </div>
                 </Grid>
               </DialogTitle>
               <DialogContent>
