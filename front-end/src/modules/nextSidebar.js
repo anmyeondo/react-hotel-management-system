@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 
 const StyledListItemHeader = withStyles({
   root: {
-    backgroundColor: "#C0C0C0",
+    backgroundColor: "#483D8B",
     textAlign: "center",
   },
 })(ListItem);
@@ -88,7 +88,7 @@ export default function LeftSidebar() {
     >
       <List>
         <StyledListItemHeader>
-          <ListItemText primary="Personnel Management"></ListItemText>
+          <ListItemText style={{color:"white"}}primary="Personnel Management"></ListItemText>
         </StyledListItemHeader>
 
         <ListItem button component={Link} to="/staff">
@@ -108,7 +108,7 @@ export default function LeftSidebar() {
       <Divider />
       <List>
         <StyledListItemHeader>
-          <ListItemText primary="Service Management"></ListItemText>
+          <ListItemText style={{color:"white"}} primary="Service Management"></ListItemText>
         </StyledListItemHeader>
 
         <ListItem button component={Link} to="/reservation">
@@ -127,7 +127,7 @@ export default function LeftSidebar() {
       <Divider />
       <List>
         <StyledListItemHeader>
-          <ListItemText primary="Facility Management"></ListItemText>
+          <ListItemText style={{color:"white"}} primary="Facility Management"></ListItemText>
         </StyledListItemHeader>
 
         <ListItem button component={Link} to="/room">
