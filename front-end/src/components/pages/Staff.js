@@ -169,7 +169,7 @@ class Staff extends React.Component {
                 <TableCell className={classes.tablecelling}>직급</TableCell>
                 <TableCell className={classes.tablecelling}>은행</TableCell>
                 <TableCell className={classes.tablecelling}>계좌</TableCell>
-                <TableCell className={classes.tablecelling}>월급</TableCell>
+                <TableCell className={classes.tablecelling}>연봉</TableCell>
                 <TableCell align="center"><strong style={{color:"dimgray"}}>수정</strong></TableCell>
                 <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
                 <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>

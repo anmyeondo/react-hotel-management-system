@@ -45,7 +45,7 @@ class ParkinglotModifyDialog extends React.Component {
       h_name: "",
       zone: "",
       cap: "",
-      v_able: "",
+      v_able: this.props.data.Valet_Parking_is_Able,
     });
     this.props.closeDialog();
   }
