@@ -57,7 +57,7 @@ class StaffInfoRow extends React.Component {
     return (
       <TableRow>
         <TableCell className={classes.tablecelling}>
-            <img src = {this.props.data.Staff_Image} style={{width:"96px",height:"96px"}}/>
+            <img src = {this.props.data.Staff_Image} style={{width:"128px",height:"128px"}}/>
         </TableCell>
         <TableCell className={classes.tablecelling}>
           <strong style={{ textJustify: "center" }}>

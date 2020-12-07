@@ -177,7 +177,7 @@ class OrderMoreInfoDialog extends React.Component {
                 justify="center"
               >
                 <strong><h3>주문 정보</h3></strong>
-                {this.props.data.Assigned_Time}
+                {this.props.data.Order_Time}
                 <br/>
                 </Grid></DialogTitle>
             <Grid

@@ -31,7 +31,7 @@ router.get('/informs', (req, res, next) => {
   var startTime = new Date();
   console.log('Staff 테이블 조회를 시작합니다 : ' + startTime);
 
-  const q = `SELECT * FROM Staff Natural Join Hotel Natural Join Information Natural Join Department_Code Natural Join Zip`;
+  const q = `SELECT * FROM Staff Natural Join Hotel Natural Join Information Natural Join Department_Code Natural Join Zip WHERE Staff_ID > 0`;
 
   connection.query(q, (err, rows, fields) => {
     res.send(JSON.stringify(rows));

@@ -36,7 +36,7 @@ class Staff extends React.Component {
     this.state = {
       customers: [],
       page: 0,
-      rowsPerPage: 10,
+      rowsPerPage: 8,
       addStaffIsOpen: false,
       searchStaffIsOpen: false,
     };
@@ -116,7 +116,7 @@ class Staff extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{background:"mistyrose"}}><strong>호텔 직원 관리 페이지입니다.</strong></h1>
+        <h1 align="center"><strong>Staff Management Page</strong></h1>
         <hr/>
         <div align="right">
           <Button  
