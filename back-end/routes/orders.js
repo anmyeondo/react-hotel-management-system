@@ -171,9 +171,9 @@ router.post('/searchOrder', (req, res) => {
       if (key === 'IsAssigned') {
         if (!data[key]) {
           if (queryCondition === ` WHERE `) {
-            queryCondition += `Staff_ID = 0`;
+            queryCondition += `Staff_ID < 0`;
           } else {
-            queryCondition += ` AND Staff_ID = 0`;
+            queryCondition += ` AND Staff_ID < 0`;
           }
         } else {
           if (queryCondition === ` WHERE `) {

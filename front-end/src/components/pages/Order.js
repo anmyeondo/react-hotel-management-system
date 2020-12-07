@@ -213,7 +213,7 @@ class Orders extends React.Component {
                 onClick={this.changecbox1}
               />
             }
-            label="완료 주문만"
+            label="완료 유무"
             labelPlacement="start"
           />
           <FormControlLabel
@@ -224,7 +224,7 @@ class Orders extends React.Component {
                 onClick={this.changecbox2}
               />
             }
-            label="배정완료 주문만"
+            label="배정 유무"
             labelPlacement="start"
           />
           &nbsp;
