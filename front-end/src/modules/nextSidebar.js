@@ -130,12 +130,6 @@ export default function LeftSidebar() {
           <ListItemText primary="Facility Management"></ListItemText>
         </StyledListItemHeader>
 
-        <ListItem button component={Link} to="/hotel">
-          <ListItemIcon>
-            <Business />
-          </ListItemIcon>
-          <ListItemText primary={"Hotel"} />
-        </ListItem>
         <ListItem button component={Link} to="/room">
           <ListItemIcon>
             <MeetingRoom />

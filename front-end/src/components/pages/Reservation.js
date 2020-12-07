@@ -10,14 +10,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
-import IconButton from '@material-ui/core/IconButton';
-import Search from '@material-ui/icons/Search';
-import Refresh from '@material-ui/icons/Refresh';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import IconButton from "@material-ui/core/IconButton";
+import Search from "@material-ui/icons/Search";
+import Refresh from "@material-ui/icons/Refresh";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import ReservationInfoRow from "../Reservation/ReservationInfoRow";
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const styles = (theme) => ({
   root: {
@@ -27,10 +27,10 @@ const styles = (theme) => ({
   },
   table: {
     minWidth: 1080,
-    border: '3px solid black',
+    border: "3px solid black",
   },
   tablecelling: {
-    align: "center"
+    align: "center",
   },
 });
 
@@ -67,7 +67,7 @@ class Reservation extends React.Component {
 
   componentDidMount() {
     this.props.checkPermission();
-    this.callApi(); 
+    this.callApi();
   }
 
   refreshTable = () => {
@@ -77,15 +77,15 @@ class Reservation extends React.Component {
     this.callApi();
   };
 
-  refreshSearchTable = async() => {
+  refreshSearchTable = async () => {
     this.setState({
       reservations: [],
     });
     const newReservations = await this.callSearchApi();
     console.log(newReservations);
     this.setState({
-      reservations: newReservations
-    })
+      reservations: newReservations,
+    });
   };
 
   setTableOnSearch = (arr) => {
@@ -175,12 +175,11 @@ class Reservation extends React.Component {
   }
 
   changecbox1 = () => {
-    if(this.state.checkbox_cin === true) {
+    if (this.state.checkbox_cin === true) {
       this.setState({
         checkbox_cin: false,
       });
-    }
-    else {
+    } else {
       this.setState({
         checkbox_cin: true,
       });
@@ -188,12 +187,11 @@ class Reservation extends React.Component {
   };
 
   changecbox2 = () => {
-    if(this.state.checkbox_cout === true) {
+    if (this.state.checkbox_cout === true) {
       this.setState({
         checkbox_cout: false,
       });
-    }
-    else {
+    } else {
       this.setState({
         checkbox_cout: true,
       });
@@ -202,70 +200,96 @@ class Reservation extends React.Component {
 
   fordebug = () => {
     console.log(this.state);
-  }
+  };
 
   render() {
     const { classes } = this.props;
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{background:"lightblue"}}><strong>호텔 예약 관리 페이지입니다.</strong></h1>
+        <h1 align="center" style={{ background: "lightblue" }}>
+          <strong>호텔 예약 관리 페이지입니다.</strong>
+        </h1>
+        <div align="center">
           <form className={classes.container} noValidate>
-              <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <TextField
-                id="cin_date_start"
-                name="cin_date_start"
-                label="체크인시작 날짜"
-                type="date"
-                value={this.state.cin_date_start}
-                className={classes.textField}
-                onChange={this.handleValueChange}
-              />
-              &nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TextField
-                id="cin_date_end"
-                name="cin_date_end"
-                label="체크인종료 날짜"
-                type="date"
-                defaultValue={this.state.cin_date_end}
-                className={classes.textField}
-                onChange={this.handleValueChange}
-              />
-              <FormControlLabel control={<Checkbox color="primary" value={this.state.checkbox_cin} onClick={this.changecbox1}/>} label="상관없음" labelPlacement="start" />
-              <br/><br/>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <TextField
-                id="cout_date_start"
-                name="cout_date_start"
-                label="체크아웃시작 날짜"
-                type="date"
-                value={this.state.cout_date_start}
-                className={classes.textField}
-                onChange={this.handleValueChange}
-              />
-              &nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TextField
-                id="cout_date_end"
-                name="cout_date_end"
-                label="체크아웃종료 날짜"
-                type="date"
-                defaultValue={this.state.cout_date_end}
-                className={classes.textField}
-                onChange={this.handleValueChange}
-              />
-              <FormControlLabel control={<Checkbox value={this.state.checkbox_cout} onClick={this.changecbox2}/>} label="상관없음" labelPlacement="start" />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <strong><span>방 유형 : </span></strong>
-              &nbsp;&nbsp;
-              <Select
-                id="room_type"
-                name="room_type"
-                value={this.state.room_type}
-                onChange={this.handleValueChange}
-              >
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <TextField
+              id="cin_date_start"
+              name="cin_date_start"
+              label="체크인시작 날짜"
+              type="date"
+              value={this.state.cin_date_start}
+              className={classes.textField}
+              onChange={this.handleValueChange}
+            />
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <TextField
+              id="cin_date_end"
+              name="cin_date_end"
+              label="체크인종료 날짜"
+              type="date"
+              defaultValue={this.state.cin_date_end}
+              className={classes.textField}
+              onChange={this.handleValueChange}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  value={this.state.checkbox_cin}
+                  onClick={this.changecbox1}
+                />
+              }
+              label="상관없음"
+              labelPlacement="start"
+            />
+            <br />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <TextField
+              id="cout_date_start"
+              name="cout_date_start"
+              label="체크아웃시작 날짜"
+              type="date"
+              value={this.state.cout_date_start}
+              className={classes.textField}
+              onChange={this.handleValueChange}
+            />
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <TextField
+              id="cout_date_end"
+              name="cout_date_end"
+              label="체크아웃종료 날짜"
+              type="date"
+              defaultValue={this.state.cout_date_end}
+              className={classes.textField}
+              onChange={this.handleValueChange}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value={this.state.checkbox_cout}
+                  onClick={this.changecbox2}
+                />
+              }
+              label="상관없음"
+              labelPlacement="start"
+            />
+            <br />
+            <br />
+            <strong>
+              <span>방 유형 : </span>
+            </strong>
+            &nbsp;&nbsp;&nbsp;
+            <Select
+              id="room_type"
+              name="room_type"
+              value={this.state.room_type}
+              onChange={this.handleValueChange}
+            >
               <MenuItem value={"Single"}>Single</MenuItem>
               <MenuItem value={"Double"}>Double</MenuItem>
               <MenuItem value={"Twin"}>Twin</MenuItem>
@@ -274,40 +298,59 @@ class Reservation extends React.Component {
               <MenuItem value={"Ondol"}>Ondol</MenuItem>
               <MenuItem value={"Sweet"}>Sweet</MenuItem>
               <MenuItem value={""}>-</MenuItem>
-              </Select>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <TextField
-                label="방 번호"
-                type="text"
-                id="room_num"
-                name="room_num"
-                value={this.state.room_num}
-                onChange={this.handleValueChange}
-              />
-              <IconButton aria-label="Search" onClick={this.searchReservationBtnOnclick}>
-                <Search />
-              </IconButton>
+            </Select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <TextField
+              label="방 번호"
+              type="text"
+              id="room_num"
+              name="room_num"
+              value={this.state.room_num}
+              onChange={this.handleValueChange}
+            />
+            <IconButton
+              aria-label="Search"
+              onClick={this.searchReservationBtnOnclick}
+            >
+              <Search />
+            </IconButton>
+            <IconButton aria-label="Refresh" onClick={this.refreshTable}>
+              <Refresh />
+            </IconButton>
+          </form>
+        </div>
 
-              <IconButton aria-label="Refresh" onClick={this.refreshTable}>
-                <Refresh />
-
-              </IconButton>
-            </form>
-
-
-          <Paper className={classes.root}>
+        <Paper className={classes.root}>
           <Table className={classes.table}>
-            <TableHead >  
+            <TableHead>
               <TableRow className={classes.table}>
-              <TableCell className={classes.tablecelling}><strong>예약 번호</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>손님 이름</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>방 번호</strong></TableCell>
-                <TableCell className={classes.tablecelling}><strong>방 유형</strong></TableCell>
-                <TableCell className={classes.tablecelling}>체크인 날짜</TableCell>
-                <TableCell className={classes.tablecelling}>체크아웃 날짜</TableCell>
-                <TableCell align="center"><strong style={{color:"dimgray"}}>수정</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"blue"}}>상세정보 조회</strong></TableCell>
-                <TableCell align="center"><strong style={{color:"red"}}>삭제</strong></TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>예약 번호</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>손님 이름</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>방 번호</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  <strong>방 유형</strong>
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  체크인 날짜
+                </TableCell>
+                <TableCell className={classes.tablecelling}>
+                  체크아웃 날짜
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "dimgray" }}>수정</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "blue" }}>상세정보 조회</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong style={{ color: "red" }}>삭제</strong>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -315,7 +358,7 @@ class Reservation extends React.Component {
                 .slice(
                   this.state.page * this.state.rowsPerPage,
                   this.state.page * this.state.rowsPerPage +
-                  this.state.rowsPerPage
+                    this.state.rowsPerPage
                 )
                 .map((c) => {
                   return (
