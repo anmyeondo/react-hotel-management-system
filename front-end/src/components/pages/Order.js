@@ -187,9 +187,7 @@ class Orders extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{ background: "aquamarine" }}>
-          <strong>주문 관리 페이지입니다.</strong>
-        </h1>
+        <h1 align="center"><strong>Order Management Page</strong></h1>
         <hr />
         <br />
         <div align="center">

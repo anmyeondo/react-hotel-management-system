@@ -207,9 +207,7 @@ class Reservation extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{ background: "lightblue" }}>
-          <strong>호텔 예약 관리 페이지입니다.</strong>
-        </h1>
+        <h1 align="center"><strong>Reservation Management Page</strong></h1>
         <div align="center">
           <form className={classes.container} noValidate>
             <br />

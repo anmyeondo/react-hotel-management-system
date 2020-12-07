@@ -147,7 +147,7 @@ class Parkinglot extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{background:"lightblue"}}><strong>호텔 주차장 관리 페이지입니다.</strong></h1>
+        <h1 align="center"><strong>Parking Lot Management Page</strong></h1>
         <div align="center">
           <form className={classes.container} noValidate>
               호텔 선택 : &nbsp; &nbsp;

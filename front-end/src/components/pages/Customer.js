@@ -117,9 +117,7 @@ class Customer extends React.Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} idx={0} />
-        <h1 align="center" style={{ background: "aquamarine" }}>
-          <strong>호텔 손님 관리 페이지입니다.</strong>
-        </h1>
+        <h1 align="center"><strong>Customer Management Page</strong></h1>
         <hr />
         <div align="right">
           <Button

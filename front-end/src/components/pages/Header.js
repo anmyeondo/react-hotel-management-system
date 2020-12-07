@@ -64,7 +64,7 @@ function Header(props) {
                 className={props.classes.iconButtonAvatar}
               >
                 <Avatar
-                  src="https://icon-library.com/images/concierge-icon/concierge-icon-13.jpg"
+                  src="https://ifh.cc/g/E7ZaZH.jpg"
                   alt="My Avatar"
                   style={{
                     width: "60px",

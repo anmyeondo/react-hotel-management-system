@@ -77,9 +77,7 @@ class Room extends Component {
     return (
       <div>
         <Header checkPermission={this.props.checkPermission} />
-        <h1 align="center" style={{ background: "#fefbd8" }}>
-          <strong>호텔 방 관리 페이지</strong>
-        </h1>
+        <h1 align="center"><strong>Room Management Page</strong></h1>
         <hr />
         <div align="center">
           호텔: &nbsp;&nbsp;&nbsp;
