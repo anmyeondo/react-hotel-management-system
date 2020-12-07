@@ -49,6 +49,8 @@ class Orders extends React.Component {
       isAssigned: false,
       Hotel_ID: "",
     };
+    this.moreOpen = false;
+    this.assignedOpen = false;
     this.callApi = this.callApi.bind(this);
     this.addOrderBtnOnclick = this.addOrderBtnOnclick.bind(this);
     this.closeAddDialog = this.closeAddDialog.bind(this);
@@ -60,14 +62,20 @@ class Orders extends React.Component {
 
   componentDidMount() {
     this.props.checkPermission();
-    this.callApi();
+    this.callApi()
+    setInterval(this.refreshTable, 5000);
   }
 
   refreshTable = () => {
-    this.setState({
-      orders: [],
-    });
-    this.callApi();
+    if(this.moreOpen || this.assignedOpen) {
+      ;
+    }
+    else {
+      this.setState({
+        orders: [],
+      });
+      this.callApi();
+    }
   };
 
   setTableOnSearch = (arr) => {
@@ -181,7 +189,12 @@ class Orders extends React.Component {
   fordebug = () => {
     console.log(this.state);
   };
+  getOpened = (more, assigned) => {
+    this.moreOpen = more;
+    this.assignedOpen = assigned;
 
+    console.log(more, assigned)
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -276,7 +289,7 @@ class Orders extends React.Component {
                 )
                 .map((c) => {
                   return (
-                    <OrderInfoRow data={c} refreshTable={this.refreshTable} />
+                    <OrderInfoRow data={c} refreshTable={this.refreshTable} getOpened={this.getOpened} />
                   );
                 })}
             </TableBody>

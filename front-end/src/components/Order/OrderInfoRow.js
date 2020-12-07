@@ -22,7 +22,7 @@ class OrderInfoRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      MoreInfoisOpen: false,
+      OrderMoreInfoisOpen: false,
       OrderAssignedisOpen: false,
       is_done: 0,
     };
@@ -36,23 +36,28 @@ class OrderInfoRow extends React.Component {
   };
   //Info
   closeMoreInfoDialog = () => {
-    console.log("값이 변경됨");
-    this.setState({ OrderMoreInfoisOpen: false });
-    console.log(this.state);
+    this.setState({ OrderMoreInfoisOpen: false }, () => {
+      this.props.getOpened(this.state.OrderMoreInfoisOpen, this.state.OrderAssignedisOpen);
+    });
   };
 
   InfoOrderBtnOnclick = () => {
-    this.setState({ OrderMoreInfoisOpen: true });
-    console.log(this.state);
+    this.setState({ OrderMoreInfoisOpen: true }, () => {
+      this.props.getOpened(this.state.OrderMoreInfoisOpen, this.state.OrderAssignedisOpen);
+    });    
   };
 
   //Assigned
   handleAssignedOpen = () => {
-    this.setState({ OrderAssignedisOpen: true });
+    this.setState({ OrderAssignedisOpen: true }, () => {
+      this.props.getOpened(this.state.OrderMoreInfoisOpen, this.state.OrderAssignedisOpen);
+    });
   };
 
   handleAssignedClose = () => {
-    this.setState({ OrderAssignedisOpen: false });
+    this.setState({ OrderAssignedisOpen: false }, () => {
+      this.props.getOpened(this.state.OrderMoreInfoisOpen, this.state.OrderAssignedisOpen);
+    });
   };
 
   closeOrderModifyDialog = () => {
