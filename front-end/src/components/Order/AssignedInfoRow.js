@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const Styles = (theme) => ({
   thirdary: {
-    // This is green.A700 as hex.
+    // This is green.A700 as hex.//
     main: "#81c784",
   },
 });

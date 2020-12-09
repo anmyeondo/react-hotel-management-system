@@ -62,7 +62,7 @@ class Orders extends React.Component {
 
   componentDidMount() {
     this.props.checkPermission();
-    this.callApi()
+    this.callApi();
     setInterval(this.refreshTable, 5000);
   }
 
